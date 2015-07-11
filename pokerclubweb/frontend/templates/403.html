@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% load i18n %}
+
+{% block bodyid %}page404{% endblock %}
+{% block bodyclass %}{% endblock %}
+{% block headtitle %}{% trans "Permission denied!" %}{% endblock %}
+
+{% block main %}
+          <div class="constrained">
+            <div class="container">
+
+              <h2 class="pagetitle">{% trans "Permission denied!" %}</h2>
+              <div id="content" class="clearfix">
+                {% blocktrans %}
+                <p>We're sorry but you are not permitted to access this page.</p>
+                {% endblocktrans %}
+                <p class="errorpage-back-link">{% trans 'Back to the <a href="/">home page</a>.' %}
+              </div><!-- /content -->
+            </div>
+          </div>
+{% endblock %}

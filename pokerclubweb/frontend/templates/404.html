@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% load i18n %}
+
+{% block bodyid %}page404{% endblock %}
+{% block bodyclass %}{% endblock %}
+{% block headtitle %}{% trans "Page not found!" %}{% endblock %}
+
+{% block main %}
+          <div class="constrained">
+            <div class="container">
+
+              <h2 class="pagetitle">{% trans "Page not found!" %}</h2>
+              <div id="content" class="clearfix">
+                {% blocktrans %}
+                <p>We're sorry but the page you are looking for can't be found.</p>
+                {% endblocktrans %}
+                <p class="errorpage-back-link">{% trans 'Back to the <a href="/">home page</a>.' %}
+              </div><!-- /content -->
+            </div>
+          </div>
+{% endblock %}
