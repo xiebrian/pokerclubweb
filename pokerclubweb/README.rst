@@ -8,7 +8,8 @@ About
 
 This site is for the poker club to track their membership and interact with members and sponsors to organize tournaments and provide club information.
 
-Unauthorized Capabilites:
+**Unauthorized Capabilites**
+
 - View static information about the club
 	- Club mission statement
 	- Perks of membership
@@ -17,21 +18,24 @@ Unauthorized Capabilites:
 	- Poker resources
 	- Photo album
 	- Exec board
-- Sign up for membership (students)
-- Contact club about becoming a sponsor
+	- Sign up for membership (students)
+	- Contact club about becoming a sponsor
 
-Member Capabilities:
+**Member Capabilities**
+
 - Register for tournament
 - View tournament results
 - Upload personal profile information + resume
 
-Sponsor Capabilities:
+**Sponsor Capabilities**
+
 - View current tier of sponsorship
 - View student resumes + profiles (based on tier?)
 - View tournament results
 - Option to upgrade sponsorship?
 
-Admin Capabilites:
+**Admin Capabilites**
+
 - Create tournaments
 - Upload tournament results
 - Update calendar
