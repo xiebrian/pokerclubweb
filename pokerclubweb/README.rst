@@ -18,8 +18,8 @@ This site is for the poker club to track their membership and interact with memb
 	- Poker resources
 	- Photo album
 	- Exec board
-	- Sign up for membership (students)
-	- Contact club about becoming a sponsor
+- Sign up for membership (students)
+- Contact club about becoming a sponsor
 
 **Member Capabilities**
 
