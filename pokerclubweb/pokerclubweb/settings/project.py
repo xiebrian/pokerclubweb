@@ -25,12 +25,13 @@ LANGUAGE_CODE = 'en'
 DATABASES = {
     'default': {
         # Choose between PostgreSQL or MySQL:
-        'ENGINE':   'django.db.backends.postgresql_psycopg2',
-        #'ENGINE':   'django.db.backends.mysql',
+        #'ENGINE':   'django.db.backends.postgresql_psycopg2',
+        'ENGINE':   'django.db.backends.mysql',
         'NAME':     'pokerclubweb',
-        'USER':     'pokerclubweb',
+        'USER':     'jlmart88@localhost',
         'PASSWORD': '',
         'OPTIONS':  {'autocommit': True,},   # Stop that "current transaction is aborted" error in PostgreSQL
+        'HOST': '127.0.0.1'
     },
 }
 

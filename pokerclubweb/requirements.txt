@@ -3,7 +3,7 @@
 # Infrastructure
 Django >= 1.8.1, < 1.9
 Pillow == 2.8.2
-#for MySQL: MySQL-python == 1.2.:
+MySQL-python >= 1.2
 #for PostgreSQL: psycopg2 == 2.6
 python-memcached == 1.54
 raven == 5.3.1

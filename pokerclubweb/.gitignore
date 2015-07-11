@@ -19,4 +19,5 @@ Gemfile.lock
 /node_modules/
 /web/media
 /stats/
+/semantic/
 pokerclubweb/settings/local.py

@@ -30,7 +30,6 @@ var sass_options = {
   outputStyle: 'expanded',
   includePaths: [
     './frontend/sass-vendor/',
-    './node_modules/bootstrap-sass/assets/stylesheets/',
   ],
   precision: 5,
 };
