@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib import admin
 from filebrowser.sites import site as fb_site
 from frontend.views import TextFileView, Http500View
+from pokerclubweb import views
 
 admin.autodiscover()
 
@@ -30,7 +31,13 @@ urlpatterns = patterns('',
     url(r'^api/ping/', include('ping.urls')),
 
     # CMS modules
-    # TODO: add your urls here
+    url(r'^$', views.index, name="index"),
+    url(r'^about/', views.about, name="about"),
+    url(r'^events/', views.events, name="events"),
+    url(r'^sponsors/', views.sponsors, name="sponsors"),
+    url(r'^officers/', views.officers, name="officers"),
+
+    url(r'^auth/', include('auth.urls')),
 )
 
 if settings.DEBUG:

@@ -56,6 +56,7 @@ INSTALLED_APPS += (
     'admin_tools.menu',
     'admin_tools.dashboard',
     'django.contrib.admin',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -68,8 +69,6 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_CONTEXT_PROCESSORS += (
     'frontend.context_processors.frontend',
 )
-
-FORMAT_MODULE_PATH = 'pokerclubweb.settings.locale'  # Consistent date formatting
 
 # Avoid 600 permission for filebrowser uploads.
 FILE_UPLOAD_PERMISSIONS = 0644
