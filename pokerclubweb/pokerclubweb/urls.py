@@ -39,9 +39,8 @@ urlpatterns = patterns('',
     url(r'^contact/', views.contact, name="contact"),
     url(r'^photos/', views.photos, name="photos"),
     url(r'^auth/', include('auth.urls')),
-    url(r'^user/', include('user.urls')),
-    url(r'^sponsor/', include('sponsor.urls')),
-    url(r'^tournament/', include('tournament.urls')),
+    url(r'^users/', include('users.urls')),
+    url(r'^tournaments/', include('tournaments.urls')),
 )
 
 if settings.DEBUG:

@@ -1,24 +1,44 @@
 from django.db import models
 from django.contrib.auth.models import User
-import datetime from datetime
 
 class Student(models.Model):
     user = models.OneToOneField(User)
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
-    classyear = models.IntegerField(validators=[validate_class_year])
     resume = models.URLField()
     picture = models.ImageField()
+    bio = models.CharField(max_length=10000)
+    isMember = models.BooleanField(default=False)
+    FRESHMAN = 'FR'
+    SOPHOMORE = 'SO'
+    JUNIOR = 'JR'
+    SENIOR = 'SR'
+    CLASS_YEAR_CHOICES = (
+        (FRESHMAN, 'Freshman'),
+        (SOPHOMORE, 'Sophomore'),
+        (JUNIOR, 'Junior'),
+        (SENIOR, 'Senior'),
+    )
+    classyear = models.CharField(max_length=2,
+                                      choices=CLASS_YEAR_CHOICES,
+                                      default=FRESHMAN)
 
+class Admin(Student):
+    position = models.CharField(max_length=100)
 
-def validate_class_year(value):
-    now = datetime.now()
-    minyear = now.year
-    maxyear = now.year + 3
-    if (now.month > 6):
-        minyear = minyear + 1
-        maxyear = maxyear + 1
-
-    if (value < minyear or value > maxyear):
-        raise ValidationError('%s is not a valid class year' % value)
-
+class Sponsor(models.Model):
+    user = models.OneToOneField(User)
+    name = models.CharField(max_length=100)
+    BRONZE = 'BR'
+    SILVER = 'SL'
+    GOLD = 'GD'
+    PLATINUM = 'PL'
+    LEVEL_CHOICES = (
+        (BRONZE, 'Bronze'),
+        (SILVER, 'Silver'),
+        (GOLD, 'Gold'),
+        (PLATINUM, 'PLATINUM')
+    )
+    level = models.CharField(
+        max_length=2,
+        choices=LEVEL_CHOICES,
+        default=BRONZE
+    )

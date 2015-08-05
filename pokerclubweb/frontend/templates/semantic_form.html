@@ -1,0 +1,35 @@
+{% if form.errors %}
+<form class="ui form error" method="post">
+{% else %}
+<form class="ui form" method="post">
+{% endif %}
+    {% csrf_token %}
+    {% for field in form %}
+        {% if field.errors %}
+            <div class="field error">
+        {% else %}
+            <div class="field">
+        {% endif %}
+            <label>{{ field.label_tag }}</label>
+
+            {{ field }}
+            {% if field.help_text %}
+                <div class="ui pointing label">
+                    {{ field.help_text }}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <div class="ui error message">
+        <ul>
+        {% for field in form %}
+            {% for error in field.errors %}
+                <li> {{error | escape}}</li>
+            {% endfor %}
+        {% endfor %}
+        </ul>
+    </div>
+    {% if not hideSubmit %}
+    <input type="submit" value="Submit" />
+    {% endif %}
+</form>
