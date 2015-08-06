@@ -1,5 +1,20 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group, Permission
+# from django.contrib.contenttypes.models import ContentType
+# from api.models import Project
+student_group, created = Group.objects.get_or_create(name='student_group')
+admin_group, created = Group.objects.get_or_create(name='admin_group')
+sponsor_group, created = Group.objects.get_or_create(name='sponsor_group')
+
+# # Code to add permission to group ???
+# ct = ContentType.objects.get_for_model(Project)
+
+# # Now what - Say I want to add 'Can add project' permission to new_group?
+# permission = Permission.objects.create(codename='can_add_project',
+#                                    name='Can add project',
+#                                    content_type=ct)
+# new_group.permissions.add(permission)
 
 class Student(models.Model):
     user = models.OneToOneField(User)
@@ -21,6 +36,9 @@ class Student(models.Model):
                                       choices=CLASS_YEAR_CHOICES,
                                       default=FRESHMAN)
 
+    def __unicode__(self):
+        return str(self.user)
+
 class Admin(Student):
     position = models.CharField(max_length=100)
 
@@ -35,10 +53,11 @@ class Sponsor(models.Model):
         (BRONZE, 'Bronze'),
         (SILVER, 'Silver'),
         (GOLD, 'Gold'),
-        (PLATINUM, 'PLATINUM')
+        (PLATINUM, 'Platinum')
     )
     level = models.CharField(
         max_length=2,
         choices=LEVEL_CHOICES,
         default=BRONZE
     )
+

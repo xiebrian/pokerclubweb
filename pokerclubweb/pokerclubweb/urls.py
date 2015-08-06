@@ -30,6 +30,9 @@ urlpatterns = patterns('',
     # Monitoring API's
     url(r'^api/ping/', include('ping.urls')),
 
+    # allauth
+    url(r'^accounts/', include('allauth.urls')),
+
     # CMS modules
     url(r'^$', views.index, name="index"),
     url(r'^about/', views.about, name="about"),
@@ -38,7 +41,8 @@ urlpatterns = patterns('',
     url(r'^officers/', views.officers, name="officers"),
     url(r'^contact/', views.contact, name="contact"),
     url(r'^photos/', views.photos, name="photos"),
-    url(r'^auth/', include('auth.urls')),
+    url(r'^auth/login/$', views.login, name="login"),
+    url(r'^auth/signup/$', views.signup, name="signup"),
     url(r'^users/', include('users.urls')),
     url(r'^tournaments/', include('tournaments.urls')),
 )

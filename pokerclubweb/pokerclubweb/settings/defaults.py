@@ -51,6 +51,8 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'compressor',
+    'users',
+    'tournaments'
 )
 
 TEMPLATE_DIRS = (
