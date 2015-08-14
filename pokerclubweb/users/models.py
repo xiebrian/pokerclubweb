@@ -21,7 +21,7 @@ class Student(models.Model):
     resume = models.URLField()
     picture = models.ImageField()
     bio = models.CharField(max_length=10000)
-    isMember = models.BooleanField(default=False)
+    is_member = models.BooleanField(default=False)
     FRESHMAN = 'FR'
     SOPHOMORE = 'SO'
     JUNIOR = 'JR'
@@ -32,7 +32,7 @@ class Student(models.Model):
         (JUNIOR, 'Junior'),
         (SENIOR, 'Senior'),
     )
-    classyear = models.CharField(max_length=2,
+    class_year = models.CharField(max_length=2,
                                       choices=CLASS_YEAR_CHOICES,
                                       default=FRESHMAN)
 

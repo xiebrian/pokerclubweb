@@ -8,8 +8,14 @@ class UserSignupForm(authforms.UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2', 'email', 'first_name', 'last_name']
+    def __init__(self, *args, **kwargs):
+        super(UserSignupForm, self).__init__(*args, **kwargs)
+
+        self.fields['email'].required = True
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
 
 class StudentSignupForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['classyear']
+        fields = ['class_year']
