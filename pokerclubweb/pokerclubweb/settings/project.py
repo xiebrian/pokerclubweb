@@ -28,11 +28,13 @@ DATABASES = {
         #'ENGINE':   'django.db.backends.postgresql_psycopg2',
         'ENGINE':   'django.db.backends.mysql',
         'NAME':     'pokerclubweb',
-        'USER':     'django_user',
-        'PASSWORD': 'django',
+        #'USER':     'django_user',
+        #'PASSWORD': 'django',
+        'USER':     'jlmart88@localhost',
+        'PASSWORD': '',
         'OPTIONS':  {'autocommit': True,},   # Stop that "current transaction is aborted" error in PostgreSQL
         'HOST': '127.0.0.1',
-        'PORT': 8889
+        #'PORT': 8889
     },
 }
 

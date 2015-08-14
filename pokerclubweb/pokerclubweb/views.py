@@ -1,21 +1,37 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext, loader
 from users.models import Student
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from .forms import StudentSignupForm, UserSignupForm
-from django.contrib.auth.models import Group
+from django.contrib.auth import forms as authforms
+from django.contrib.auth import login as authLogin
 
 def login(request):
+    if request.method == 'POST':
+        form = authforms.AuthenticationForm(data=request.POST)
+
+        for error in form.errors:
+            print error
+        print form.errors
+        if (form.is_valid()):
+            authLogin(request, form.get_user())
+            return HttpResponseRedirect('/users/profile')
+    else:
+        form = authforms.AuthenticationForm()
+
     template = loader.get_template('auth/login.html')
     context = RequestContext(request)
+    context['forms'] = [form]
+    if (form.errors):
+        context['errors'] = True
     return HttpResponse(template.render(context))
 
 def signup(request):
     if request.method == 'POST':
         userform = UserSignupForm(request.POST, prefix='user')
         studentform = StudentSignupForm(request.POST, prefix='student')
-        print 'student valid: ' + str(studentform.is_valid())
-        print 'user valid: ' + str(userform.is_valid())
+        # print 'student valid: ' + str(studentform.is_valid())
+        # print 'user valid: ' + str(userform.is_valid())
 
         if (userform.is_valid() and studentform.is_valid()):
             user = userform.save()
