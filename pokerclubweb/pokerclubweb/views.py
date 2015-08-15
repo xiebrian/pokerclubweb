@@ -5,6 +5,7 @@ from django.contrib.auth.models import User, Group
 from .forms import StudentSignupForm, UserSignupForm
 from django.contrib.auth import forms as authforms
 from django.contrib.auth import login as authLogin
+from django.contrib.auth import logout as authLogout
 
 def login(request):
     if request.method == 'POST':
@@ -30,8 +31,6 @@ def signup(request):
     if request.method == 'POST':
         userform = UserSignupForm(request.POST, prefix='user')
         studentform = StudentSignupForm(request.POST, prefix='student')
-        # print 'student valid: ' + str(studentform.is_valid())
-        # print 'user valid: ' + str(userform.is_valid())
 
         if (userform.is_valid() and studentform.is_valid()):
             user = userform.save()
@@ -53,6 +52,10 @@ def signup(request):
     if (userform.errors or studentform.errors):
         context['errors'] = True
     return HttpResponse(template.render(context))
+
+def logout(request):
+    authLogout(request)
+    return HttpResponseRedirect('/')
 
 def index(request):
     template = loader.get_template('home/index.html')
