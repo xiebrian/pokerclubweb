@@ -40,7 +40,7 @@ def register(request, tournamentID):
 
     return redirect('summary', tournamentID=tournamentID)
 
-def admin_create(request, tournamentID=0):
+def admin_create_tournament(request, tournamentID=0):
 
     if request.method == 'POST':
         if (tournamentID):
@@ -75,7 +75,7 @@ def admin_create(request, tournamentID=0):
         context['errors'] = True
     return HttpResponse(template.render(context))
 
-def admin_results(request, tournamentID):
+def admin_edit_tournament_results(request, tournamentID):
     tournament = Tournament.objects.get(id=tournamentID)
     forms = []
     if request.method == 'POST':
@@ -92,7 +92,8 @@ def admin_results(request, tournamentID):
             return redirect('admin_tools')
     else:
         for n in range(1,tournament.places+1):
-            forms.append(TournamentResultForm(prefix=n, place=n, tournament=tournament, instance=TournamentResult.objects.get(tournament=tournament, place=n)))
+            instance, _ = TournamentResult.objects.get_or_create(tournament=tournament, place=n)
+            forms.append(TournamentResultForm(prefix=n, place=n, tournament=tournament, instance=instance))
 
     template = loader.get_template('tournaments/admin/results.html')
     context = RequestContext(request)

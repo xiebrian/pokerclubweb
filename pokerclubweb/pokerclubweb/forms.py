@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import forms as authforms
 from django.contrib.auth.models import User
-from users.models import Student
+from users.models import Student, Sponsor
 
 
 class UserSignupForm(authforms.UserCreationForm):
@@ -19,3 +19,8 @@ class StudentSignupForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ['class_year']
+
+class SponsorSignupForm(forms.ModelForm):
+    class Meta:
+        model = Sponsor
+        fields = ['company_name', 'level']

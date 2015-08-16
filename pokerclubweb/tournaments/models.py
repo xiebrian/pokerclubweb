@@ -21,7 +21,7 @@ class Tournament(models.Model):
 
 class TournamentResult(models.Model):
     tournament = models.ForeignKey('Tournament')
-    student = models.ForeignKey('users.Student')
+    student = models.ForeignKey('users.Student', blank=True, null=True)
     place = models.PositiveSmallIntegerField()
 
     class Meta:

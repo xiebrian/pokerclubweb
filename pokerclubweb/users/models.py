@@ -44,7 +44,7 @@ class Admin(Student):
 
 class Sponsor(models.Model):
     user = models.OneToOneField(User)
-    name = models.CharField(max_length=100)
+    company_name = models.CharField(max_length=100)
     BRONZE = 'BR'
     SILVER = 'SL'
     GOLD = 'GD'
