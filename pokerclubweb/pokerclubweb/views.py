@@ -1,12 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template import RequestContext, loader
+from django.template.response import TemplateResponse
 from users.models import Student
 from django.contrib.auth.models import User, Group
 from .forms import StudentSignupForm, UserSignupForm
 from django.contrib.auth import forms as authforms
 from django.contrib.auth import login as authLogin
 from django.contrib.auth import logout as authLogout
+from django.contrib.auth.views import password_reset, password_reset_confirm, password_change
 
 def login(request):
     if request.method == 'POST':
@@ -54,6 +56,45 @@ def signup(request):
 def logout(request):
     authLogout(request)
     return redirect('index')
+
+def change_password(request):
+    template_response = password_change(request, template_name='auth/change_password.html')
+    if isinstance(template_response, TemplateResponse): 
+        template_response.context_data['forms'] = [template_response.context_data['form']]
+        if (template_response.context_data['form'].errors):
+            template_response.context_data['errors'] = True
+    return template_response
+
+def change_password_done(request):
+    template = loader.get_template('auth/change_password_done.html')
+    context = RequestContext(request)
+    return HttpResponse(template.render(context))
+
+def reset_password(request):
+    template_response = password_reset(request, email_template_name='auth/reset_password_email.html',  template_name='auth/reset_password.html')
+    if isinstance(template_response, TemplateResponse): 
+        template_response.context_data['forms'] = [template_response.context_data['form']]
+        if (template_response.context_data['form'].errors):
+            template_response.context_data['errors'] = True
+    return template_response
+
+def reset_password_done(request):
+    template = loader.get_template('auth/reset_password_done.html')
+    context = RequestContext(request)
+    return HttpResponse(template.render(context))
+
+def reset_password_confirm(request, uidb64, token):
+    template_response = password_reset_confirm(request, uidb64=uidb64, token=token, template_name='auth/reset_password_confirm.html')
+    if isinstance(template_response, TemplateResponse): 
+        template_response.context_data['forms'] = [template_response.context_data['form']]
+        if (template_response.context_data['form'].errors):
+            template_response.context_data['errors'] = True
+    return template_response
+
+def reset_password_complete(request):
+    template = loader.get_template('auth/reset_password_complete.html')
+    context = RequestContext(request)
+    return HttpResponse(template.render(context))
 
 def index(request):
     template = loader.get_template('home/index.html')

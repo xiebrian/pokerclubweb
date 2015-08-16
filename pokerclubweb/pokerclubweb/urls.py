@@ -4,6 +4,7 @@ from django.contrib import admin
 from filebrowser.sites import site as fb_site
 from frontend.views import TextFileView, Http500View
 from pokerclubweb import views
+from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm, password_reset_complete
 
 admin.autodiscover()
 
@@ -41,9 +42,18 @@ urlpatterns = patterns('',
     url(r'^officers/', views.officers, name="officers"),
     url(r'^contact/', views.contact, name="contact"),
     url(r'^photos/', views.photos, name="photos"),
-    url(r'^auth/login/$', views.login, name="login"),
-    url(r'^auth/logout/$', views.logout, name="logout"),
-    url(r'^auth/signup/$', views.signup, name="signup"),
+    url(r'^auth/', include([
+        url(r'^login/$', views.login, name="login"),
+        url(r'^logout/$', views.logout, name="logout"),
+        url(r'^signup/$', views.signup, name="signup"),
+        url(r'^change_password/$', views.change_password, name="change_password"),
+        url(r'^change_password_done/$', views.change_password_done, name="password_change_done"),
+        url(r'^reset_password/$', views.reset_password, name="reset_password"),
+        url(r'^reset_password_confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.reset_password_confirm, name="password_reset_confirm"),
+        url(r'^reset_password_done/$', views.reset_password_done, name="password_reset_done"),
+        url(r'^reset_password_complete/$', views.reset_password_complete, name="password_reset_complete"),
+        ])
+    ),
     url(r'^users/', include('users.urls')),
     url(r'^tournaments/', include('tournaments.urls')),
 )

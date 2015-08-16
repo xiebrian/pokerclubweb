@@ -29,7 +29,6 @@ def summary(request, tournamentID):
 
     return HttpResponse(template.render(context))
 
-
 def register(request, tournamentID):
     if request.method == 'POST':
         tournament = Tournament.objects.get(id=tournamentID)
