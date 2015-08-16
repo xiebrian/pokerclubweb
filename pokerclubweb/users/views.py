@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from .models import Student, Sponsor
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from pokerclubweb.forms import SponsorSignupForm, UserSignupForm
 
 def profile(request, userID=None):
@@ -43,6 +43,9 @@ def admin_create_sponsor(request, sponsorID=0):
             sponsor = sponsorform.save(commit=False)
             sponsor.user = user
             sponsor.save()
+
+            g = Group.objects.get(name='sponsor_group')
+            g.user_set.add(user)
 
             return redirect('profile', userID=user.id)
     else:
