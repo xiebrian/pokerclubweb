@@ -10,16 +10,10 @@
 
               <h2 class="pagetitle">Welcome to the MIT Poker Club</h2>
               <div id="content" class="clearfix">
-              {% for sponsor in sponsors %}
-                <a href={{sponsor.home_page_url}}>
-                    <img src={{sponsor.logo.url}}/>
+              {% for student in students %}
+                <a href={% url "profile" student.user.id %}>
+                    {{student}}
                 </a>
-                {% load user_extras %}
-                {% if user|has_group:"admin_group" %}
-                <a href={% url "sponsor_profile" sponsor.user.id %}>
-                    Sponsor Profile
-                </a>
-                {% endif %}
               {% endfor %}
               </div><!-- /content -->
             </div>

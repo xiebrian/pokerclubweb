@@ -20,6 +20,9 @@ sponsor_group, created = Group.objects.get_or_create(name='sponsor_group')
 def profile_picture_file_name(instance, filename):
     return '/'.join(['profile_pictures', str(instance.id), filename])
 
+def sponsor_logo_file_name(instance, filename):
+    return '/'.join(['sponsor_logos', str(instance.id), filename])
+
 def resume_file_name(instance, filename):
     return '/'.join(['resumes', str(instance.id), filename])
 
@@ -59,6 +62,8 @@ class Admin(Student):
 class Sponsor(models.Model):
     user = models.OneToOneField(User)
     company_name = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to=sponsor_logo_file_name)
+    home_page_url = models.URLField()
     BRONZE = 'BR'
     SILVER = 'SL'
     GOLD = 'GD'
@@ -77,4 +82,7 @@ class Sponsor(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def can_view_resumes(self):
+        return self.level in [PLATINUM, GOLD]
 

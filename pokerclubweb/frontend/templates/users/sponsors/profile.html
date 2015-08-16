@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block bodyid %}index{% endblock %}
+{% block bodyclass %}{% endblock %}
+{% block headtitle %}Poker Club Home Page{% endblock %}
+
+{% block main %}
+          <div class="constrained">
+            <div class="container">
+
+              <h2 class="pagetitle">Welcome to the MIT Poker Club</h2>
+              <div id="content" class="clearfix">
+                    {{sponsor.company_name}}
+                    {{sponsor.user.first_name}} {{sponsor.user.last_name}}
+                    <img src={{sponsor.logo.url}}/>
+                    {{sponsor.level}}
+                    {% load user_extras %}
+                    {% if user|has_group:"admin_group" or user.id == sponsor.user.id %}
+                        <a href={% url "edit_sponsor_profile" sponsor.user.id %}>
+                          Edit Profile
+                        </a>
+                    {% endif %}
+                    {% if user.id == sponsor.user.id %}
+                    <a href={% url "change_password" %}>
+                      Change Password
+                    </a>
+                    {% endif %}
+
+              </div><!-- /content -->
+            </div>
+          </div>
+{% endblock %}

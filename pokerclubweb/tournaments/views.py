@@ -5,6 +5,7 @@ from .forms import TournamentCreationForm, TournamentResultForm
 from .models import Tournament, TournamentResult
 from django.db import IntegrityError
 from django.forms.util import ErrorList
+from users.decorators import group_required
 
 def index(request):
     template = loader.get_template('tournaments/index.html')
@@ -29,6 +30,7 @@ def summary(request, tournamentID):
 
     return HttpResponse(template.render(context))
 
+@group_required('student_group')
 def register(request, tournamentID):
     if request.method == 'POST':
         tournament = Tournament.objects.get(id=tournamentID)
@@ -43,6 +45,7 @@ def register(request, tournamentID):
 
     return redirect('summary', tournamentID=tournamentID)
 
+@group_required('admin_group')
 def admin_create_tournament(request, tournamentID=0):
 
     if request.method == 'POST':
@@ -78,6 +81,7 @@ def admin_create_tournament(request, tournamentID=0):
         context['errors'] = True
     return HttpResponse(template.render(context))
 
+@group_required('admin_group')
 def admin_edit_tournament_results(request, tournamentID):
     tournament = Tournament.objects.get(id=tournamentID)
     forms = []
