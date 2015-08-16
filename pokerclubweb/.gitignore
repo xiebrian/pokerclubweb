@@ -21,3 +21,4 @@ Gemfile.lock
 /stats/
 /semantic/
 pokerclubweb/settings/local.py
+/frontend/static/frontend/vendor/*
