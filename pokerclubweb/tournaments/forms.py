@@ -18,7 +18,7 @@ class TournamentCreationForm(forms.ModelForm):
     )
     class Meta:
         model = Tournament
-        fields = ['name', 'start_time', 'end_time', 'location', 'places']
+        fields = '__all__'
         help_texts = {
             'places' : ('Example: 3 means 1st, 2nd, and 3rd place will be tracked in the results')
         }
@@ -34,4 +34,4 @@ class TournamentResultForm(forms.ModelForm):
         tournament = kwargs.pop('tournament')
         super(TournamentResultForm, self).__init__(*args, **kwargs)
 
-        self.fields['student'] = StudentModelChoiceField(tournament.registered_students, label=TournamentResult.intToWord(place) + " Place")
+        self.fields['student'] = StudentModelChoiceField(tournament.registered_students, required=False, label=TournamentResult.intToWord(place) + " Place")

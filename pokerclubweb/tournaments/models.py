@@ -9,6 +9,7 @@ class Tournament(models.Model):
     registered_students = models.ManyToManyField(Student, blank=True)
     places = models.PositiveSmallIntegerField()
     location = models.CharField(max_length=500)
+    results_available = models.BooleanField(default=False)
 
     def clean_fields(self, exclude=None):
         if self.start_time > self.end_time:
@@ -28,7 +29,7 @@ class TournamentResult(models.Model):
         unique_together = (('tournament', 'place'),('tournament','student'))
 
     def __unicode__(self):
-        return intToWord(self.place) + ' place for ' + self.tournament.name
+        return self.intToWord(self.place) + ' place for ' + self.tournament.name
 
     @staticmethod
     def intToWord(num):

@@ -14,6 +14,11 @@
               {{tournament.start_time}}
               {{tournament.end_time}}
               {{tournament.location}}
+              {% if results %}
+                {% for result in results %}
+                  {{result}} {{result.student}}
+                {% endfor %}
+              {% endif %}
               <form action={% url "register" tournament.id %} method="post">
                 {% csrf_token %}
                 {% load user_extras %}
