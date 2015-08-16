@@ -18,6 +18,7 @@ django-crispy-forms >= 1.4.0, < 1.5
 #dashboardmods >= 0.2.2
 django_compressor == 1.5
 django-google-tools >= 1.0.0
+django-cleanup >= 0.3.1
 -e git+https://github.com/smacker/django-filebrowser-no-grappelli.git@25613ff879325f2da8e465c028b9657ae6dd79cf#egg=django-filebrowser-no-grappelli
 -e git+https://github.com/rizumu/django-ping.git@b9e228fe1f338d87b323383509a975fd9df22ef1#egg=django_ping-0.3b1
 pytz >= 2015.4

@@ -1,8 +1,10 @@
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.template import RequestContext, loader
 from .models import Student, Sponsor
 from django.contrib.auth.models import User, Group
 from pokerclubweb.forms import SponsorSignupForm, UserSignupForm
+from .forms import StudentProfileForm, UserProfileForm
 
 def profile(request, userID=None):
     template = loader.get_template('users/profile.html')
@@ -18,8 +20,24 @@ def profile(request, userID=None):
         return HttpResponse(template.render(context))
 
 def edit_profile(request):
-    template = loader.get_template('users/edit_profile.html')
+    if request.method == 'POST':
+        userform = UserProfileForm(request.POST, prefix='user', instance=User.objects.get(id=request.user.id))
+        studentform = StudentProfileForm(request.POST, request.FILES, prefix='student', instance=Student.objects.get(user=request.user))
+
+        if (userform.is_valid() and studentform.is_valid()):
+            user = userform.save()
+            student = studentform.save()
+
+            return redirect('profile', userID=user.id)
+    else:
+        userform = UserProfileForm(prefix='user', instance=User.objects.get(id=request.user.id))
+        studentform = StudentProfileForm(prefix='student', instance=Student.objects.get(user=request.user))
+
     context = RequestContext(request)
+    context['forms'] = [userform, studentform]
+    if (userform.errors or studentform.errors):
+        context['errors'] = True
+    template = loader.get_template('users/edit_profile.html')
     return HttpResponse(template.render(context))
 
 def admin_tools(request):

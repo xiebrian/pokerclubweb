@@ -2,7 +2,6 @@ from django import forms
 from .models import Tournament, TournamentResult
 from users.models import Student
 from django.forms import ModelChoiceField
-from datetime import datetime
 
 class StudentModelChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):

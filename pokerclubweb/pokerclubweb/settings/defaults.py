@@ -52,7 +52,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'compressor',
     'users',
-    'tournaments'
+    'tournaments',
+    'django_cleanup'
 )
 
 TEMPLATE_DIRS = (

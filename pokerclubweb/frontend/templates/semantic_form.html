@@ -1,7 +1,7 @@
 {% if errors %}
-<form class="ui form error" method="post">
+<form class="ui form error" method="post" enctype="multipart/form-data">
 {% else %}
-<form class="ui form" method="post">
+<form class="ui form" method="post" enctype="multipart/form-data">
 {% endif %}
     {% for form in forms %}
         {% csrf_token %}
