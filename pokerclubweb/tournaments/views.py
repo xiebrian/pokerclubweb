@@ -7,28 +7,66 @@ from .models import Tournament, TournamentResult
 def index(request):
     template = loader.get_template('tournaments/index.html')
     context = RequestContext(request)
+    context['tournaments'] = Tournament.objects.all()
     return HttpResponse(template.render(context))
 
-def results(request):
+def summary(request, tournamentID):
+    template = loader.get_template('tournaments/summary.html')
+    context = RequestContext(request)
+    context['tournament'] = Tournament.objects.get(id=tournamentID)
+    try:
+        context['isRegistered'] = request.user.student in context['tournament'].registered_students.all()
+    except:
+        context['isRegistered'] = False
+    return HttpResponse(template.render(context))
+
+def results(request, tournamentID):
     template = loader.get_template('tournaments/results.html')
     context = RequestContext(request)
+    context['tournament'] = Tournament.objects.get(id=tournamentID)
     return HttpResponse(template.render(context))
 
-def register(request):
-    template = loader.get_template('tournaments/register.html')
-    context = RequestContext(request)
-    return HttpResponse(template.render(context))
-
-def admin_create(request):
+def register(request, tournamentID):
     if request.method == 'POST':
-        form = TournamentCreationForm(data=request.POST)
+        tournament = Tournament.objects.get(id=tournamentID)
+        student = request.user.student
+
+        if student in tournament.registered_students.all():
+            tournament.registered_students.remove(student)
+        else:
+            tournament.registered_students.add(student)
+
+        tournament.save()
+
+    return redirect('summary', tournamentID=tournamentID)
+
+def admin_create(request, tournamentID=0):
+
+    if request.method == 'POST':
+        if (tournamentID):
+            tournament = Tournament.objects.get(id=tournamentID)
+            form = TournamentCreationForm(data=request.POST, instance=tournament)
+        else:
+            form = TournamentCreationForm(data=request.POST)
 
         if (form.is_valid()):
             tournament = form.save()
+            tournamentID = tournament.id
 
-        return redirect('admin_tools')
+            return redirect('summary', tournamentID=tournamentID)
     else:
-        form = TournamentCreationForm()
+        if (tournamentID):
+            tournament = Tournament.objects.get(id=tournamentID)
+            print tournament.start_time.strftime('%Y-%m-%dT%H:%M')
+            print tournament.start_time
+            form = TournamentCreationForm(
+                instance=tournament, 
+                initial = { 
+                    'start_time' : tournament.start_time.strftime('%Y-%m-%dT%H:%M'),
+                    'end_time' : tournament.end_time.strftime('%Y-%m-%dT%H:%M'),
+            })
+        else:
+            form = TournamentCreationForm()
 
     template = loader.get_template('tournaments/admin/create.html')
     context = RequestContext(request)

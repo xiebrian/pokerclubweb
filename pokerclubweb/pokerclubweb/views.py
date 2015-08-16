@@ -14,7 +14,7 @@ def login(request):
 
         if (form.is_valid()):
             authLogin(request, form.get_user())
-            return redirect('my_profile')
+            return redirect('profile', userID=form.get_user().id)
     else:
         form = authforms.AuthenticationForm()
 

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block bodyid %}index{% endblock %}
+{% block bodyclass %}{% endblock %}
+{% block headtitle %}Poker Club Home Page{% endblock %}
+
+{% block main %}
+          <div class="constrained">
+            <div class="container">
+
+              <h2 class="pagetitle">Welcome to the MIT Poker Club</h2>
+              <div id="content" class="clearfix">
+              {{tournament}}
+              {{tournament.start_time}}
+              {{tournament.end_time}}
+              {{tournament.location}}
+              <form action={% url "register" tournament.id %} method="post">
+                {% csrf_token %}
+                {% load user_extras %}
+                {% if user|has_group:"student_group" %}
+                    {% if isRegistered %}
+                        You are currently registered for this tournament.
+                        <input type="submit" value="Unregister">
+                    {% else %}
+                        You are not currently registered for this tournament.
+                        <input type="submit" value="Register">
+                    {% endif %}
+                {% endif %}
+                {% if user|has_group:"admin_group" %}
+                    <a href={% url "admin_edit" tournament.id %}>
+                        Edit Tournament
+                    </a>
+                {% endif %}
+                </form>
+              </div><!-- /content -->
+            </div>
+          </div>
+{% endblock %}

@@ -2,6 +2,7 @@ from django import forms
 from .models import Tournament, TournamentResult
 from users.models import Student
 from django.forms import ModelChoiceField
+from datetime import datetime
 
 class StudentModelChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):
@@ -10,7 +11,7 @@ class StudentModelChoiceField(ModelChoiceField):
 class TournamentCreationForm(forms.ModelForm):
     start_time = forms.DateTimeField(
         input_formats = ['%Y-%m-%dT%H:%M'],
-        widget = forms.DateTimeInput(attrs={'type':'datetime-local'})
+        widget = forms.DateTimeInput(attrs={'type':'datetime-local'}),
     )
     end_time = forms.DateTimeField(
         input_formats=['%Y-%m-%dT%H:%M'],

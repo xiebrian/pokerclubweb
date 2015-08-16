@@ -16,7 +16,7 @@ SITE_ID = 1
 # Language codes
 USE_I18N = True                   # False for optimizations
 USE_L10N = True
-USE_TZ = True
+USE_TZ = False
 
 # Path autodetection
 SRC_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))

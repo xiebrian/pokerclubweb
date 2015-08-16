@@ -22,7 +22,10 @@
 			</a>
 		{% endif %}
 		{% if request.user.is_authenticated %}
-			<a class="item" href={% url "my_profile" %}>
+			<a class="item" href={% url "tournaments" %}>
+				Tournaments
+			</a>
+			<a class="item" href={% url "profile" request.user.id %}>
 				Profile
 			</a>
 			<a class="item" href={% url "logout" %}>

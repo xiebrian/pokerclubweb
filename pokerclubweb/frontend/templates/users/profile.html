@@ -10,8 +10,15 @@
 
               <h2 class="pagetitle">Welcome to the MIT Poker Club</h2>
               <div id="content" class="clearfix">
-                  {% load account %}
-                Welcome, {% user_display user %}
+                {% if student %}
+                    {{student.user.first_name}} {{student.user.last_name}}
+                    {{student.picture}}
+                    {{student.class_year}}
+                    {{student.bio}}
+                {% else %}
+                    {% load account %}
+                    Welcome, {% user_display user %}
+                {% endif %}
 
               </div><!-- /content -->
             </div>
