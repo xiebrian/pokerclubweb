@@ -37,7 +37,7 @@ class Student(models.Model):
                                       default=FRESHMAN)
 
     def __unicode__(self):
-        return str(self.user)
+        return self.user.first_name + ' ' + self.user.last_name
 
 class Admin(Student):
     position = models.CharField(max_length=100)
@@ -60,4 +60,7 @@ class Sponsor(models.Model):
         choices=LEVEL_CHOICES,
         default=BRONZE
     )
+
+    def __unicode__(self):
+        return self.name
 

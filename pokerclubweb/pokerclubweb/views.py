@@ -1,4 +1,5 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.template import RequestContext, loader
 from users.models import Student
 from django.contrib.auth.models import User, Group
@@ -11,12 +12,9 @@ def login(request):
     if request.method == 'POST':
         form = authforms.AuthenticationForm(data=request.POST)
 
-        for error in form.errors:
-            print error
-        print form.errors
         if (form.is_valid()):
             authLogin(request, form.get_user())
-            return HttpResponseRedirect('/users/profile')
+            return redirect('my_profile')
     else:
         form = authforms.AuthenticationForm()
 
@@ -41,7 +39,7 @@ def signup(request):
             g = Group.objects.get(name='student_group')
             g.user_set.add(user)
 
-            return HttpResponseRedirect('/')
+            return redirect('index')
     else:
         userform = UserSignupForm(prefix='user')
         studentform = StudentSignupForm(prefix='student')
@@ -55,7 +53,7 @@ def signup(request):
 
 def logout(request):
     authLogout(request)
-    return HttpResponseRedirect('/')
+    return redirect('index')
 
 def index(request):
     template = loader.get_template('home/index.html')
