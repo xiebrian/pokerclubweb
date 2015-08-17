@@ -6,3 +6,4 @@
 ./manage.py compress
 ./manage.py makemigrations
 ./manage.py syncdb
+./manage.py loaddata users/fixtures/initial_data.json
