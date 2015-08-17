@@ -41,3 +41,7 @@ CACHES['default']['KEY_PREFIX'] = 'pokerclubweb.production'
 COMPRESS_OFFLINE = True
 
 DEBUG = True
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'web/static'),
+)
