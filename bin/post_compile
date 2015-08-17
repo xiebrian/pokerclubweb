@@ -4,3 +4,5 @@
 # cd semantic
 # gulp build
 ./manage.py compress
+./manage.py makemigrations
+./manage.py syncdb
