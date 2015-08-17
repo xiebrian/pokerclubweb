@@ -1,4 +1,4 @@
-<!-- {% get_static_prefix as STATIC_URL %} -->
+{% load static %}
 <!DOCTYPE html>
 
 <html xml:lang="{{ LANGUAGE_CODE|default:"en" }}" lang="{{ LANGUAGE_CODE|default:"en" }}">
@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="generator" content="Powered by Django" />
     <title>'Internal error!</title>
-    <!-- <link href="{{ STATIC_URL }}frontend/css/screen.css" rel="stylesheet" type="text/css" /> -->
+    <link href="{% static "frontend/css/screen.css" %}" rel="stylesheet" type="text/css" />
     {% block scripts %}{% endblock %}
   </head>
 
