@@ -38,3 +38,4 @@ ALLOWED_HOSTS = (
 
 CACHES['default']['KEY_PREFIX'] = 'pokerclubweb.production'
 
+COMPRESS_OFFLINE = True
