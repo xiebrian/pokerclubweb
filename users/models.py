@@ -4,9 +4,9 @@ from django.contrib.auth.models import Group, Permission
 from django.core.exceptions import ValidationError
 # from django.contrib.contenttypes.models import ContentType
 # from api.models import Project
-member_group, created = Group.objects.get_or_create(name='member_group')
-admin_group, created = Group.objects.get_or_create(name='admin_group')
-sponsor_group, created = Group.objects.get_or_create(name='sponsor_group')
+# member_group, created = Group.objects.get_or_create(name='member_group')
+# admin_group, created = Group.objects.get_or_create(name='admin_group')
+# sponsor_group, created = Group.objects.get_or_create(name='sponsor_group')
 
 # # Code to add permission to group ???
 # ct = ContentType.objects.get_for_model(Project)
