@@ -31,3 +31,4 @@ bpython >= 0.13.1
 django-allauth >= 0.23.0
 
 gunicorn >= 19.3
+whitenoise >= 2.0.2
