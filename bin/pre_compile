@@ -8,7 +8,7 @@ NODE_ARCHIVE="http://nodejs.org/dist/v${NODE_VERSION}/${NODE_BASENAME}.tar.gz"
 curl -s -L -o tmp-nodejs.tar.gz $NODE_ARCHIVE
 tar -zxvf tmp-nodejs.tar.gz > /dev/null
 rm tmp-nodejs.tar.gz
-cp $NODE_BASENAME/bin/* /usr/local/bin/
+apt-get install nodejs-legacy
 
 export PATH=$NODE_BASENAME/bin:tmp-nodejs/$PATH
 echo "path" $PATH
