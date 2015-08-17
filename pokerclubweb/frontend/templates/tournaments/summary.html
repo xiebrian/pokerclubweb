@@ -16,13 +16,13 @@
               {{tournament.location}}
               {% if results %}
                 {% for result in results %}
-                  {{result}} {{result.student}}
+                  {{result}} {{result.member}}
                 {% endfor %}
               {% endif %}
               <form action={% url "register" tournament.id %} method="post">
                 {% csrf_token %}
                 {% load user_extras %}
-                {% if user|has_group:"student_group" %}
+                {% if user|has_group:"member_group" %}
                     {% if isRegistered %}
                         You are currently registered for this tournament.
                         <input type="submit" value="Unregister">

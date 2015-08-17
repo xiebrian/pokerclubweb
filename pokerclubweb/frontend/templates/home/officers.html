@@ -10,7 +10,10 @@
 
               <h2 class="pagetitle">Welcome to the MIT Poker Club</h2>
               <div id="content" class="clearfix">
-
+                {% for officer in officers %}
+                    {{officer.user.first_name}} {{officer.user.last_name}}
+                    {{officer.position}}
+                {% endfor %}
               </div><!-- /content -->
             </div>
           </div>

@@ -1,12 +1,12 @@
 from django.db import models
-from users.models import Student
+from users.models import Member
 from django.core.exceptions import ValidationError
 
 class Tournament(models.Model):
     name = models.CharField(max_length=100)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    registered_students = models.ManyToManyField(Student, blank=True)
+    registered_members = models.ManyToManyField(Member, blank=True)
     places = models.PositiveSmallIntegerField()
     location = models.CharField(max_length=500)
     results_available = models.BooleanField(default=False)
@@ -22,11 +22,11 @@ class Tournament(models.Model):
 
 class TournamentResult(models.Model):
     tournament = models.ForeignKey('Tournament')
-    student = models.ForeignKey('users.Student', blank=True, null=True)
+    member = models.ForeignKey('users.Member', blank=True, null=True)
     place = models.PositiveSmallIntegerField()
 
     class Meta:
-        unique_together = (('tournament', 'place'),('tournament','student'))
+        unique_together = (('tournament', 'place'),('tournament','member'))
 
     def __unicode__(self):
         return self.intToWord(self.place) + ' place for ' + self.tournament.name

@@ -10,17 +10,25 @@
 
               <h2 class="pagetitle">Welcome to the MIT Poker Club</h2>
               <div id="content" class="clearfix">
-                {% if student %}
-                    {{student.user.first_name}} {{student.user.last_name}}
-                    <img src={{student.picture.url}}/>
-                    {{student.class_year}}
-                    {{student.bio}}
-                    <a href={% url "edit_profile" %}>
-                      Edit Profile
-                    </a>
-                    <a href={% url "change_password" %}>
-                      Change Password
-                    </a>
+                {% if member %}
+                    {{member.user.first_name}} {{member.user.last_name}}
+                    <img src={{member.picture_url}}/>
+                    {{member.class_year}}
+                    {{member.bio}}
+                    {% load user_extras %}
+                    {% if user|has_group:"admin_group" or user.sponsor.can_view_resumes %}
+                      <a href={% url "view_resume" member.id %}>
+                        View Resume
+                      </a>
+                    {% endif %}
+                    {% if user.id == member.id %}
+                      <a href={% url "edit_profile" %}>
+                        Edit Profile
+                      </a>
+                      <a href={% url "change_password" %}>
+                        Change Password
+                      </a>
+                    {% endif %}
                 {% else %}
                     {% load account %}
                     Welcome, {% user_display user %}

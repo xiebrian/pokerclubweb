@@ -14,14 +14,19 @@
 	<a class="item" href={% url "officers" %}>
 		Officers
 	</a>
+	<a class="item" href={% url "contact" %}>
+		Contact
+	</a>
 	<div class="right menu">
 		{% load user_extras %}
 		{% if request.user|has_group:"admin_group" %}
 			<a class="item" href={% url "admin_tools" %}>
 				Admin Tools
 			</a>
+		{% endif %}
+		{% if request.user|has_group:"admin_group" or request.user|has_group:"sponsor_group"%}
 			<a class="item" href={% url "users_index" %}>
-				Students
+				Members
 			</a>
 		{% endif %}
 		{% if request.user.is_authenticated %}

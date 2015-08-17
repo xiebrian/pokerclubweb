@@ -2,9 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template import RequestContext, loader
 from django.template.response import TemplateResponse
-from users.models import Student, Sponsor
+from users.models import Member, Sponsor, Admin
 from django.contrib.auth.models import User, Group
-from .forms import StudentSignupForm, UserSignupForm
+from .forms import MemberSignupForm, UserSignupForm
 from django.contrib.auth import forms as authforms
 from django.contrib.auth import login as authLogin
 from django.contrib.auth import logout as authLogout
@@ -34,26 +34,26 @@ def login(request):
 def signup(request):
     if request.method == 'POST':
         userform = UserSignupForm(request.POST, prefix='user')
-        studentform = StudentSignupForm(request.POST, prefix='student')
+        memberform = MemberSignupForm(request.POST, prefix='member')
 
-        if (userform.is_valid() and studentform.is_valid()):
+        if (userform.is_valid() and memberform.is_valid()):
             user = userform.save()
-            student = studentform.save(commit=False)
-            student.user = user
-            student.save()
+            member = memberform.save(commit=False)
+            member.user = user
+            member.save()
 
-            g = Group.objects.get(name='student_group')
+            g = Group.objects.get(name='member_group')
             g.user_set.add(user)
 
             return redirect('index')
     else:
         userform = UserSignupForm(prefix='user')
-        studentform = StudentSignupForm(prefix='student')
+        memberform = MemberSignupForm(prefix='member')
 
     template = loader.get_template('auth/signup.html')
     context = RequestContext(request)
-    context['forms'] = [userform, studentform]
-    if (userform.errors or studentform.errors):
+    context['forms'] = [userform, memberform]
+    if (userform.errors or memberform.errors):
         context['errors'] = True
     return HttpResponse(template.render(context))
 
@@ -131,6 +131,7 @@ def sponsors(request):
 def officers(request):
     template = loader.get_template('home/officers.html')
     context = RequestContext(request)
+    context['officers'] = Admin.objects.all()
     return HttpResponse(template.render(context))
 
 def photos(request):

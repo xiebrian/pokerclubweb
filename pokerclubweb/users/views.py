@@ -1,28 +1,44 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template import RequestContext, loader
-from .models import Student, Sponsor
+from .models import Member, Sponsor
 from django.contrib.auth.models import User, Group
 from pokerclubweb.forms import SponsorSignupForm, UserSignupForm
-from .forms import StudentProfileForm, UserProfileForm, SponsorProfileForm, SponsorProfileAdminForm
+from .forms import MemberProfileForm, UserProfileForm, SponsorProfileForm, SponsorProfileAdminForm, AdminCreateForm, MemberSelectForm
 from .decorators import group_required, is_self_or_admin
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def index(request):
     template = loader.get_template('users/index.html')
     context = RequestContext(request)
-    context['students'] = Student.objects.all()
+    context['members'] = Member.objects.all()
     return HttpResponse(template.render(context))
 
+@login_required
 def profile(request, userID=None):
     template = loader.get_template('users/profile.html')
     context = RequestContext(request)
     try:
         if not userID:
-            context['student'] = Student.objects.get(user=request.user)
+            if hasattr(request.user, 'sponsor'):
+                return redirect('sponsor_profile', request.user.id)
+            elif hasattr(request.user, 'admin'):
+                context['member'] = Admin.objects.get(user=request.user)
+            else:
+                context['member'] = Member.objects.get(user=request.user)
         else:
-            context['student'] = Student.objects.get(user=User.objects.get(id=userID))
-    finally:
-        return HttpResponse(template.render(context))
+            user = User.objects.get(id=userID)
+            if hasattr(user, 'sponsor'):
+                return redirect('sponsor_profile', user.id)
+            elif hasattr(user, 'admin'):
+                context['member'] = Admin.objects.get(user=user)
+            else:
+                context['member'] = Member.objects.get(user=user)
+    except:
+        return redirect('index')
+    
+    return HttpResponse(template.render(context))
 
 @is_self_or_admin
 def sponsor_profile(request, userID):
@@ -31,11 +47,11 @@ def sponsor_profile(request, userID):
     try:
         context['sponsor'] = Sponsor.objects.get(user=User.objects.get(id=userID))
     except:
-        return redirect('sponsors')
+        return redirect('index')
     
     return HttpResponse(template.render(context))
 
-
+@is_self_or_admin
 def edit_sponsor_profile(request, userID):
     user = User.objects.get(id=userID)
     SponsorFormClass = SponsorProfileForm
@@ -47,7 +63,7 @@ def edit_sponsor_profile(request, userID):
 
         if (userform.is_valid() and sponsorform.is_valid()):
             user = userform.save()
-            student = sponsorform.save()
+            member = sponsorform.save()
 
             return redirect('sponsor_profile', userID=user.id)
     else:
@@ -61,24 +77,24 @@ def edit_sponsor_profile(request, userID):
     template = loader.get_template('users/sponsors/edit_profile.html')
     return HttpResponse(template.render(context))
 
-@group_required('student_group')
+@group_required('member_group')
 def edit_profile(request):
     if request.method == 'POST':
         userform = UserProfileForm(request.POST, prefix='user', instance=User.objects.get(id=request.user.id))
-        studentform = StudentProfileForm(request.POST, request.FILES, prefix='student', instance=Student.objects.get(user=request.user))
+        memberform = MemberProfileForm(request.POST, request.FILES, prefix='member', instance=Member.objects.get(user=request.user))
 
-        if (userform.is_valid() and studentform.is_valid()):
+        if (userform.is_valid() and memberform.is_valid()):
             user = userform.save()
-            student = studentform.save()
+            member = memberform.save()
 
             return redirect('profile', userID=user.id)
     else:
         userform = UserProfileForm(prefix='user', instance=User.objects.get(id=request.user.id))
-        studentform = StudentProfileForm(prefix='student', instance=Student.objects.get(user=request.user))
+        memberform = MemberProfileForm(prefix='member', instance=Member.objects.get(user=request.user))
 
     context = RequestContext(request)
-    context['forms'] = [userform, studentform]
-    if (userform.errors or studentform.errors):
+    context['forms'] = [userform, memberform]
+    if (userform.errors or memberform.errors):
         context['errors'] = True
     template = loader.get_template('users/edit_profile.html')
     return HttpResponse(template.render(context))
@@ -125,5 +141,36 @@ def admin_create_sponsor(request, sponsorID=0):
     context = RequestContext(request)
     context['forms'] = [userform, sponsorform]
     if (userform.errors or sponsorform.errors):
+        context['errors'] = True
+    return HttpResponse(template.render(context))
+
+@group_required('admin_group')
+def admin_create_admin(request):
+    if request.method == 'POST':
+        memberform = MemberSelectForm(request.POST, prefix='member')
+        adminform = AdminCreateForm(request.POST, prefix='admin')
+
+        if (memberform.is_valid() and adminform.is_valid()):
+            admin = adminform.save(commit=False)
+            member = memberform.cleaned_data['member']
+            Member.objects.filter(id=member.id).delete()
+            admin.update_with_member(member)
+            admin.save()
+            
+            g = Group.objects.get(name='admin_group')
+            g.user_set.add(admin.user)
+
+            g = Group.objects.get(name='member_group')
+            g.user_set.remove(admin.user)
+
+            return redirect('profile', userID=admin.user.id)
+    else:
+        memberform = MemberSelectForm(prefix='member')
+        adminform = AdminCreateForm(prefix='admin')
+
+    template = loader.get_template('users/admin/create.html')
+    context = RequestContext(request)
+    context['forms'] = [memberform, adminform]
+    if (memberform.errors or adminform.errors):
         context['errors'] = True
     return HttpResponse(template.render(context))

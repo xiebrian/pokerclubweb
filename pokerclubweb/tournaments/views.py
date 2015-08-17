@@ -18,7 +18,7 @@ def summary(request, tournamentID):
     context = RequestContext(request)
     context['tournament'] = Tournament.objects.get(id=tournamentID)
     try:
-        context['isRegistered'] = request.user.student in context['tournament'].registered_students.all()
+        context['isRegistered'] = request.user.member in context['tournament'].registered_members.all()
     except:
         context['isRegistered'] = False
 
@@ -30,16 +30,16 @@ def summary(request, tournamentID):
 
     return HttpResponse(template.render(context))
 
-@group_required('student_group')
+@group_required('member_group')
 def register(request, tournamentID):
     if request.method == 'POST':
         tournament = Tournament.objects.get(id=tournamentID)
-        student = request.user.student
+        member = request.user.member
 
-        if student in tournament.registered_students.all():
-            tournament.registered_students.remove(student)
+        if member in tournament.registered_members.all():
+            tournament.registered_members.remove(member)
         else:
-            tournament.registered_students.add(student)
+            tournament.registered_members.add(member)
 
         tournament.save()
 
@@ -91,21 +91,21 @@ def admin_edit_tournament_results(request, tournamentID):
             forms.append(TournamentResultForm(data=request.POST, prefix=n, place=n, tournament=tournament, instance=instance))
 
         if all(form.is_valid() for form in forms):
-            students = {}
+            members = {}
             for form in forms:
                 result = form.save(commit=False)
-                students[form]=result.student
-                result.student = None
+                members[form]=result.member
+                result.member = None
                 result.save()
             error = False
             for form in forms:
                 result = form.save(commit=False)
-                result.student = students[form]
+                result.member = members[form]
                 try:
                     result.save()
                 except IntegrityError:
-                    errors = form._errors.setdefault('student', ErrorList())
-                    errors.append(u'This student was selected for multiple places')
+                    errors = form._errors.setdefault('member', ErrorList())
+                    errors.append(u'This member was selected for multiple places')
                     error = True
 
             if not error:

@@ -1,11 +1,6 @@
 from django import forms
 from .models import Tournament, TournamentResult
-from users.models import Student
-from django.forms import ModelChoiceField
-
-class StudentModelChoiceField(ModelChoiceField):
-    def label_from_instance(self, obj):
-        return '{0} {1} ({2})'.format(obj.user.first_name, obj.user.last_name, obj.user)
+from users.forms import MemberModelChoiceField
 
 class TournamentCreationForm(forms.ModelForm):
     start_time = forms.DateTimeField(
@@ -27,11 +22,11 @@ class TournamentResultForm(forms.ModelForm):
 
     class Meta:
         model = TournamentResult
-        fields = ['student']
+        fields = ['member']
 
     def __init__(self, *args, **kwargs):
         place = kwargs.pop('place')
         tournament = kwargs.pop('tournament')
         super(TournamentResultForm, self).__init__(*args, **kwargs)
 
-        self.fields['student'] = StudentModelChoiceField(tournament.registered_students, required=False, label=TournamentResult.intToWord(place) + " Place")
+        self.fields['member'] = MemberModelChoiceField(tournament.registered_members, required=False, label=TournamentResult.intToWord(place) + " Place")

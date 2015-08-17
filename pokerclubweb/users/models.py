@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group, Permission
 from django.core.exceptions import ValidationError
 # from django.contrib.contenttypes.models import ContentType
 # from api.models import Project
-student_group, created = Group.objects.get_or_create(name='student_group')
+member_group, created = Group.objects.get_or_create(name='member_group')
 admin_group, created = Group.objects.get_or_create(name='admin_group')
 sponsor_group, created = Group.objects.get_or_create(name='sponsor_group')
 
@@ -36,9 +36,8 @@ def pdf_file(value):
 class Student(models.Model):
     user = models.OneToOneField(User)
     resume = models.FileField(blank=True, upload_to=resume_file_name, validators=[pdf_file])
-    picture = models.ImageField(upload_to=profile_picture_file_name, default='img/profile_default.png')
+    picture = models.ImageField(blank=True, upload_to=profile_picture_file_name)
     bio = models.TextField(blank=True)
-    is_member = models.BooleanField(default=False)
     FRESHMAN = 'FR'
     SOPHOMORE = 'SO'
     JUNIOR = 'JR'
@@ -56,8 +55,29 @@ class Student(models.Model):
     def __unicode__(self):
         return self.user.first_name + ' ' + self.user.last_name
 
+    def picture_url(self):
+        if self.picture and hasattr(self.picture, 'url'):
+            return self.picture.url
+        else:
+            return '/static/frontend/img/profile_default.png'
+
+    class Meta:
+        abstract=True
+
+
+class Member(Student):
+    is_registered = models.BooleanField(default=False)
+
 class Admin(Student):
     position = models.CharField(max_length=100)
+
+    def update_with_member(self, member):
+        self.user = member.user
+        self.resume = member.resume
+        self.picture = member.picture
+        self.bio = member.bio
+        self.is_member = True
+        self.class_year = member.class_year
 
 class Sponsor(models.Model):
     user = models.OneToOneField(User)
@@ -81,8 +101,14 @@ class Sponsor(models.Model):
     )
 
     def __unicode__(self):
-        return self.name
+        return self.company_name
+
+    def logo_url(self):
+        if self.logo and hasattr(self.logo, 'url'):
+            return self.logo.url
+        else:
+            return '/static/frontend/img/profile_default.png'
 
     def can_view_resumes(self):
-        return self.level in [PLATINUM, GOLD]
+        return self.level in [self.PLATINUM, self.GOLD]
 
