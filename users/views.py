@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template import RequestContext, loader
-from .models import Member, Sponsor
+from .models import Member, Sponsor, Admin
 from django.contrib.auth.models import User, Group
 from pokerclubweb.forms import SponsorSignupForm, UserSignupForm
 from .forms import MemberProfileForm, UserProfileForm, SponsorProfileForm, SponsorProfileAdminForm, AdminCreateForm, MemberSelectForm
@@ -20,21 +20,13 @@ def profile(request, userID=None):
     template = loader.get_template('users/profile.html')
     context = RequestContext(request)
     try:
-        if not userID:
-            if hasattr(request.user, 'sponsor'):
-                return redirect('sponsor_profile', request.user.id)
-            elif hasattr(request.user, 'admin'):
-                context['member'] = Admin.objects.get(user=request.user)
-            else:
-                context['member'] = Member.objects.get(user=request.user)
+        user = User.objects.get(id=userID)
+        if hasattr(user, 'sponsor'):
+            return redirect('sponsor_profile', user.id)
+        elif hasattr(user, 'admin'):
+            context['member'] = user.admin
         else:
-            user = User.objects.get(id=userID)
-            if hasattr(user, 'sponsor'):
-                return redirect('sponsor_profile', user.id)
-            elif hasattr(user, 'admin'):
-                context['member'] = Admin.objects.get(user=user)
-            else:
-                context['member'] = Member.objects.get(user=user)
+            context['member'] = user.member
     except:
         return redirect('index')
     
