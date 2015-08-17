@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-npm install
-cd semantic
-gulp build
+# npm install
+# cd semantic
+# gulp build
