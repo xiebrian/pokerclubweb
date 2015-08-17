@@ -1,4 +1,6 @@
-{% load compress googletools %}<!doctype html>
+{% load compress googletools %}
+{% load static %}
+<!doctype html>
 <html xml:lang="{{ LANGUAGE_CODE|default:"en" }}" lang="{{ LANGUAGE_CODE|default:"en" }}">
   <head>
     <meta charset="utf-8" />
@@ -19,8 +21,8 @@
     <meta property="og:site_name" content="{{ site.name|default:site.domain }}" />
     <meta property="og:description" content="{% block og-description %}{{ page.description }}{% endblock %}" />
     {% compress css %}
-    <link href="{{ STATIC_URL }}frontend/vendor/semantic.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{ STATIC_URL }}frontend/css/screen.css" rel="stylesheet" type="text/css" />
+    <link href="{% static "frontend/vendor/semantic.min.css" %}" rel="stylesheet" type="text/css" />
+    <link href="{% static "frontend/css/screen.css" %}" rel="stylesheet" type="text/css" />
     {% endcompress %}
     {% compress css %}{% block link %}{% endblock %}{% endcompress %}
     <!--[if lt IE 9]>
@@ -29,8 +31,8 @@
     <![endif]-->
     {% block extrahead %}{% endblock %}
     {% site_verification_code %}
-    <script type="text/javascript" src="{{ STATIC_URL }}frontend/vendor/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}frontend/vendor/semantic.min.js"></script>
+    <script type="text/javascript" src="{% static "frontend/vendor/jquery-1.11.3.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "frontend/vendor/semantic.min.js" %}"></script>
     {% block script %}{% endblock %}
   </head>
 
