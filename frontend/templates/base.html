@@ -44,14 +44,19 @@
       </header>
 
       <section id="content">
+        <div class="title">
+          <h1 class="pagetitle ui center aligned header">{{title}}</h1>
+        </div>
         <div id="main">
           {% block main %}{% endblock %}
         </div>
-      </section>
 
-      <footer id="bottom">
+      </section>
+      <div id="footer">
         <p>Copyright © MIT Poker Club 2012-{% now "Y" %}</p>
-      </footer>
+      </div>
+
+
     </div>
 
     {% compress js %}{% block bodyscripts %}{% endblock %}{% endcompress %}

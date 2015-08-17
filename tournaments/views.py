@@ -11,23 +11,23 @@ def index(request):
     template = loader.get_template('tournaments/index.html')
     context = RequestContext(request)
     context['tournaments'] = Tournament.objects.all()
+    context['title'] = 'Tournaments'
     return HttpResponse(template.render(context))
 
 def summary(request, tournamentID):
     template = loader.get_template('tournaments/summary.html')
     context = RequestContext(request)
+    tournament = Tournament.objects.get(id=tournamentID)
     context['tournament'] = Tournament.objects.get(id=tournamentID)
     try:
-        context['isRegistered'] = request.user.member in context['tournament'].registered_members.all()
+        context['isRegistered'] = request.user.member in tournament.registered_members.all()
     except:
         context['isRegistered'] = False
 
-    if context['tournament'].results_available:
-        try:
-            context['results'] = TournamentResult.objects.filter(tournament=context['tournament'])
-        except:
-            print 'ERROR'
+    if tournament.results_available:
+        context['results'] = TournamentResult.objects.filter(tournament=tournament)
 
+    context['title'] = tournament.name
     return HttpResponse(template.render(context))
 
 @group_required('member_group')
@@ -66,8 +66,8 @@ def admin_create_tournament(request, tournamentID=0):
             print tournament.start_time.strftime('%Y-%m-%dT%H:%M')
             print tournament.start_time
             form = TournamentCreationForm(
-                instance=tournament, 
-                initial = { 
+                instance=tournament,
+                initial = {
                     'start_time' : tournament.start_time.strftime('%Y-%m-%dT%H:%M'),
                     'end_time' : tournament.end_time.strftime('%Y-%m-%dT%H:%M'),
             })
@@ -79,6 +79,7 @@ def admin_create_tournament(request, tournamentID=0):
     context['forms'] = [form]
     if (form.errors):
         context['errors'] = True
+    context['title'] = 'Create Tournament'
     return HttpResponse(template.render(context))
 
 @group_required('admin_group')
@@ -121,5 +122,6 @@ def admin_edit_tournament_results(request, tournamentID):
     context['forms'] = forms
     if any(form.errors for form in forms):
         context['errors'] = True
+    context['title'] = 'Edit Results for ' + tournament.name
     return HttpResponse(template.render(context))
 

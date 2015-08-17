@@ -1,58 +1,59 @@
-<div id="navbar" class="ui menu borderless">
-	<a class="item" href={% url "index" %}>
-		Home
-	</a>
-	<a class="item" href={% url "about" %}>
-		About
-	</a>
-	<a class="item" href={% url "events" %}>
-		Events
-	</a>
-	<a class="item" href={% url "sponsors" %}>
-		Sponsors
-	</a>
-	<a class="item" href={% url "officers" %}>
-		Officers
-	</a>
-	<a class="item" href={% url "contact" %}>
-		Contact
-	</a>
-	<div class="right menu">
-		{% load user_extras %}
-		{% if request.user|has_group:"admin_group" %}
-			<a class="item" href={% url "admin_tools" %}>
-				Admin Tools
-			</a>
-		{% endif %}
-		{% if request.user|has_group:"admin_group" or request.user|has_group:"sponsor_group"%}
-			<a class="item" href={% url "users_index" %}>
-				Members
-			</a>
-		{% endif %}
-		{% if request.user.is_authenticated %}
-			<a class="item" href={% url "tournaments" %}>
-				Tournaments
-			</a>
-			{% if request.user|has_group:"sponsor_group" %}
-				<a class="item" href={% url "sponsor_profile" request.user.id %}>
-					Profile
-				</a>
-			{% else %}
-				<a class="item" href={% url "profile" request.user.id %}>
-					Profile
+{% load static %}
+	<div id="navbar" class="ui menu borderless">
+		<a class="vertically fitted item" href={% url "index" %}>
+			<img class="ui tiny image" src="{% static "frontend/img/PokerClubLogo_ClearBackground.png" %}"/>
+		</a>
+		<a class="item" href={% url "about" %}>
+			About
+		</a>
+		<a class="item" href={% url "events" %}>
+			Events
+		</a>
+		<a class="item" href={% url "sponsors" %}>
+			Sponsors
+		</a>
+		<a class="item" href={% url "officers" %}>
+			Officers
+		</a>
+		<a class="item" href={% url "contact" %}>
+			Contact
+		</a>
+		<div class="right menu">
+			{% load user_extras %}
+			{% if request.user|has_group:"admin_group" %}
+				<a class="item" href={% url "admin_tools" %}>
+					Admin Tools
 				</a>
 			{% endif %}
-			<a class="item" href={% url "logout" %}>
-				Logout
-			</a>
-		{% else %}
-			<a class="item" href={% url "login" %}>
-				Login
-			</a>
-			<a class="item" href={% url "signup" %}>
-				Sign Up
-			</a>
-		{% endif %}
-		
+			{% if request.user|has_group:"admin_group" or request.user|has_group:"sponsor_group"%}
+				<a class="item" href={% url "users_index" %}>
+					Members
+				</a>
+			{% endif %}
+			{% if request.user.is_authenticated %}
+				<a class="item" href={% url "tournaments" %}>
+					Tournaments
+				</a>
+				{% if request.user|has_group:"sponsor_group" %}
+					<a class="item" href={% url "sponsor_profile" request.user.id %}>
+						Profile
+					</a>
+				{% else %}
+					<a class="item" href={% url "profile" request.user.id %}>
+						Profile
+					</a>
+				{% endif %}
+				<a class="item" href={% url "logout" %}>
+					Logout
+				</a>
+			{% else %}
+				<a class="item" href={% url "login" %}>
+					Login
+				</a>
+				<a class="item" href={% url "signup" %}>
+					Sign Up
+				</a>
+			{% endif %}
+
+		</div>
 	</div>
-</div>

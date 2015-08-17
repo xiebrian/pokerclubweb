@@ -61,6 +61,9 @@ class Student(models.Model):
         else:
             return '/static/frontend/img/profile_default.png'
 
+    def full_name(self):
+        return self.user.first_name + ' ' + self.user.last_name
+
     class Meta:
         abstract=True
 

@@ -13,6 +13,7 @@ def index(request):
     template = loader.get_template('users/index.html')
     context = RequestContext(request)
     context['members'] = Member.objects.all()
+    context['title'] = 'Members'
     return HttpResponse(template.render(context))
 
 @login_required
@@ -29,7 +30,7 @@ def profile(request, userID=None):
             context['member'] = user.member
     except:
         return redirect('index')
-    
+    context['title'] = context['member'].full_name
     return HttpResponse(template.render(context))
 
 @is_self_or_admin
@@ -40,7 +41,8 @@ def sponsor_profile(request, userID):
         context['sponsor'] = Sponsor.objects.get(user=User.objects.get(id=userID))
     except:
         return redirect('index')
-    
+
+    context['title'] = context['sponsor'].company_name
     return HttpResponse(template.render(context))
 
 @is_self_or_admin
@@ -67,6 +69,7 @@ def edit_sponsor_profile(request, userID):
     if (userform.errors or sponsorform.errors):
         context['errors'] = True
     template = loader.get_template('users/sponsors/edit_profile.html')
+    context['title'] = 'Edit Profile for ' + user.sponsor.company_name
     return HttpResponse(template.render(context))
 
 @group_required('member_group')
@@ -89,12 +92,14 @@ def edit_profile(request):
     if (userform.errors or memberform.errors):
         context['errors'] = True
     template = loader.get_template('users/edit_profile.html')
+    context['title'] = 'Edit Profile'
     return HttpResponse(template.render(context))
 
 @group_required('admin_group')
 def admin_tools(request):
     template = loader.get_template('users/admin/index.html')
     context = RequestContext(request)
+    context['title'] = 'Admin Tools'
     return HttpResponse(template.render(context))
 
 @group_required('admin_group')
@@ -134,6 +139,7 @@ def admin_create_sponsor(request, sponsorID=0):
     context['forms'] = [userform, sponsorform]
     if (userform.errors or sponsorform.errors):
         context['errors'] = True
+    context['title'] = 'Create Sponsor'
     return HttpResponse(template.render(context))
 
 @group_required('admin_group')
@@ -148,7 +154,7 @@ def admin_create_admin(request):
             Member.objects.filter(id=member.id).delete()
             admin.update_with_member(member)
             admin.save()
-            
+
             g = Group.objects.get(name='admin_group')
             g.user_set.add(admin.user)
 
@@ -165,4 +171,5 @@ def admin_create_admin(request):
     context['forms'] = [memberform, adminform]
     if (memberform.errors or adminform.errors):
         context['errors'] = True
+    context['title'] = 'Create Admin'
     return HttpResponse(template.render(context))
