@@ -37,4 +37,7 @@ for dependency in $(cat $BUILD_DIR/npm_requirements.txt)
 do
     run_npm_install_global $dependency
 done
+npm install
+cd semantic
+gulp build
 echo "Dependencies installed" | indent
