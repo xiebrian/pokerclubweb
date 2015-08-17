@@ -2,20 +2,22 @@
     { "model": "auth.group",
         "pk": 1,
         "fields": {
-            "name": "admin_group"
+            "name": "admin_group",
+            "permissions": []
         }
     },
     { "model": "auth.group",
         "pk": 2,
         "fields": {
-            "name": "member_group"
+            "name": "member_group",
+            "permissions": []
         }
     },
     { "model": "auth.group",
         "pk": 3,
         "fields": {
-            "name": "sponsor_group"
+            "name": "sponsor_group",
+            "permissions": []
         }
-    },
-
+    }
 ]
