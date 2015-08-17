@@ -1,1 +1,1 @@
-web: gunicorn pokerclubweb/pokerclubweb/wsgi/production.py
+web: gunicorn pokerclubweb.wsgi:production
