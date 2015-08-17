@@ -31,8 +31,7 @@ DATABASES = {
         #'USER':     'django_user',
         #'PASSWORD': 'django',
         'USER':     'jlmart88@localhost',
-        'PASSWORD': '',
-        'OPTIONS':  {'autocommit': True,},   # Stop that "current transaction is aborted" error in PostgreSQL
+        'PASSWORD': '',   # Stop that "current transaction is aborted" error in PostgreSQL
         'HOST': '127.0.0.1',
         #'PORT': 8889
     },

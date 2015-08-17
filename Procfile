@@ -1,1 +1,1 @@
-web: gunicorn pokerclubweb.wsgi:production
+web: gunicorn pokerclubweb.wsgi.production:application

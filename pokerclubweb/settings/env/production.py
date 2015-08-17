@@ -14,7 +14,6 @@ DATABASES = {
         'USER':     'thpigrkwjopqne',
         'PASSWORD': 'rYj19UP1spyJeAssvJVUR0I9Qa',
         'PORT':     5432,
-        'OPTIONS':  {'autocommit': True,},   # Stop that "current transaction is aborted" error in PostgreSQL
     },
 }
 
