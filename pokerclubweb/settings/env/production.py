@@ -33,6 +33,7 @@ TEMPLATE_LOADERS = (
 ALLOWED_HOSTS = (
     '.pokerclubweb.tld',
     '.pokerclubweb.tld.',
+    '.herokuapp.com'
 )
 
 CACHES['default']['KEY_PREFIX'] = 'pokerclubweb.production'
