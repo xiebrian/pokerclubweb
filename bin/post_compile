@@ -3,3 +3,4 @@
 # npm install
 # cd semantic
 # gulp build
+./manage.py compress
