@@ -20,12 +20,22 @@ This site is for the poker club to track their membership and interact with memb
 	- Exec board
 - Sign up for membership (students)
 - Contact club about becoming a sponsor
+- Home Page have most relevant content (upcoming tournament/event)
 
 **Member Capabilities**
 
 - Register for tournament
+- Main tournaments, qualifying tournaments (only tracking information)
+- Main tournament: no registration
+    - Give instructions for registration for qualifying tournaments:
+        - Fill out profile
+        - Register with pokerstars league
+    - Admin can select 'eligible students'
+        - Eligible students can register for main tournament
+- Contact me field about becoming an officer
 - View tournament results
 - Upload personal profile information + resume
+- Delete account
 
 **Sponsor Capabilities**
 
@@ -33,6 +43,7 @@ This site is for the poker club to track their membership and interact with memb
 - View student resumes + profiles (based on tier?)
 - View tournament results
 - Option to upgrade sponsorship?
+- Sponsor feed to post messages?
 
 **Admin Capabilites**
 
@@ -40,6 +51,7 @@ This site is for the poker club to track their membership and interact with memb
 - Upload tournament results
 - Update calendar
 - Create sponsor accounts
+- Email out to all members
 
 Prerequisites
 -------------

@@ -14,6 +14,7 @@ class Tournament(models.Model):
     registered_members = models.ManyToManyField(Member, blank=True)
     places = models.PositiveSmallIntegerField()
     location = models.CharField(max_length=500)
+    registration_open = models.BooleanField(default=False)
     results_available = models.BooleanField(default=False)
 
     def clean_fields(self, exclude=None):

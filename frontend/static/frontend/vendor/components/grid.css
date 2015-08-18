@@ -1357,7 +1357,7 @@
 .ui.grid > .red.row,
 .ui.grid > .red.column,
 .ui.grid > .row > .red.column {
-  background-color: #db2828 !important;
+  background-color: #991c2e !important;
   color: #ffffff;
 }
 
@@ -1445,7 +1445,7 @@
 .ui.grid > .grey.row,
 .ui.grid > .grey.column,
 .ui.grid > .row > .grey.column {
-  background-color: #767676 !important;
+  background-color: #7f8081 !important;
   color: #ffffff;
 }
 

@@ -501,14 +501,14 @@ a.ui.active.label:ActiveHover:before {
 
 .ui.red.labels .label,
 .ui.red.label {
-  background-color: #db2828 !important;
-  border-color: #db2828 !important;
+  background-color: #991c2e !important;
+  border-color: #991c2e !important;
   color: #ffffff !important;
 }
 .ui.labels .red.label:before,
 .ui.red.labels .label:before,
 .ui.red.label:before {
-  background-color: #db2828 !important;
+  background-color: #991c2e !important;
 }
 .ui.red.corner.label,
 .ui.red.corner.label:hover {
@@ -516,17 +516,17 @@ a.ui.active.label:ActiveHover:before {
 }
 a.ui.red.labels .label:hover,
 a.ui.red.label:hover {
-  background-color: #d01919 !important;
-  border-color: #d01919 !important;
+  background-color: #891324 !important;
+  border-color: #891324 !important;
   color: #ffffff !important;
 }
 .ui.labels a.red.label:hover:before,
 .ui.red.labels a.label:hover:before,
 a.ui.red.label:hover:before {
-  background-color: #d01919 !important;
+  background-color: #891324 !important;
 }
 .ui.red.ribbon.label {
-  border-color: #b21e1e !important;
+  border-color: #6e1421 !important;
 }
 
 /*--- Orange ---*/
@@ -853,14 +853,14 @@ a.ui.brown.label:hover:before {
 
 .ui.grey.labels .label,
 .ui.grey.label {
-  background-color: #767676 !important;
-  border-color: #767676 !important;
+  background-color: #7f8081 !important;
+  border-color: #7f8081 !important;
   color: #ffffff !important;
 }
 .ui.labels .grey.label:before,
 .ui.grey.labels .label:before,
 .ui.grey.label:before {
-  background-color: #767676 !important;
+  background-color: #7f8081 !important;
 }
 .ui.grey.corner.label,
 .ui.grey.corner.label:hover {
@@ -868,17 +868,17 @@ a.ui.brown.label:hover:before {
 }
 a.ui.grey.labels .label:hover,
 a.ui.grey.label:hover {
-  background-color: #838383 !important;
-  border-color: #838383 !important;
+  background-color: #8c8d8e !important;
+  border-color: #8c8d8e !important;
   color: #ffffff !important;
 }
 .ui.labels a.grey.label:hover:before,
 .ui.grey.labels a.label:hover:before,
 a.ui.grey.label:hover:before {
-  background-color: #838383 !important;
+  background-color: #8c8d8e !important;
 }
 .ui.grey.ribbon.label {
-  border-color: #5d5d5d !important;
+  border-color: #666767 !important;
 }
 
 /*--- Black ---*/
@@ -910,7 +910,7 @@ a.ui.black.label:hover:before {
   background-color: #27292a !important;
 }
 .ui.black.ribbon.label {
-  border-color: #5d5d5d !important;
+  border-color: #666767 !important;
 }
 
 /*-------------------

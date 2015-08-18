@@ -1,6 +1,7 @@
 {% load static %}
-	<div id="navbar" class="ui menu borderless">
-		<a class="vertically fitted item" href={% url "index" %}>
+<div id="navbar" class="ui borderless fixed menu">
+	<div class="ui container">
+		<a class="vertically fitted header item" href={% url "index" %}>
 			<img class="ui tiny image" src="{% static "frontend/img/PokerClubLogo_ClearBackground.png" %}"/>
 		</a>
 		<a class="item" href={% url "about" %}>
@@ -57,3 +58,4 @@
 
 		</div>
 	</div>
+</div>

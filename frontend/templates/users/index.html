@@ -5,17 +5,9 @@
 {% block headtitle %}Poker Club Home Page{% endblock %}
 
 {% block main %}
-          <div class="constrained">
-            <div class="container">
-
-
-              <div id="content" class="clearfix">
-              {% for member in members %}
-                <a href={% url "profile" member.user.id %}>
-                    {{member}}
-                </a>
-              {% endfor %}
-              </div><!-- /content -->
-            </div>
-          </div>
+  {% for member in members %}
+    <a href={% url "profile" member.user.id %}>
+        {{member}}
+    </a>
+  {% endfor %}
 {% endblock %}

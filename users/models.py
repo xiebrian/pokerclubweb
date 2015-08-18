@@ -36,17 +36,20 @@ def pdf_file(value):
 class Student(models.Model):
     user = models.OneToOneField(User)
     resume = models.FileField(blank=True, upload_to=resume_file_name, validators=[pdf_file])
+    pokerstars_username = models.CharField(max_length=100)
     picture = models.ImageField(blank=True, upload_to=profile_picture_file_name)
     bio = models.TextField(blank=True)
     FRESHMAN = 'FR'
     SOPHOMORE = 'SO'
     JUNIOR = 'JR'
     SENIOR = 'SR'
+    GRADUATE = 'GR'
     CLASS_YEAR_CHOICES = (
         (FRESHMAN, 'Freshman'),
         (SOPHOMORE, 'Sophomore'),
         (JUNIOR, 'Junior'),
         (SENIOR, 'Senior'),
+        (GRADUATE, 'Graduate'),
     )
     class_year = models.CharField(max_length=2,
                                       choices=CLASS_YEAR_CHOICES,

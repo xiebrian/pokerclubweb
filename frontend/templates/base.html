@@ -36,28 +36,23 @@
     {% block script %}{% endblock %}
   </head>
 
-  <body id="{% block bodyid %}page{% endblock %}" class="{% block bodyclass %}default{% endblock %} ui one column grid container" itemscope itemtype="http://schema.org/WebPage">
-    <div id="wrapper" class="column">
-
-      <header id="top">
+  <body id="{% block bodyid %}page{% endblock %}" class="{% block bodyclass %}default{% endblock %}" itemscope itemtype="http://schema.org/WebPage">
       {% include "navbar.html" %}
-      </header>
 
-      <section id="content">
-        <div class="title">
-          <h1 class="pagetitle ui center aligned header">{{title}}</h1>
-        </div>
+      <div class="ui main text container">
+        
+        <h1 class="pagetitle ui center aligned header">{{title}}</h1>
         <div id="main">
           {% block main %}{% endblock %}
         </div>
 
-      </section>
-      <div id="footer">
-        <p>Copyright © <a href="mailto:poker-exec@mit.edu">MIT Poker Club</a> 2012-{% now "Y" %}</p>
+      </div>
+      <div class="ui vertical footer primary inverted secondary segment">
+        <div class="ui center aligned container">
+          <p>Copyright © <a href="mailto:poker-exec@mit.edu">MIT Poker Club</a> 2012-{% now "Y" %}</p>
+        </div>
       </div>
 
-
-    </div>
 
     {% compress js %}{% block bodyscripts %}{% endblock %}{% endcompress %}
     {% analytics_code %}

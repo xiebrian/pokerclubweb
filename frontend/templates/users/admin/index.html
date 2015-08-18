@@ -5,15 +5,9 @@
 {% block headtitle %}Poker Club Home Page{% endblock %}
 
 {% block main %}
-          <div class="constrained">
-            <div class="container">
-
-
-              <div id="content" class="clearfix">
+        
               <a href={% url "admin_create_tournament" %}>Create Tournament</a>
               <a href={% url "admin_create_sponsor" %}>Create Sponsor</a>
               <a href={% url "admin_create_admin" %}>Create Admin</a>
-              </div><!-- /content -->
-            </div>
-          </div>
+
 {% endblock %}

@@ -1,39 +1,14 @@
-#wrapper {
-    height: 100vh;
+@import "partials/base";
+.ui.main.container {
+    min-height: calc(100% - 130px);
+    margin-top: 7em;
 }
 
-#content {
-    min-height: calc(100% - 169px);
-    height: auto;
-    width: 100%;
-    display:table;
-
-    .title {
-        display: table-caption;
-        height: 40px;
-        margin: 20px 0;
+.ui.footer.segment {
+    margin-top: 5em;
+    padding: 2em 0em;
+    
+    a {
+        color: black;
     }
-    #main {
-        height: calc(100% - 79px);
-        width: 100%;
-        display:table-cell;
-
-        .constrained {
-            height: 100%;
-            width: 100%;
-            display: inline-block;
-
-            .container, .grid {
-                height: 100%;
-            }
-        }
-    }
-
-}
-
-#footer {
-    text-align:center;
-    height:28px;
-    margin-top: 20px;
-    margin-bottom: 10px;
 }

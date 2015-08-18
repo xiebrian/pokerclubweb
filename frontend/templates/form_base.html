@@ -10,16 +10,10 @@
 {% endblock %}
 
 {% block main %}
-          <div class="constrained">
-            <div class="container">
-                <div class="ui middle aligned center aligned grid">
-                    <div class="six wide left aligned column">
-                        {% include "semantic_form.html" %}
-                        {% block form_extras %}{% endblock %}
-                    </div>
-                </div>
-            </div>
-          </div>
-
-
+    <div class="ui middle aligned center aligned grid">
+        <div class="ten wide left aligned column">
+            {% include "semantic_form.html" %}
+            {% block form_extras %}{% endblock %}
+        </div>
+    </div>
 {% endblock %}

@@ -322,13 +322,13 @@ h5.ui.header .sub.header {
 /*--- Red ---*/
 
 .ui.red.header {
-  color: #db2828 !important;
+  color: #991c2e !important;
 }
 a.ui.red.header:hover {
-  color: #d01919 !important;
+  color: #891324 !important;
 }
 .ui.red.dividing.header {
-  border-bottom: 2px solid #db2828;
+  border-bottom: 2px solid #991c2e;
 }
 
 /* Inverted */
@@ -542,13 +542,13 @@ a.ui.inverted.brown.header:hover {
 /*--- Grey ---*/
 
 .ui.grey.header {
-  color: #767676 !important;
+  color: #7f8081 !important;
 }
 a.ui.grey.header:hover {
-  color: #838383 !important;
+  color: #8c8d8e !important;
 }
 .ui.grey.dividing.header {
-  border-bottom: 2px solid #767676;
+  border-bottom: 2px solid #7f8081;
 }
 
 /* Inverted */
