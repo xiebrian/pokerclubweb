@@ -2,10 +2,15 @@ from django.db import models
 from users.models import Member
 from django.core.exceptions import ValidationError
 
+def tournament_picture_file_name(instance, filename):
+    return '/'.join(['tournament_pictures', str(instance.id), filename])
+
 class Tournament(models.Model):
     name = models.CharField(max_length=100)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    picture = models.ImageField(blank=True, upload_to=tournament_picture_file_name)
+    description = models.TextField(blank=True)
     registered_members = models.ManyToManyField(Member, blank=True)
     places = models.PositiveSmallIntegerField()
     location = models.CharField(max_length=500)
@@ -19,6 +24,15 @@ class Tournament(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def picture_url(self):
+        if self.picture and hasattr(self.picture, 'url'):
+            return self.picture.url
+        else:
+            return '/static/frontend/img/profile_default.png'
+
+    def registered_members_count(self):
+        return self.registered_members.count()
 
 class TournamentResult(models.Model):
     tournament = models.ForeignKey('Tournament')
@@ -50,5 +64,5 @@ class TournamentResult(models.Model):
             suffix = "rd"
         else:
             suffix = "th"
-        
+
         return value + suffix

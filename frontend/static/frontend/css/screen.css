@@ -3,7 +3,7 @@
 }
 
 #content {
-  min-height: calc(100% - 119px);
+  min-height: calc(100% - 169px);
   height: auto;
   width: 100%;
   display: table;
@@ -12,7 +12,7 @@
 #content .title {
   display: table-caption;
   height: 40px;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 #content #main {
@@ -33,7 +33,8 @@
 
 #footer {
   text-align: center;
-  height: 18px;
+  height: 28px;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 

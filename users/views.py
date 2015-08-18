@@ -4,7 +4,7 @@ from django.template import RequestContext, loader
 from .models import Member, Sponsor, Admin
 from django.contrib.auth.models import User, Group
 from pokerclubweb.forms import SponsorSignupForm, UserSignupForm
-from .forms import MemberProfileForm, UserProfileForm, SponsorProfileForm, SponsorProfileAdminForm, AdminCreateForm, MemberSelectForm
+from .forms import MemberProfileForm, UserProfileForm, AdminProfileForm, SponsorProfileForm, SponsorProfileAdminForm, AdminCreateForm, MemberSelectForm
 from .decorators import group_required, is_self_or_admin
 from django.contrib.auth.decorators import login_required
 
@@ -72,11 +72,14 @@ def edit_sponsor_profile(request, userID):
     context['title'] = 'Edit Profile for ' + user.sponsor.company_name
     return HttpResponse(template.render(context))
 
-@group_required('member_group')
+@group_required('member_group', 'admin_group')
 def edit_profile(request):
     if request.method == 'POST':
         userform = UserProfileForm(request.POST, prefix='user', instance=User.objects.get(id=request.user.id))
-        memberform = MemberProfileForm(request.POST, request.FILES, prefix='member', instance=Member.objects.get(user=request.user))
+        if hasattr(request.user, 'admin'):
+            memberform = AdminProfileForm(request.POST, request.FILES, prefix='member', instance=Admin.objects.get(user=request.user))
+        else:
+            memberform = MemberProfileForm(request.POST, request.FILES, prefix='member', instance=Member.objects.get(user=request.user))
 
         if (userform.is_valid() and memberform.is_valid()):
             user = userform.save()
@@ -85,7 +88,10 @@ def edit_profile(request):
             return redirect('profile', userID=user.id)
     else:
         userform = UserProfileForm(prefix='user', instance=User.objects.get(id=request.user.id))
-        memberform = MemberProfileForm(prefix='member', instance=Member.objects.get(user=request.user))
+        if hasattr(request.user, 'admin'):
+            memberform = AdminProfileForm(prefix='member', instance=Admin.objects.get(user=request.user))
+        else:
+            memberform = MemberProfileForm(prefix='member', instance=Member.objects.get(user=request.user))
 
     context = RequestContext(request)
     context['forms'] = [userform, memberform]

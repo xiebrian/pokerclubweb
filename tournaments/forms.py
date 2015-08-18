@@ -14,6 +14,7 @@ class TournamentCreationForm(forms.ModelForm):
     class Meta:
         model = Tournament
         fields = '__all__'
+        excludes = ['registered_members', 'results_available']
         help_texts = {
             'places' : ('Example: 3 means 1st, 2nd, and 3rd place will be tracked in the results')
         }

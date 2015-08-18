@@ -21,6 +21,12 @@ class MemberProfileForm(forms.ModelForm):
         fields = '__all__'
         exclude = ['user', 'is_member']
 
+class AdminProfileForm(forms.ModelForm):
+    class Meta:
+        model = Admin
+        fields = '__all__'
+        exclude = ['user', 'is_member']
+
 class SponsorProfileForm(forms.ModelForm):
     class Meta:
         model = Sponsor

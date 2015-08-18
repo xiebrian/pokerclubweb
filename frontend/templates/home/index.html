@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block bodyid %}index{% endblock %}
 {% block bodyclass %}{% endblock %}
@@ -7,10 +8,11 @@
 {% block main %}
           <div class="constrained">
             <div class="container">
-
-
-              <div id="content" class="clearfix">
-
+                <div class="ui grid">
+                    <div class="ui middle aligned center aligned column">
+                        <img class="ui large centered image" src="{% static "frontend/img/PokerClubLogo_ClearBackground.png" %}"/>
+                    </div>
+                </div>
               </div>
             </div>
           </div>
