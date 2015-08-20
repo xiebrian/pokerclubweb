@@ -23,8 +23,18 @@ class MemberProfileForm(forms.ModelForm):
         model = Member
         fields = '__all__'
         exclude = ['user', 'is_registered']
+        
 
 class AdminProfileForm(MemberProfileForm):
+    dropdowns = [
+        'class_year'
+    ]
+    image_uploads = [
+        'picture'
+    ]
+    file_uploads = image_uploads + [
+        'resume'
+    ]
     class Meta:
         model = Admin
         fields = '__all__'
@@ -37,6 +47,9 @@ class SponsorProfileForm(forms.ModelForm):
         exclude = ['user', 'level']
 
 class SponsorProfileAdminForm(forms.ModelForm):
+    dropdowns = [
+        'level'
+    ]
     class Meta:
         model = Sponsor
         fields = '__all__'
@@ -48,4 +61,7 @@ class AdminCreateForm(forms.ModelForm):
         fields = ['position']
 
 class MemberSelectForm(forms.Form):
+    dropdowns = [
+        'member'
+    ]
     member = MemberModelChoiceField(Member.objects.all())

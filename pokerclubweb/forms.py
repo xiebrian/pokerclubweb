@@ -16,11 +16,17 @@ class UserSignupForm(authforms.UserCreationForm):
         self.fields['last_name'].required = True
 
 class MemberSignupForm(forms.ModelForm):
+    dropdowns = [
+        'class_year'
+    ]
     class Meta:
         model = Member
         fields = ['class_year']
 
 class SponsorSignupForm(forms.ModelForm):
+    dropdowns = [
+        'level'
+    ]
     class Meta:
         model = Sponsor
         fields = ['company_name', 'level']

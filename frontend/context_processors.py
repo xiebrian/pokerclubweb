@@ -32,6 +32,7 @@ def icons(request):
         'picture': 'photo',
         #'bio': 'book',
         'class_year': 'student',
+        'position': 'building',
         'company_name': 'suitcase',
         'logo': 'photo',
         'home_page_url': 'linkify',

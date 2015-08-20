@@ -25,7 +25,7 @@
                         {% load get_item %}
                         <i class="{{ icons|get_item:field.name }} float left icon field-icon"></i>
                     {% endif %}
-                    <div class="default text">{{field.placeholder}}</div>
+                    <div class="default text"></div>
                     <div class="menu">
                         {% for choice in field.field.choices %}
                             <div class="item" data-value="{{choice.0}}">{{choice.1}}</div>
@@ -34,7 +34,57 @@
                 </div>
             {% elif field.name in form.checkboxes %}
                 <div class="ui checkbox">
-                    <input type="checkbox" name="{% if form.prefix %}{{form.prefix}}-{% endif %}{{field.name}}" value="{{field.value}}" class="hidden">
+                    <input type="checkbox" name="{% if form.prefix %}{{form.prefix}}-{% endif %}{{field.name}}" {% if field.value %}checked{% endif %} class="hidden">
+                </div>
+            {% elif field.name in form.file_uploads %}
+                <div class="ui items segment" style="margin-top:0; box-shadow:none;">
+                    {% if field.value %}
+                    <div class="item">
+                        {% if field.name in form.image_uploads %}
+                            <div class="ui tiny image">
+                                <img src="{{field.value.url}}">
+                            </div>
+                        {% endif %}
+                        <div class="middle aligned content">
+
+                            <label class="ui label">
+                                Currently: 
+                                <div class="detail">
+                                <a href="{{field.value.url}}">{{field.value.url}}</a>
+                                </div>
+                            </label>
+                                                           
+                        
+                            {% if not field.field.required %}
+                            <div class="extra">
+                                <div class="ui checkbox">
+                                    <input type="checkbox" name="{% if form.prefix %}{{form.prefix}}-{% endif %}{{field.name}}-clear" class="hidden">
+                                    <label> Clear </label>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="item">
+                        <div class="ui labeled input">
+                            {% if field.name in icons %}
+                                <a class="ui secondary right corner label">
+                                {% load get_item %}
+                                <i class="{{ icons|get_item:field.name }} float left icon field-icon"></i>
+                                </a>
+                            {% endif %}
+                            <label class="ui label">
+                                {% if field.value %}
+                                    Change:
+                                {% else %}
+                                    Upload:
+                                {% endif %}
+                            </label>
+                            <input name="{% if form.prefix %}{{form.prefix}}-{% endif %}{{field.name}}" type="file">
+                        </div>
+                    </div>
                 </div>
             {% else %}
                 {% if field.name in icons %}

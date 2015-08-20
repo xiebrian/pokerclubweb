@@ -9,7 +9,8 @@ class SemanticModelMultipleChoiceField(forms.ModelMultipleChoiceField):
         print value
         cleaned_value = []
         for item in value:
-            cleaned_value.extend(item.split(','))
+            if item:
+                cleaned_value.extend(item.split(','))
         print cleaned_value
         return super(SemanticModelMultipleChoiceField, self).clean(cleaned_value)
 
@@ -47,7 +48,7 @@ class TournamentEditForm(TournamentCreationForm):
         'registration_open'
     ]
     dropdowns = multiple_selects
-    registered_members = SemanticModelMultipleChoiceField(queryset=Member.objects.all())
+    registered_members = SemanticModelMultipleChoiceField(queryset=Member.objects.all(), required=False)
     class Meta:
         model = Tournament
         fields = '__all__'
@@ -62,7 +63,9 @@ class TournamentEditForm(TournamentCreationForm):
     #     return data
 
 class TournamentResultForm(forms.ModelForm):
-
+    dropdowns = [
+        'member'
+    ]
     class Meta:
         model = TournamentResult
         fields = ['member']
