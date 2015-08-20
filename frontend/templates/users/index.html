@@ -5,9 +5,28 @@
 {% block headtitle %}Poker Club Home Page{% endblock %}
 
 {% block main %}
+  <div class="ui three column grid">
   {% for member in members %}
-    <a href={% url "profile" member.user.id %}>
-        {{member}}
-    </a>
+    <div class="column">
+        <a href={% url "profile" member.user.id %}>
+            <div class="ui card">
+                <div class="ui image">
+                    <img src="{{member.picture_url}}">
+                </div>
+                <div class="content">
+                    <div class="header">
+                        {{member}}
+                    </div>
+                    {% if member.pokerstars_username %}
+                    <div class="meta">
+                        <i class="star icon"></i>
+                        <span>{{member.pokerstars_username}}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </a>
+    </div>
   {% endfor %}
+  </div>
 {% endblock %}

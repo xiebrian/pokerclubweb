@@ -78,12 +78,9 @@ class Admin(Student):
     position = models.CharField(max_length=100)
 
     def update_with_member(self, member):
-        self.user = member.user
-        self.resume = member.resume
-        self.picture = member.picture
-        self.bio = member.bio
-        self.is_member = True
-        self.class_year = member.class_year
+        for a in member._meta.get_all_field_names():
+            setattr(self, a, getattr(member, a, None))
+        self.save()
 
 class Sponsor(models.Model):
     user = models.OneToOneField(User)

@@ -28,7 +28,7 @@ def icons(request):
         'email': 'mail',
         'member': 'users',
         'resume': 'file pdf outline',
-        'pokerstars_username': 'spy',
+        'pokerstars_username': 'star',
         'picture': 'photo',
         #'bio': 'book',
         'class_year': 'student',

@@ -157,9 +157,9 @@ def admin_create_admin(request):
         if (memberform.is_valid() and adminform.is_valid()):
             admin = adminform.save(commit=False)
             member = memberform.cleaned_data['member']
-            Member.objects.filter(id=member.id).delete()
             admin.update_with_member(member)
             admin.save()
+            Member.objects.filter(id=member.id).delete()
 
             g = Group.objects.get(name='admin_group')
             g.user_set.add(admin.user)

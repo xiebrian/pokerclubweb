@@ -5,16 +5,54 @@
 {% block headtitle %}Poker Club Home Page{% endblock %}
 
 {% block main %}
-          <div class="constrained">
-            <div class="container">
-
-
-              <div id="content" class="clearfix">
-                {% for officer in officers %}
-                    {{officer.user.first_name}} {{officer.user.last_name}}
-                    {{officer.position}}
-                {% endfor %}
-              </div><!-- /content -->
+  <div class="ui one column grid">
+    <div class="column">
+      <div class="ui divided items">
+        {% for officer in officers %}
+          <div class="item">
+          {% if forloop.counter0|divisibleby:2 %}
+            <div class="image">
+              <img src="{{officer.picture_url}}">
             </div>
+            <div class="content">
+              <div class="header">
+                {{officer.user.first_name}} {{officer.user.last_name}}
+              </div>
+              <div class="meta">
+                {{officer.position}}
+              </div>
+              <div class="meta">
+                <i class="star icon"></i>
+                {{officer.pokerstars_username}}
+              </div>
+              <div class="description">
+                {{officer.bio}}
+              </div>
+            </div>
+          {% else %}
+            <div class="content">
+              <div class="header">
+                {{officer.user.first_name}} {{officer.user.last_name}}
+              </div>
+              <div class="meta">
+                {{officer.position}}
+              </div>
+              <div class="meta">
+                <i class="star icon"></i>
+                {{member.pokerstars_username}}
+              </div>
+              <div class="description">
+                {{officer.bio}}
+              </div>
+            </div>
+            <div class="image">
+              <img src="{{officer.picture_url}}">
+            </div>
+          {% endif %}
           </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
 {% endblock %}
