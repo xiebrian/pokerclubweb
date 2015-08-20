@@ -1,32 +1,31 @@
 {% extends "base.html" %}
+{% load get_item %}
 
 {% block bodyid %}index{% endblock %}
 {% block bodyclass %}{% endblock %}
 {% block headtitle %}Poker Club Home Page{% endblock %}
 
 {% block main %}
-  <div class="ui three column grid">
-  {% for member in members %}
-    <div class="column">
-        <a href={% url "profile" member.user.id %}>
-            <div class="ui card">
-                <div class="ui image">
-                    <img src="{{member.picture_url}}">
-                </div>
+
+    <div class="ui two cards">
+        {% for member in members %}
+            <a class="ui card" href={% url "profile" member.user.id %}>
                 <div class="content">
+                    <div class="ui tiny left floated middle aligned image">
+                        <img src="{{member.picture_url}}">
+                    </div>
                     <div class="header">
                         {{member}}
                     </div>
-                    {% if member.pokerstars_username %}
-                    <div class="meta">
-                        <i class="star icon"></i>
-                        <span>{{member.pokerstars_username}}</span>
+                    <div class="extra">
+                        <div class='ui label'>
+                          <i class="{{icons|get_item:"pokerstars_username"}} icon"></i>
+                          {{member.pokerstars_username}}
+                        </div>
                     </div>
-                    {% endif %}
                 </div>
-            </div>
-        </a>
+            </a>
+        {% endfor %}
     </div>
-  {% endfor %}
-  </div>
+
 {% endblock %}

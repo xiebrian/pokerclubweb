@@ -1,23 +1,36 @@
 {% extends "base.html" %}
+{% load get_item %}
 
 {% block bodyid %}index{% endblock %}
 {% block bodyclass %}{% endblock %}
 {% block headtitle %}Poker Club Home Page{% endblock %}
 
 {% block main %}
-  {{sponsor.company_name}}
-  {{sponsor.user.first_name}} {{sponsor.user.last_name}}
-  <img src={{sponsor.logo_url}}/>
-  {{sponsor.level}}
+  <img class="ui left floated small image" src={{sponsor.logo_url}}>
+  <div class="ui large label">
+    <i class="{{icons|get_item:"first_name"}} icon"></i>
+    {{sponsor.user.first_name}} {{sponsor.user.last_name}}
+  </div>
+  <div class="ui large label">
+    <i class="{{icons|get_item:"level"}} icon"></i>
+    {{sponsor.get_level_display}}
+  </div>
   {% load user_extras %}
   {% if user|has_group:"admin_group" or user.id == sponsor.user.id %}
-      <a href={% url "edit_sponsor_profile" sponsor.user.id %}>
+    <div class="ui horizontal divider">
+      Actions
+    </div>
+    <a href={% url "edit_sponsor_profile" sponsor.user.id %}>
+      <div class="ui button">
         Edit Profile
+      </div>
+    </a>
+    {% if user.id == sponsor.user.id %}
+      <a href={% url "change_password" %}>
+        <div class="ui button">
+          Change Password
+        </div>
       </a>
-  {% endif %}
-  {% if user.id == sponsor.user.id %}
-  <a href={% url "change_password" %}>
-    Change Password
-  </a>
+    {% endif %}
   {% endif %}
 {% endblock %}

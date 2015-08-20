@@ -1,31 +1,54 @@
 {% extends "base.html" %}
+{% load get_item %}
 
 {% block bodyid %}index{% endblock %}
 {% block bodyclass %}{% endblock %}
 {% block headtitle %}Poker Club Home Page{% endblock %}
 
 {% block main %}
-  {% if member %}
-      {{member.user.first_name}} {{member.user.last_name}}
-      <img src={{member.picture_url}}/>
-      {{member.class_year}}
-      {{member.bio}}
-      {% load user_extras %}
-      {% if user|has_group:"admin_group" or user.sponsor.can_view_resumes %}
-        <a href={% url "view_resume" member.id %}>
-          View Resume
-        </a>
-      {% endif %}
-      {% if user.id == member.user.id %}
-        <a href={% url "edit_profile" %}>
-          Edit Profile
-        </a>
-        <a href={% url "change_password" %}>
-          Change Password
-        </a>
-      {% endif %}
-  {% else %}
-      {% load account %}
-      Welcome, {% user_display user %}
+
+  <img class="ui left floated small image" src={{member.picture_url}}>
+  <div class="ui large label">
+    <i class="{{icons|get_item:"pokerstars_username"}} icon"></i>
+    {{member.pokerstars_username}}
+  </div>
+  <div class="ui large label">
+    <i class="{{icons|get_item:"class_year"}} icon"></i>
+    {{member.get_class_year_display}}
+  </div>
+  <div class="ui horizontal divider">
+    Bio
+  </div>
+  <p>
+    {{member.bio}}
+  </p>
+  {% load user_extras %}
+  {% if user|has_group:"admin_group" or user.sponsor.can_view_resumes or user.id == member.user.id %}
+    <div class="ui horizontal divider">
+      Actions
+    </div>
+    {% if member.resume %}
+    <a href={% url "view_resume" member.id %}>
+      <div class="ui button">
+        View Resume
+      </div>
+    </a>
+    {% else %}
+      <div class="ui disabled button">
+        No Resume Uploaded
+      </div>
+    {% endif %}
   {% endif %}
+{% if user.id == member.user.id %}
+  <a href={% url "edit_profile" %}>
+    <div class="ui button">
+      Edit Profile
+    </div>
+  </a>
+  <a href={% url "change_password" %}>
+    <div class="ui button">
+      Change Password
+    </div>
+  </a>
+{% endif %}
 {% endblock %}

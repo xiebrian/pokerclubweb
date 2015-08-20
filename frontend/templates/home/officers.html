@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load get_item %}
 
 {% block bodyid %}index{% endblock %}
 {% block bodyclass %}{% endblock %}
@@ -19,11 +20,17 @@
                 {{officer.user.first_name}} {{officer.user.last_name}}
               </div>
               <div class="meta">
-                {{officer.position}}
+                  {{officer.position}}
               </div>
-              <div class="meta">
-                <i class="star icon"></i>
-                {{officer.pokerstars_username}}
+              <div class="extra">
+                <div class="ui label">
+                  <i class="{{icons|get_item:"pokerstars_username"}} icon"></i>
+                  {{officer.pokerstars_username}}
+                </div>
+                <div class="ui label">
+                  <i class="{{icons|get_item:"class_year"}} icon"></i>
+                  {{officer.get_class_year_display}}
+                </div>
               </div>
               <div class="description">
                 {{officer.bio}}
@@ -35,11 +42,17 @@
                 {{officer.user.first_name}} {{officer.user.last_name}}
               </div>
               <div class="meta">
-                {{officer.position}}
+                  {{officer.position}}
               </div>
-              <div class="meta">
-                <i class="star icon"></i>
-                {{member.pokerstars_username}}
+              <div class="extra">
+                <div class="ui label">
+                  <i class="{{icons|get_item:"pokerstars_username"}} icon"></i>
+                  {{officer.pokerstars_username}}
+                </div>
+                <div class="ui label">
+                  <i class="{{icons|get_item:"class_year"}} icon"></i>
+                  {{officer.get_class_year_display}}
+                </div>
               </div>
               <div class="description">
                 {{officer.bio}}

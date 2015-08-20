@@ -38,7 +38,7 @@ class Student(models.Model):
     resume = models.FileField(blank=True, upload_to=resume_file_name, validators=[pdf_file])
     pokerstars_username = models.CharField(max_length=100)
     picture = models.ImageField(blank=True, upload_to=profile_picture_file_name)
-    bio = models.TextField(blank=True)
+    bio = models.TextField(default='I <3 Poker')
     FRESHMAN = 'FR'
     SOPHOMORE = 'SO'
     JUNIOR = 'JR'

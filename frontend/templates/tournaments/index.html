@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load get_item %}
 
 {% block bodyid %}index{% endblock %}
 {% block bodyclass %}{% endblock %}
@@ -6,7 +7,7 @@
 
 {% block main %}
   <div class="ui center aligned grid">
-        <div class="ui twelve wide left aligned column">
+        <div class="ui left aligned column">
           <div class="ui divided items">
             {% for tournament in tournaments %}
             <div class="item">
@@ -15,11 +16,19 @@
               </div>
               <div class="content">
                 <a href={% url "summary" tournament.id %} class="header">{{tournament.name}}</a>
-                <div class="meta">
-                  <span>{{tournament.start_time}}</span>
+                <div class="extra">
+                  <div class="ui label">
+                    <i class="{{icons|get_item:"start_time"}} icon"></i>
+                    {{tournament.start_time}}
+                  </div>
+                  <div class="ui label">
+                    <i class="{{icons|get_item:"location"}} icon"></i>
+                    {{tournament.location}}
+                  </div>
                 </div>
+                <div class="ui divider"></div>
                 <div class="description">
-                  <p>{{tournament.description}}</p>
+                  <p>{{tournament.description|linebreaks}}</p>
                 </div>
                 <div class="extra">
                   {{tournament.registered_members_count}} Registered Student{% if tournament.registered_members_count != 1 %}s{% endif %}

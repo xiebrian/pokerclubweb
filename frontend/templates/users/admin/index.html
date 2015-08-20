@@ -5,9 +5,27 @@
 {% block headtitle %}Poker Club Home Page{% endblock %}
 
 {% block main %}
-        
-              <a href={% url "admin_create_tournament" %}>Create Tournament</a>
-              <a href={% url "admin_create_sponsor" %}>Create Sponsor</a>
-              <a href={% url "admin_create_admin" %}>Create Admin</a>
-
+    <div class="ui three column grid">
+        <div class="column">
+            <a href={% url "admin_create_tournament" %}>
+                <div class="ui fluid button">
+                    Create Tournament
+                </div>
+            </a>
+        </div>
+        <div class="column">
+            <a href={% url "admin_create_sponsor" %}>
+                <div class="ui fluid button">
+                    Create Sponsor
+                </div>
+            </a>
+        </div>
+        <div class="column">
+            <a href={% url "admin_create_admin" %}>
+                <div class="ui fluid button">
+                    Create Admin
+                </div>
+            </a>
+        </div>
+    </div>
 {% endblock %}

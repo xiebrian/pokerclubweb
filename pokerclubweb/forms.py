@@ -21,7 +21,8 @@ class MemberSignupForm(forms.ModelForm):
     ]
     class Meta:
         model = Member
-        fields = ['class_year']
+        fields = '__all__'
+        exclude = ['user']
 
 class SponsorSignupForm(forms.ModelForm):
     dropdowns = [
@@ -29,4 +30,5 @@ class SponsorSignupForm(forms.ModelForm):
     ]
     class Meta:
         model = Sponsor
-        fields = ['company_name', 'level']
+        fields = '__all__'
+        exclude = ['user']
