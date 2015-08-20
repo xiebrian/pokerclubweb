@@ -12,4 +12,8 @@
   color: black;
 }
 
+.ui.multiple.selection.dropdown .field-icon {
+  padding-top: .55em;
+}
+
 /*# sourceMappingURL=screen.css.map */

@@ -76,6 +76,7 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATE_CONTEXT_PROCESSORS += (
     'frontend.context_processors.frontend',
+    'frontend.context_processors.icons',
 )
 
 # Avoid 600 permission for filebrowser uploads.

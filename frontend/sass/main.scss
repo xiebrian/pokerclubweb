@@ -7,8 +7,14 @@
 .ui.footer.segment {
     margin-top: 5em;
     padding: 2em 0em;
-    
+
     a {
         color: black;
+    }
+}
+
+.ui.multiple.selection.dropdown {
+    .field-icon {
+        padding-top: .55em;
     }
 }

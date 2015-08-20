@@ -11,14 +11,49 @@
             {% else %}
                 <div class="field">
             {% endif %}
-                {{ field.label_tag }}
 
-                {{ field }}
-                {% if field.help_text %}
-                    <div class="ui pointing label">
-                        {{ field.help_text }}
-                    </div>
+            {{ field.label_tag }}
+            {% if field.name in form.dropdowns %}
+                {% if field.name in form.multiple_selects %}
+                    <div class="ui multiple selection dropdown">
+                {% else %}
+                    <div class="ui selection dropdown">
                 {% endif %}
+                    <input type="hidden" name="{% if form.prefix %}{{form.prefix}}-{% endif %}{{field.name}}" value="{{field.value}}">
+                    <i class="dropdown icon"></i>
+                    {% if field.name in icons %}
+                        {% load get_item %}
+                        <i class="{{ icons|get_item:field.name }} float left icon field-icon"></i>
+                    {% endif %}
+                    <div class="default text">{{field.placeholder}}</div>
+                    <div class="menu">
+                        {% for choice in field.field.choices %}
+                            <div class="item" data-value="{{choice.0}}">{{choice.1}}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% elif field.name in form.checkboxes %}
+                <div class="ui checkbox">
+                    <input type="checkbox" name="{% if form.prefix %}{{form.prefix}}-{% endif %}{{field.name}}" value="{{field.value}}" class="hidden">
+                </div>
+            {% else %}
+                {% if field.name in icons %}
+                    {% load get_item %}
+                    <div class="ui left icon input">
+                        <i class="{{ icons|get_item:field.name }} icon"></i>
+                        {{field}}
+                    </div>
+                {% else %}
+                    {{ field }}
+                {% endif %}
+            {% endif %}
+
+            {% if field.help_text %}
+                <div class="ui pointing label">
+                    {{ field.help_text }}
+                </div>
+            {% endif %}
+
             </div>
         {% endfor %}
     {% endfor %}
@@ -39,4 +74,9 @@
         </div>
 
     <input class="ui fluid primary submit button" type="submit" value="Submit" />
+    <script type="text/javascript">
+        $('.ui.dropdown').dropdown();
+        $('.ui.checkbox').checkbox();
+    </script>
 </form>
+

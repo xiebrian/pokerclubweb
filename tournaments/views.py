@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template import RequestContext, loader
-from .forms import TournamentCreationForm, TournamentResultForm
+from .forms import TournamentCreationForm, TournamentEditForm, TournamentResultForm
 from .models import Tournament, TournamentResult
 from django.db import IntegrityError
 from django.forms.util import ErrorList
@@ -49,9 +49,10 @@ def register(request, tournamentID):
 def admin_create_tournament(request, tournamentID=0):
 
     if request.method == 'POST':
+        # print request.POST
         if (tournamentID):
             tournament = Tournament.objects.get(id=tournamentID)
-            form = TournamentCreationForm(data=request.POST, instance=tournament)
+            form = TournamentEditForm(data=request.POST, instance=tournament)
         else:
             form = TournamentCreationForm(data=request.POST)
 
@@ -65,7 +66,7 @@ def admin_create_tournament(request, tournamentID=0):
             tournament = Tournament.objects.get(id=tournamentID)
             print tournament.start_time.strftime('%Y-%m-%dT%H:%M')
             print tournament.start_time
-            form = TournamentCreationForm(
+            form = TournamentEditForm(
                 instance=tournament,
                 initial = {
                     'start_time' : tournament.start_time.strftime('%Y-%m-%dT%H:%M'),

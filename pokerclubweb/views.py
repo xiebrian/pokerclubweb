@@ -71,7 +71,7 @@ def change_password(request):
         template_response.context_data['forms'] = [template_response.context_data['form']]
         if (template_response.context_data['form'].errors):
             template_response.context_data['errors'] = True
-    context['title'] = 'Change Password'
+    template_response.context_data['title'] = 'Change Password'
     return template_response
 
 @login_required
@@ -88,7 +88,7 @@ def reset_password(request):
         template_response.context_data['forms'] = [template_response.context_data['form']]
         if (template_response.context_data['form'].errors):
             template_response.context_data['errors'] = True
-    context['title'] = 'Reset Password'
+    template_response.context_data['title'] = 'Reset Password'
     return template_response
 
 @anonymous_required
@@ -105,7 +105,7 @@ def reset_password_confirm(request, uidb64, token):
         template_response.context_data['forms'] = [template_response.context_data['form']]
         if (template_response.context_data['form'].errors):
             template_response.context_data['errors'] = True
-    context['title'] = 'Reset Password'
+    template_response.context_data['title'] = 'Reset Password'
     return template_response
 
 @anonymous_required

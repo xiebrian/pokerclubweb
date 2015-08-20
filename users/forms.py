@@ -16,16 +16,19 @@ class UserProfileForm(forms.ModelForm):
         }
 
 class MemberProfileForm(forms.ModelForm):
+    dropdowns = [
+        'class_year'
+    ]
     class Meta:
         model = Member
         fields = '__all__'
-        exclude = ['user', 'is_member']
+        exclude = ['user', 'is_registered']
 
-class AdminProfileForm(forms.ModelForm):
+class AdminProfileForm(MemberProfileForm):
     class Meta:
         model = Admin
         fields = '__all__'
-        exclude = ['user', 'is_member']
+        exclude = ['user', 'is_registered']
 
 class SponsorProfileForm(forms.ModelForm):
     class Meta:
