@@ -1,13 +1,49 @@
 @import "partials/base";
+#navbar, #sidebar {
+    .desktop-hide {
+        display: inherit;
+    }
+    .mobile-hide {
+        display: inherit;
+    }
+    .collapsed-left-menu, .mobile-show {
+        display: none;
+    }
+    @media (max-width:1200px) {
+        .desktop-hide {
+            display: none;
+        }
+        .collapsed-left-menu {
+            display: inherit;
+        }
+    }
+    @media (max-width:768px) {
+        .mobile-hide {
+            display: none;
+        }
+        .mobile-show {
+            display:inherit;
+        }
+    }
+}
+.pusher {
+    // height: auto;
+    // width: auto;
+}
 .ui.main.container {
-    min-height: calc(100% - 130px);
+    //min-height: calc(100% - 130px);
+    min-height: calc(100vh - 130px);
     margin-top: 7em;
+    
 }
 
 .ui.footer.segment {
-    margin-top: 5em;
+    
     padding: 2em 0em;
-
+    margin-top: 5em;
+    // position:fixed;
+    // bottom:0;
+    // width:100vw;
     a {
         color: black;
     }

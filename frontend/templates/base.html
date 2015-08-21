@@ -37,9 +37,11 @@
   </head>
 
   <body id="{% block bodyid %}page{% endblock %}" class="{% block bodyclass %}default{% endblock %}" itemscope itemtype="http://schema.org/WebPage">
+    {% include "sidebar.html" %}
     {% include "navbar.html" %}
-    {% block container %}
-
+    <div class="pusher">
+      
+      {% block container %}
       <div class="ui main text container">
 
         <h1 class="pagetitle ui center aligned header">{{title}}</h1>
@@ -47,12 +49,14 @@
           {% block main %}{% endblock %}
         </div>
       </div>
-    {% endblock %}
-    <div class="ui vertical footer primary inverted secondary segment">
-      <div class="ui center aligned container">
-        <p>Copyright © <a href="mailto:poker-exec@mit.edu">MIT Poker Club</a> 2012-{% now "Y" %}</p>
+      {% endblock %}
+      <div class="ui vertical footer fixed inverted secondary segment">
+        <div class="ui center aligned container">
+          <p>Copyright © <a href="mailto:poker-exec@mit.edu">MIT Poker Club</a> 2012-{% now "Y" %}</p>
+        </div>
       </div>
     </div>
+    
     {% compress js %}{% block bodyscripts %}{% endblock %}{% endcompress %}
     {% analytics_code %}
   </body>
