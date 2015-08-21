@@ -64,8 +64,8 @@ def admin_create_tournament(request, tournamentID=0):
     else:
         if (tournamentID):
             tournament = Tournament.objects.get(id=tournamentID)
-            print tournament.start_time.strftime('%Y-%m-%dT%H:%M')
-            print tournament.start_time
+            #print tournament.start_time.strftime('%Y-%m-%dT%H:%M')
+            #print tournament.start_time
             form = TournamentEditForm(
                 instance=tournament,
                 initial = {

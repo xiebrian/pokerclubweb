@@ -1,27 +1,50 @@
 {% extends "base.html" %}
+{% load user_extras %}
 
 {% block bodyid %}index{% endblock %}
 {% block bodyclass %}{% endblock %}
 {% block headtitle %}Poker Club Home Page{% endblock %}
 
-{% block main %}
-          <div class="constrained">
-            <div class="container">
+{% block container %}
+  <div class="ui main container">
+  <h1 class="pagetitle ui center aligned header">{{title}}</h1>
+  <div class="ui center aligned grid">
+    <div class="column">
 
-
-              <div id="content" class="clearfix">
-              {% for sponsor in sponsors %}
-                <a href={{sponsor.home_page_url}}>
-                    <img src={{sponsor.logo_url}}/>
-                </a>
-                {% load user_extras %}
-                {% if user|has_group:"admin_group" %}
-                <a href={% url "sponsor_profile" sponsor.user.id %}>
-                    Sponsor Profile
-                </a>
-                {% endif %}
-              {% endfor %}
-              </div><!-- /content -->
-            </div>
-          </div>
+      <h2 class="ui header">
+        Platinum
+      </h2>
+      <div class="ui large images">
+        {% for sponsor in sponsors|are_level:"PL" %}
+          {% include "users/sponsors/logo_display.html" %}
+        {% endfor %}
+      </div>
+      <h3 class="ui header">
+        Gold
+      </h3>
+      <div class="ui medium images">
+        {% for sponsor in sponsors|are_level:"GD" %}
+          {% include "users/sponsors/logo_display.html" %}
+        {% endfor %}
+      </div>
+      <h4 class="ui header">
+        Silver
+      </h4>
+      <div class="ui small images">
+        {% for sponsor in sponsors|are_level:"SL" %}
+          {% include "users/sponsors/logo_display.html" %}
+        {% endfor %}
+      </div>
+      <h5 class="ui header">
+        Bronze
+      </h5>
+      <div class="ui tiny images">
+        {% for sponsor in sponsors|are_level:"BR" %}
+          {% include "users/sponsors/logo_display.html" %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
 {% endblock %}

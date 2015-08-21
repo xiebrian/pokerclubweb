@@ -23,7 +23,7 @@ class MemberProfileForm(forms.ModelForm):
         model = Member
         fields = '__all__'
         exclude = ['user', 'is_registered']
-        
+
 
 class AdminProfileForm(MemberProfileForm):
     dropdowns = [
@@ -44,12 +44,16 @@ class SponsorProfileForm(forms.ModelForm):
     class Meta:
         model = Sponsor
         fields = '__all__'
-        exclude = ['user', 'level']
+        exclude = ['user', 'level', 'logo', 'company_name', 'home_page_url']
 
 class SponsorProfileAdminForm(forms.ModelForm):
     dropdowns = [
         'level'
     ]
+    image_uploads = [
+        'logo'
+    ]
+    file_uploads = image_uploads
     class Meta:
         model = Sponsor
         fields = '__all__'
