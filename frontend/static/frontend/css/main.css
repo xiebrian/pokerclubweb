@@ -1,3 +1,12 @@
+.pagetitle.ui.header {
+  margin-bottom: 30px;
+}
+
+#navbar .item, #sidebar .item {
+  text-transform: uppercase !important;
+  font-weight: 200;
+}
+
 #navbar .desktop-hide, #sidebar .desktop-hide {
   display: inherit;
 }
@@ -28,9 +37,17 @@
   }
 }
 
+.ui.header {
+  text-transform: uppercase;
+  font-weight: 200;
+}
+
+.pusher {
+  padding-top: 7em;
+}
+
 .ui.main.container {
-  min-height: calc(100vh - 130px);
-  margin-top: 7em;
+  min-height: calc(100vh - 225px);
 }
 
 .ui.footer.segment {

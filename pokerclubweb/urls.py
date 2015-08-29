@@ -5,6 +5,7 @@ from filebrowser.sites import site as fb_site
 from frontend.views import TextFileView, Http500View
 from pokerclubweb import views
 from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm, password_reset_complete
+from django.views.generic import RedirectView
 
 admin.autodiscover()
 
@@ -56,9 +57,11 @@ urlpatterns = patterns('',
     ),
     url(r'^users/', include('users.urls')),
     url(r'^tournaments/', include('tournaments.urls')),
+
+    url(r'^media/resumes/(?P<userID>\d+)/', RedirectView.as_view(pattern_name="view_resume", permanent=False)),
 )
 
-if settings.DEBUG:
-    urlpatterns.insert(0,
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True})
-    )
+# if settings.DEBUG:
+#     urlpatterns.insert(0,
+#         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True})
+#     )

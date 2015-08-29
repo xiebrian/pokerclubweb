@@ -6,14 +6,24 @@
 {% block headtitle %}Poker Club Home Page{% endblock %}
 
 {% block main %}
-  <img class="ui left floated small image" src={{sponsor.logo_url}}>
-  <div class="ui large label">
-    <i class="{{icons|get_item:"first_name"}} icon"></i>
-    {{sponsor.user.first_name}} {{sponsor.user.last_name}}
-  </div>
-  <div class="ui large label">
-    <i class="{{icons|get_item:"level"}} icon"></i>
-    {{sponsor.get_level_display}}
+  <div class="ui items">
+    <div class="item">
+      <div class="image">
+        <img src={{sponsor.logo_url}}>
+      </div>
+      <div class="content">
+        <div class="ui list">
+          <div class="item">
+            <i class="{{icons|get_item:"first_name"}} icon"></i>
+            {{sponsor.user.first_name}} {{sponsor.user.last_name}}
+          </div>
+          <div class="item">
+            <i class="{{icons|get_item:"level"}} icon"></i>
+            {{sponsor.get_level_display}}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   {% load user_extras %}
   {% if user|has_group:"admin_group" or user.id == sponsor.user.id %}

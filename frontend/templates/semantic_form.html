@@ -1,3 +1,4 @@
+{% load filename %}
 {% if errors %}
 <form class="ui form error" method="post" enctype="multipart/form-data">
 {% else %}
@@ -50,7 +51,7 @@
                             <label class="ui label">
                                 Currently: 
                                 <div class="detail">
-                                <a href="{{field.value.url}}">{{field.value.url}}</a>
+                                <a href="{{field.value.url}}">{{field.value.file|filename}}</a>
                                 </div>
                             </label>
                                                            

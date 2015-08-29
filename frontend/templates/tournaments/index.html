@@ -7,9 +7,10 @@
 
 {% block main %}
   <div class="ui center aligned grid">
-        <div class="ui left aligned column">
-          <div class="ui divided items">
-            {% for tournament in tournaments %}
+    {% if tournaments %}
+      <div class="ui left aligned column">
+        <div class="ui divided items">
+          {% for tournament in tournaments %}
             <div class="item">
               <div class="ui small image">
                 <img src={{tournament.picture_url}}>
@@ -47,11 +48,15 @@
                     </form>
                 {% endif %}
               </div>
-              </div>
-            {% endfor %}
-    </div>
-  </div>
-
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <div class="ui center aligned column">
+        No tournaments currently scheduled
+      </div>
+    {% endif %}
   </div>
 
 {% endblock %}

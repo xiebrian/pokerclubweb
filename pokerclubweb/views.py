@@ -156,5 +156,5 @@ def photos(request):
 def contact(request):
     template = loader.get_template('home/contact.html')
     context = RequestContext(request)
-    context['title'] = 'Contact Us'
+    context['title'] = 'Contact'
     return HttpResponse(template.render(context))

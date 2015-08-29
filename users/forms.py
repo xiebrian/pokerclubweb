@@ -19,6 +19,12 @@ class MemberProfileForm(forms.ModelForm):
     dropdowns = [
         'class_year'
     ]
+    image_uploads = [
+        'picture'
+    ]
+    file_uploads = image_uploads + [
+        'resume'
+    ]
     class Meta:
         model = Member
         fields = '__all__'
@@ -41,6 +47,7 @@ class AdminProfileForm(MemberProfileForm):
         exclude = ['user', 'is_registered']
 
 class SponsorProfileForm(forms.ModelForm):
+
     class Meta:
         model = Sponsor
         fields = '__all__'
