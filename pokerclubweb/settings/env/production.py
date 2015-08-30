@@ -48,8 +48,8 @@ CACHES['default']['KEY_PREFIX'] = 'pokerclubweb.production'
 
 COMPRESS_OFFLINE = True
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'web/static'),
-)
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'web/static'),
+# )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
