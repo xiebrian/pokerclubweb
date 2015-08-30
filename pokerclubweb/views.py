@@ -106,7 +106,7 @@ def reset_password_confirm(request, uidb64, token):
         template_response.context_data['forms'] = [template_response.context_data['form']]
         if (template_response.context_data['form'].errors):
             template_response.context_data['errors'] = True
-    template_response.context_data['title'] = 'Reset Password'
+        template_response.context_data['title'] = 'Reset Password'
     return template_response
 
 @anonymous_required
