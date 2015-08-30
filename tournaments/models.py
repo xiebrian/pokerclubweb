@@ -35,6 +35,9 @@ class Tournament(models.Model):
     def registered_members_count(self):
         return self.registered_members.count()
 
+    def results(self):
+        return self.tournamentresult_set.all()
+
 class TournamentResult(models.Model):
     tournament = models.ForeignKey('Tournament')
     member = models.ForeignKey('users.Member', blank=True, null=True)
@@ -44,7 +47,10 @@ class TournamentResult(models.Model):
         unique_together = (('tournament', 'place'),('tournament','member'))
 
     def __unicode__(self):
-        return self.intToWord(self.place) + ' place for ' + self.tournament.name
+        return self.place_string() + ' place for ' + self.tournament.name
+        
+    def place_string(self):
+        return self.intToWord(self.place)
 
     @staticmethod
     def intToWord(num):

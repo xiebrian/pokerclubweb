@@ -75,4 +75,4 @@ class TournamentResultForm(forms.ModelForm):
         tournament = kwargs.pop('tournament')
         super(TournamentResultForm, self).__init__(*args, **kwargs)
 
-        self.fields['member'] = MemberModelChoiceField(tournament.registered_members, required=False, label=TournamentResult.intToWord(place) + " Place")
+        self.fields['member'] = MemberModelChoiceField(tournament.registered_members.all(), required=False, label=TournamentResult.intToWord(place) + " Place")

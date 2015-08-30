@@ -74,6 +74,9 @@ class Student(models.Model):
 class Member(Student):
     is_registered = models.BooleanField(default=False)
 
+    def results(self):
+        return self.tournamentresult_set.all()
+
 class Admin(Student):
     position = models.CharField(max_length=100)
 
