@@ -33,7 +33,7 @@ def get_google_calendar_events():
     # for item in calendarList['items']:
     #     print item
     eventsResult = service.events().list(
-        calendarId='zildjian843@gmail.com', timeMin=now, maxResults=10, singleEvents=True,
+        calendarId='mitpokerexec@gmail.com', timeMin=now, maxResults=10, singleEvents=True,
         orderBy='startTime').execute()
     events = eventsResult.get('items', [])
 

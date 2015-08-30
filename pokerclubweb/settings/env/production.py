@@ -4,6 +4,14 @@ from .. import *
 TEMPLATE_DEBUG = DEBUG
 COMPRESS_ENABLED = True
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'mitpokerexec'
+EMAIL_HOST_PASSWORD = 'fiveofakind'
+DEFAULT_FROM_EMAIL = 'mitpokerexec@gmail.com'
+
 DATABASES = {
     'default': {
         # Choose between PostgreSQL or MySQL:

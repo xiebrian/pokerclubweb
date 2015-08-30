@@ -14,8 +14,8 @@ ADMINS = (
 MANAGERS = ADMINS
 
 SERVER_EMAIL = 'root@localhost'
-DEFAULT_FROM_EMAIL = 'info@pokerclubweb.example.com'
-EMAIL_SUBJECT_PREFIX = '[Django][pokerclubweb] '
+DEFAULT_FROM_EMAIL = 'mitpokerexec@gmail.com'
+EMAIL_SUBJECT_PREFIX = '[MIT Poker Club]'
 
 # Project language settings
 TIME_ZONE = 'Europe/Amsterdam'

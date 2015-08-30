@@ -9,38 +9,43 @@
     <div class="ui two column grid">
         <div class="left aligned column">
             <h2 class="ui centered header">Upcoming Events</h2>
-            <div class="ui top attached segment">
-                <div class="ui divided list">
-                    {% for event in events %}
-                    <div class="item">
-                        <div class="middle aligned image">
-                            <div class="ui center aligned red segment datepreview">
-                            <div class="header">
-                                {{event.time|date:"M"}}
+            {% if events %}
+                <div class="ui top attached segment">
+                    <div class="ui divided list">
+                        {% for event in events %}
+                            <div class="item">
+                                <div class="middle aligned image">
+                                    <div class="ui center aligned red segment datepreview">
+                                    <div class="header">
+                                        {{event.time|date:"M"}}
+                                    </div>
+                                    <div class="extra">
+                                        {{event.time|date:"d"}}
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div class="header">
+                                        {{event.summary}}
+                                    </div>
+                                    <div class="extra">
+                                        <i class="calendar icon"></i>
+                                        {{event.time|date}}
+                                    </div>
+                                    <div class="extra">
+                                        <i class="time icon"></i>
+                                        {{event.time|time}}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="extra">
-                                {{event.time|date:"d"}}
-                            </div>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <div class="header">
-                                {{event.summary}}
-                            </div>
-                            <div class="extra">
-                                <i class="calendar icon"></i>
-                                {{event.time|date}}
-                            </div>
-                            <div class="extra">
-                                <i class="time icon"></i>
-                                {{event.time|time}}
-                            </div>
-                        </div>
-                        
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
-            </div>
+            {% else %}
+                <div class="ui center aligned top attached segment">
+                    No upcoming events
+                </div>
+            {% endif %}
             <a href={% url "events" %}>
                 <div class="ui bottom attached primary button">
                     View Full Calendar
