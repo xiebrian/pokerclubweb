@@ -1,6 +1,6 @@
 from .. import *
 
-# DEBUG = False
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 COMPRESS_ENABLED = True
 
@@ -47,8 +47,6 @@ ALLOWED_HOSTS = (
 CACHES['default']['KEY_PREFIX'] = 'pokerclubweb.production'
 
 COMPRESS_OFFLINE = True
-
-DEBUG = True
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATICFILES_DIRS = (

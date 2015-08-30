@@ -22,7 +22,7 @@ class MemberSignupForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = '__all__'
-        exclude = ['user']
+        exclude = ['user', 'is_registered']
 
 class SponsorSignupForm(forms.ModelForm):
     dropdowns = [
