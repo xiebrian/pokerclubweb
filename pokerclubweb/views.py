@@ -11,6 +11,7 @@ from django.contrib.auth import logout as authLogout
 from django.contrib.auth.views import password_reset, password_reset_confirm, password_change
 from django.contrib.auth.decorators import login_required
 from users.decorators import anonymous_required
+from .helpers import get_google_calendar_events
 
 @anonymous_required
 def login(request):
@@ -119,6 +120,7 @@ def index(request):
     template = loader.get_template('home/index.html')
     context = RequestContext(request)
     context['title'] = 'Welcome to the MIT Poker Club'
+    context['events'] = get_google_calendar_events()
     return HttpResponse(template.render(context))
 
 def about(request):

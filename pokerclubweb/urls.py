@@ -61,7 +61,7 @@ urlpatterns = patterns('',
     url(r'^media/resumes/(?P<userID>\d+)/', RedirectView.as_view(pattern_name="view_resume", permanent=False)),
 )
 
-# if settings.DEBUG:
-#     urlpatterns.insert(0,
-#         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True})
-#     )
+if settings.DEBUG:
+    urlpatterns.append(
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True})
+    )

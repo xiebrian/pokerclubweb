@@ -25,7 +25,6 @@ def is_self_or_admin(view):
         if str(request.user.id) != userID and not request.user.groups.filter(name='admin_group').exists():
             return redirect('login')
 
-        # Return the actual company object to the view
         return view(request, userID, *args, **kwargs)
     return inner
 
@@ -42,3 +41,14 @@ def anonymous_required(function=None, redirect_url=None):
     if function:
         return actual_decorator(function)
     return actual_decorator
+
+def can_view_resumes(view):
+    @wraps(view)
+    def inner(request, userID, *args, **kwargs):
+        if str(request.user.id) != userID \
+            and not request.user.groups.filter(name='admin_group').exists() \
+            and not request.user.groups.filter(name='sponsor_group').exists():
+            return redirect('profile', userID=userID)
+
+        return view(request, userID, *args, **kwargs)
+    return inner

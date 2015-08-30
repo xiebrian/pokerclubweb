@@ -1,12 +1,15 @@
 from django.http import HttpResponse
+from django.conf import settings
 from django.shortcuts import redirect
 from django.template import RequestContext, loader
-from .models import Member, Sponsor, Admin
+from .models import Member, Sponsor, Admin, Student
 from django.contrib.auth.models import User, Group
 from pokerclubweb.forms import SponsorSignupForm, UserSignupForm
 from .forms import MemberProfileForm, UserProfileForm, AdminProfileForm, SponsorProfileForm, SponsorProfileAdminForm, AdminCreateForm, MemberSelectForm
-from .decorators import group_required, is_self_or_admin
+from .decorators import group_required, is_self_or_admin, can_view_resumes
 from django.contrib.auth.decorators import login_required
+
+import os
 
 @login_required
 def index(request):
@@ -32,6 +35,29 @@ def profile(request, userID=None):
         return redirect('index')
     context['title'] = context['member'].full_name
     return HttpResponse(template.render(context))
+
+@can_view_resumes
+def view_resume(request, userID):
+    user = User.objects.get(id=userID)
+    if hasattr(user, 'member'):
+        resume = user.member.resume
+    elif hasattr(user, 'admin'):
+        resume = user.admin.resume
+    else:
+        return redirect('index')
+
+    if resume:
+        abspath = open(str(resume.file),'r')
+        response = HttpResponse(content=abspath.read())
+
+        response['Content-Type'] = 'application/pdf'
+
+        response['Content-Disposition'] = 'inline; filename=%s.pdf' \
+             % (user.first_name+'_'+user.last_name)
+        return response
+
+    else:
+        return redirect('profile', userID=userID)
 
 @is_self_or_admin
 def sponsor_profile(request, userID):
