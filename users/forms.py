@@ -28,7 +28,7 @@ class MemberProfileForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = '__all__'
-        exclude = ['user', 'is_registered']
+        exclude = ['user', 'activation_key', 'is_registered']
 
 
 class AdminProfileForm(MemberProfileForm):
@@ -44,7 +44,7 @@ class AdminProfileForm(MemberProfileForm):
     class Meta:
         model = Admin
         fields = '__all__'
-        exclude = ['user', 'is_registered']
+        exclude = ['user', 'activation_key', 'is_registered']
 
 class SponsorProfileForm(forms.ModelForm):
 

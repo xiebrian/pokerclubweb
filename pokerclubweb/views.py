@@ -1,10 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.template import RequestContext, loader
 from django.template.response import TemplateResponse
 from users.models import Member, Sponsor, Admin
 from django.contrib.auth.models import User, Group
-from .forms import MemberSignupForm, UserSignupForm
+from .forms import MemberSignupForm, UserSignupForm, UserSignupMITEmailForm
 from django.contrib.auth import forms as authforms
 from django.contrib.auth import login as authLogin
 from django.contrib.auth import logout as authLogout
@@ -12,6 +12,9 @@ from django.contrib.auth.views import password_reset, password_reset_confirm, pa
 from django.contrib.auth.decorators import login_required
 from users.decorators import anonymous_required
 from .helpers import get_google_calendar_events
+from django.core.mail import EmailMessage
+from django.contrib.sites.shortcuts import get_current_site
+import hashlib, random
 
 @anonymous_required
 def login(request):
@@ -35,21 +38,46 @@ def login(request):
 @anonymous_required
 def signup(request):
     if request.method == 'POST':
-        userform = UserSignupForm(request.POST, prefix='user')
+        userform = UserSignupMITEmailForm(request.POST, prefix='user')
         memberform = MemberSignupForm(request.POST, prefix='member')
 
         if (userform.is_valid() and memberform.is_valid()):
             user = userform.save()
             member = memberform.save(commit=False)
             member.user = user
-            member.save()
 
             g = Group.objects.get(name='member_group')
             g.user_set.add(user)
 
-            return redirect('index')
+            #send confirmation email
+            email = userform.cleaned_data['email']
+            username = userform.cleaned_data['username']
+            salt = hashlib.sha1(str(random.random())).hexdigest()[:5]            
+            activation_key = hashlib.sha1(salt+email).hexdigest() 
+            
+            member.activation_key = activation_key
+            member.save()
+
+            current_site = get_current_site(request)
+            site_name = current_site.name
+            domain = current_site.domain
+
+            email_subject = 'Account Confirmation'
+            email_body = loader.render_to_string('auth/register_confirm_email.html', 
+                {
+                    'activation_key':activation_key,
+                    'domain': domain,
+                    'site_name': site_name,
+                    'protocol': 'http',
+                }
+            )
+
+            msg = EmailMessage(email_subject, email_body,to=[email])
+            msg.send()
+
+            return redirect('register_success')
     else:
-        userform = UserSignupForm(prefix='user')
+        userform = UserSignupMITEmailForm(prefix='user')
         memberform = MemberSignupForm(prefix='member')
 
     template = loader.get_template('auth/signup.html')
@@ -58,6 +86,32 @@ def signup(request):
     if (userform.errors or memberform.errors):
         context['errors'] = True
     context['title'] = "Signup"
+    return HttpResponse(template.render(context))
+
+@anonymous_required
+def register_success(request):
+    template = loader.get_template('auth/register_success.html')
+    context = RequestContext(request)
+    context['title'] = 'Registration Successful'
+    return HttpResponse(template.render(context))
+
+@anonymous_required
+def register_confirmation(request, activation_key):
+
+    # check if there is UserProfile which matches the activation key (if not then display 404)
+    member = get_object_or_404(Member, activation_key=activation_key)
+
+    #if the key hasn't expired save user and set him as active and render some template to confirm activation
+    user = member.user
+    user.is_active = True
+    user.save()
+    return redirect('register_validated')
+
+@anonymous_required
+def register_validated(request):
+    template = loader.get_template('auth/register_validated.html')
+    context = RequestContext(request)
+    context['title'] = 'Registration Validated'
     return HttpResponse(template.render(context))
 
 @login_required

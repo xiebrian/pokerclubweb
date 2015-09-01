@@ -36,7 +36,7 @@ def pdf_file(value):
 class Student(models.Model):
     user = models.OneToOneField(User)
     resume = models.FileField(blank=True, upload_to=resume_file_name, validators=[pdf_file])
-    pokerstars_username = models.CharField(max_length=100)
+    pokerstars_username = models.CharField(max_length=100, blank=True)
     picture = models.ImageField(blank=True, upload_to=profile_picture_file_name)
     bio = models.TextField(default='I <3 Poker')
     FRESHMAN = 'FR'
@@ -73,6 +73,7 @@ class Student(models.Model):
 
 class Member(Student):
     is_registered = models.BooleanField(default=False)
+    activation_key = models.CharField(max_length=40, blank=True)
 
     def results(self):
         return self.tournamentresult_set.all()
