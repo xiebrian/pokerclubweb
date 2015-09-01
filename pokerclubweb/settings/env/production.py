@@ -16,7 +16,7 @@ DATABASES = {
     'default': {
         # Choose between PostgreSQL or MySQL:
         #'ENGINE':   'django.db.backends.postgresql_psycopg2',
-        #'ENGINE':   'django.db.backends.mysql',
+        'ENGINE':   'django.db.backends.mysql',
         'HOST':     'sql.mit.edu',
         'NAME':     'poker+pokerclubweb',
         'USER':     'poker',
