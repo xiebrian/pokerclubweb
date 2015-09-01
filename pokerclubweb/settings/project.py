@@ -9,7 +9,7 @@ from .defaults import *
 
 # Admins receive 500 errors, managers receive 404 errors.
 ADMINS = (
-    # ('pokerclubweb', 'sysadmin@pokerclubweb.example.org'),
+    ('jlmart88', 'jlmart88@mit.edu'),
 )
 MANAGERS = ADMINS
 

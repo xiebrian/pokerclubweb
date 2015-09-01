@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.models import Group, Permission
 from django.core.exceptions import ValidationError
+from django.conf import settings
 # from django.contrib.contenttypes.models import ContentType
 # from api.models import Project
 # member_group, created = Group.objects.get_or_create(name='member_group')
@@ -62,7 +63,7 @@ class Student(models.Model):
         if self.picture and hasattr(self.picture, 'url'):
             return self.picture.url
         else:
-            return '/static/frontend/img/profile_default.png'
+            return settings.STATIC_URL+'frontend/img/profile_default.png'
 
     def full_name(self):
         return self.user.first_name + ' ' + self.user.last_name
@@ -114,7 +115,7 @@ class Sponsor(models.Model):
         if self.logo and hasattr(self.logo, 'url'):
             return self.logo.url
         else:
-            return '/static/frontend/img/profile_default.png'
+            return settings.STATIC_URL+'/frontend/img/profile_default.png'
 
     def can_view_resumes(self):
         return self.level in [self.PLATINUM, self.GOLD]

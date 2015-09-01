@@ -1,7 +1,7 @@
 from django.conf.urls import *
 from django.conf import settings
 from django.contrib import admin
-from filebrowser.sites import site as fb_site
+#from filebrowser.sites import site as fb_site
 from frontend.views import TextFileView, Http500View
 from pokerclubweb import views
 from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm, password_reset_complete
@@ -16,7 +16,7 @@ sitemaps = {
 urlpatterns = patterns('',
     # Django admin
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^admin/filebrowser/', include(fb_site.urls)),
+    #url(r'^admin/filebrowser/', include(fb_site.urls)),
     url(r'^admin/util/tools/', include('admin_tools.urls')),
 
     # Test pages

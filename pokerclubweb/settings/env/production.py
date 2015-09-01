@@ -25,6 +25,8 @@ DATABASES = {
     },
 }
 
+WSGI_APPLICATION = 'pokerclubweb.wsgi.production.application'
+
 RAVEN_CONFIG = {
     'dsn': '',
 }
@@ -41,15 +43,17 @@ TEMPLATE_LOADERS = (
 ALLOWED_HOSTS = (
     '.pokerclubweb.tld',
     '.pokerclubweb.tld.',
-    '.herokuapp.com'
+    '.mit.edu'
 )
 
 CACHES['default']['KEY_PREFIX'] = 'pokerclubweb.production'
 
-COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = False
 
 # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'web/static'),
 # )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+STATIC_URL = '/pokerclubweb/web/static/'
