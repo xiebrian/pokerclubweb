@@ -2,7 +2,7 @@ from .. import *
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -57,3 +57,4 @@ COMPRESS_OFFLINE = False
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 STATIC_URL = '/pokerclubweb/web/static/'
+MEDIA_URL = '/pokerclubweb/web/media/'
