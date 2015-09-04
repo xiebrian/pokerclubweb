@@ -6,11 +6,12 @@ from frontend.views import TextFileView, Http500View
 from pokerclubweb import views
 from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm, password_reset_complete
 from django.views.generic import RedirectView
+from .sitemaps import StaticViewSitemap
 
 admin.autodiscover()
 
 sitemaps = {
-    # Place sitemaps here
+    'static': StaticViewSitemap,
 }
 
 urlpatterns = patterns('',
