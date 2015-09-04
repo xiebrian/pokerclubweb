@@ -58,13 +58,14 @@ class UserSignupMITEmailForm(UserSignupForm):
 
 
 class MemberSignupForm(forms.ModelForm):
+    is_interested_in_exec = forms.BooleanField(label='I am interested in being contacted about joining the MIT Poker Club Committee', required=False)
     dropdowns = [
         'class_year'
     ]
     class Meta:
         model = Member
         fields = '__all__'
-        exclude = ['user', 'bio', 'activation_key', 'is_registered']
+        exclude = ['user', 'bio', 'activation_key', 'resume', 'picture', 'is_registered']
 
 class SponsorSignupForm(forms.ModelForm):
     dropdowns = [
