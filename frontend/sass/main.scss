@@ -82,3 +82,15 @@
         }
     }
 }
+
+.mobile-hide {
+    @media (max-width:767px) {
+        display: none !important;
+    }
+}
+
+.mobile-show {
+    @media (min-width:768px) {
+        display: none !important;   
+    }
+}

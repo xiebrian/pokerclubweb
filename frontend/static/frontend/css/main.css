@@ -78,4 +78,16 @@
   padding: 0.5em;
 }
 
+@media (max-width: 767px) {
+  .mobile-hide {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-show {
+    display: none !important;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */

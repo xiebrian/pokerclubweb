@@ -39,6 +39,9 @@
               </div>
             </div>
           {% else %}
+            <div class="image mobile-show">
+              <img src="{{officer.picture_url}}">
+            </div>
             <div class="content">
               <div class="header">
                 {{officer.user.first_name}} {{officer.user.last_name}}
@@ -62,7 +65,7 @@
                 {{officer.bio}}
               </div>
             </div>
-            <div class="image">
+            <div class="image mobile-hide">
               <img src="{{officer.picture_url}}">
             </div>
           {% endif %}
