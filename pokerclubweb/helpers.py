@@ -54,13 +54,13 @@ def get_google_calendar_events():
     return [{'time':parser.parse(event['start'].get('dateTime', event['start'].get('date'))), 'summary':event['summary']} for event in events]
 
 def try_cache():
-    with open(CACHE_FILE, 'r') as upcoming_events:
-        try:
+    try:
+        with open(CACHE_FILE, 'r') as upcoming_events:
             data = json.load(upcoming_events)
             expired = parser.parse(data['expires']).replace(tzinfo=None) < datetime.datetime.utcnow()
             return data['events'], expired
-        except:
-            return [], True
+    except:
+        return [], True
 def update_cache(events):
     with open(CACHE_FILE, 'w') as upcoming_events:
         data = {
