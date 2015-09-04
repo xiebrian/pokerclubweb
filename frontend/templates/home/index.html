@@ -5,13 +5,15 @@
 {% block bodyclass %}{% endblock %}
 {% block headtitle %}MIT Poker Club{% endblock %}
 
-{% block main %}
+{% block container %}
+  <div class="ui main container">
+  <h1 class="pagetitle ui center aligned header">{{title}}</h1>
     <div class="ui two column stackable grid">
         <div class="left aligned column">
             <h2 class="ui centered header">Upcoming Events</h2>
             {% if events %}
-                <div class="ui top attached segment">
-                    <div class="ui divided list">
+                <div class="ui top attached segment upcomingevents">
+                    <div class="ui divided relaxed list eventslist">
                         {% for event in events %}
                             <div class="item">
                                 <div class="middle aligned image">
@@ -24,15 +26,16 @@
                                     </div>
                                     </div>
                                 </div>
-                                <div class="content">
-                                    <div class="header">
+                                <div class="content ui list">
+
+                                    <div class="header item">
                                         {{event.summary}}
                                     </div>
-                                    <div class="extra">
+                                    <div class="extra item">
                                         <i class="calendar icon"></i>
                                         {{event.time|date}}
                                     </div>
-                                    <div class="extra">
+                                    <div class="extra item">
                                         <i class="time icon"></i>
                                         {{event.time|time}}
                                     </div>
@@ -56,4 +59,5 @@
             <img class="ui large centered image" src="{% static "frontend/img/PokerClubLogo_ClearBackground.png" %}"/>
         </div>
     </div>
+</div>
 {% endblock %}

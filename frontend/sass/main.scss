@@ -67,10 +67,18 @@
         padding-top: .55em;
     }
 }
+.ui.segment.upcomingevents {
+    padding-top:0;
+    padding-bottom:0;
 
-.ui.segment.datepreview {
-    width:3.5em;
-    height:3.5em;
-    padding:0.5em;
+    .ui.list.eventslist {
+        padding:0;
 
+        .ui.segment.datepreview {
+            width:3.5em;
+            height:3.5em;
+            padding:0.5em;
+
+        }
+    }
 }
