@@ -34,7 +34,7 @@ def get_google_calendar_events():
             service = discovery.build('calendar', 'v3', http=http)
 
             now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-            # print 'Getting the upcoming 10 events on home page'
+            print 'Getting the upcoming 10 events on home page'
             # calendarList = service.calendarList().list().execute()
             # for item in calendarList['items']:
             #     print item
@@ -44,7 +44,9 @@ def get_google_calendar_events():
             events = eventsResult.get('items', [])
 
             update_cache(events)
-        except:
+        except Exception as e:
+            print e
+            print 'Getting events failed'
             events = []
 
     if not events:
