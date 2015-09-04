@@ -19,13 +19,13 @@ from django.conf import settings
 # new_group.permissions.add(permission)
 
 def profile_picture_file_name(instance, filename):
-    return '/'.join(['profile_pictures', str(instance.id), filename])
+    return '/'.join(['profile_pictures', str(instance.user.id), filename])
 
 def sponsor_logo_file_name(instance, filename):
-    return '/'.join(['sponsor_logos', str(instance.id), filename])
+    return '/'.join(['sponsor_logos', str(instance.user.id), filename])
 
 def resume_file_name(instance, filename):
-    return '/'.join(['resumes', str(instance.id), filename])
+    return '/'.join(['resumes', str(instance.user.id), filename])
 
 def pdf_file(value):
     import os
@@ -74,6 +74,7 @@ class Student(models.Model):
 
 class Member(Student):
     is_registered = models.BooleanField(default=False)
+    is_interested_in_exec = models.BooleanField(default=False)
     activation_key = models.CharField(max_length=40, blank=True)
 
     def results(self):

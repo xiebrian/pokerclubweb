@@ -29,6 +29,8 @@ def login(request):
 
     template = loader.get_template('auth/login.html')
     context = RequestContext(request)
+    form.fields['username'].required = False
+    form.fields['password'].required = False
     context['forms'] = [form]
     if (form.errors):
         context['errors'] = True
