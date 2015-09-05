@@ -140,11 +140,11 @@ def admin_create_sponsor(request, sponsorID=0):
         if (sponsorID):
             sponsor = Sponsor.objects.get(id=SponsorID)
             user = sponsor.user
-            userform = UserSignupForm(request.POST, prefix='user', instance=user)
-            sponsorform = SponsorSignupForm(request.POST, prefix='sponsor', instance=sponsor)
+            userform = UserSignupForm(request.POST, rprefix='user', instance=user)
+            sponsorform = SponsorSignupForm(request.POST, request.FILES, prefix='sponsor', instance=sponsor)
         else:
             userform = UserSignupForm(request.POST, prefix='user')
-            sponsorform = SponsorSignupForm(request.POST, prefix='sponsor')
+            sponsorform = SponsorSignupForm(request.POST, request.FILES, prefix='sponsor')
 
         if (userform.is_valid() and sponsorform.is_valid()):
             user = userform.save()

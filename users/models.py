@@ -116,7 +116,7 @@ class Sponsor(models.Model):
         if self.logo and hasattr(self.logo, 'url'):
             return self.logo.url
         else:
-            return settings.STATIC_URL+'/frontend/img/profile_default.png'
+            return settings.STATIC_URL+'frontend/img/profile_default.png'
 
     def can_view_resumes(self):
         return self.level in [self.PLATINUM, self.GOLD]

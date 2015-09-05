@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import Member
 from django.core.exceptions import ValidationError
+from django.conf import settings
 
 def tournament_picture_file_name(instance, filename):
     return '/'.join(['tournament_pictures', str(instance.id), filename])
@@ -30,7 +31,7 @@ class Tournament(models.Model):
         if self.picture and hasattr(self.picture, 'url'):
             return self.picture.url
         else:
-            return '/static/frontend/img/profile_default.png'
+            return settings.STATIC_URL + 'frontend/img/tournament_default.jpg'
 
     def registered_members_count(self):
         return self.registered_members.count()
