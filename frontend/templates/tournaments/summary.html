@@ -39,7 +39,7 @@
                       <div class="extra">
                         {{tournament.registered_members_count}} Registered Student{% if tournament.registered_members_count != 1 %}s{% endif %}
                       </div>
-                      {% if tournament.is_registration_open %}
+                      {% if tournament.registration_open %}
                         {% load user_extras %}
                         {% if user|has_group:"member_group" %}
                           <form action={% url "register" tournament.id %} method="post">

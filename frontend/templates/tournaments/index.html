@@ -40,18 +40,20 @@
                 <div class="extra">
                   {{tournament.registered_members_count}} Registered Student{% if tournament.registered_members_count != 1 %}s{% endif %}
                 </div>
-                {% load user_extras %}
-                {% if user|has_group:"member_group" %}
-                  <form action={% url "register" tournament.id %} method="post">
-                    {% csrf_token %}
-                      {% if user.member in tournament.registered_members.all %}
-                          You are currently registered for this tournament.
-                          <input type="submit" class="ui submit button" value="Unregister">
-                      {% else %}
-                          You are not currently registered for this tournament.
-                          <input type="submit" class="ui submit button" value="Register">
-                      {% endif %}
-                    </form>
+                {% if tournament.registration_open %}
+                  {% load user_extras %}
+                  {% if user|has_group:"member_group" %}
+                    <form action={% url "register" tournament.id %} method="post">
+                      {% csrf_token %}
+                        {% if user.member in tournament.registered_members.all %}
+                            You are currently registered for this tournament.
+                            <input type="submit" class="ui submit button" value="Unregister">
+                        {% else %}
+                            You are not currently registered for this tournament.
+                            <input type="submit" class="ui submit button" value="Register">
+                        {% endif %}
+                      </form>
+                  {% endif %}
                 {% endif %}
               </div>
             </div>
