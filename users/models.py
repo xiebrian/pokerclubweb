@@ -113,5 +113,6 @@ class Sponsor(models.Model):
             return '/static/frontend/img/profile_default.png'
 
     def can_view_resumes(self):
-        return self.level in [self.PLATINUM, self.GOLD]
+        #return self.level in [self.PLATINUM, self.GOLD]
+        return true
 
