@@ -10,6 +10,7 @@ from .decorators import group_required, is_self_or_admin, can_view_resumes
 from django.contrib.auth.decorators import login_required
 
 import os
+import csv
 
 @login_required
 def index(request):
@@ -141,10 +142,10 @@ def admin_create_sponsor(request, sponsorID=0):
             sponsor = Sponsor.objects.get(id=SponsorID)
             user = sponsor.user
             userform = UserSignupForm(request.POST, prefix='user', instance=user)
-            sponsorform = SponsorSignupForm(request.POST, prefix='sponsor', instance=sponsor)
+            sponsorform = SponsorSignupForm(request.POST, request.FILES, prefix='sponsor', instance=sponsor)
         else:
             userform = UserSignupForm(request.POST, prefix='user')
-            sponsorform = SponsorSignupForm(request.POST, prefix='sponsor')
+            sponsorform = SponsorSignupForm(request.POST, request.FILES, prefix='sponsor')
 
         if (userform.is_valid() and sponsorform.is_valid()):
             user = userform.save()
@@ -205,3 +206,20 @@ def admin_create_admin(request):
         context['errors'] = True
     context['title'] = 'Create Admin'
     return HttpResponse(template.render(context))
+
+@group_required('admin_group')
+def admin_download_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="poker_club_users.csv"'
+
+    writer = csv.writer(response)
+
+    members = Member.objects.all()
+    admins = Admin.objects.all()
+    writer.writerow(['First Name', 'Last Name', 'Email', 'Pokerstars Account'])
+    for admin in admins:
+        writer.writerow([admin.user.first_name, admin.user.last_name, admin.user.email, admin.pokerstars_username])
+    for member in members:
+        writer.writerow([member.user.first_name, member.user.last_name, member.user.email, member.pokerstars_username])
+
+    return response

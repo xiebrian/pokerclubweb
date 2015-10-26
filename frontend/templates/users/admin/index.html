@@ -2,7 +2,7 @@
 
 {% block bodyid %}index{% endblock %}
 {% block bodyclass %}{% endblock %}
-{% block headtitle %}Poker Club Home Page{% endblock %}
+{% block headtitle %}MIT Poker Club{% endblock %}
 
 {% block main %}
     <div class="ui three column grid">
@@ -24,6 +24,13 @@
             <a href={% url "admin_create_admin" %}>
                 <div class="ui fluid button">
                     Create Admin
+                </div>
+            </a>
+        </div>
+        <div class="column">
+            <a href={% url "admin_download_csv" %}>
+                <div class="ui fluid button">
+                    Download User Information
                 </div>
             </a>
         </div>

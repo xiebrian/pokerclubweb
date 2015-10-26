@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.models import Group, Permission
 from django.core.exceptions import ValidationError
+from django.conf import settings
 # from django.contrib.contenttypes.models import ContentType
 # from api.models import Project
 # member_group, created = Group.objects.get_or_create(name='member_group')
@@ -18,13 +19,13 @@ from django.core.exceptions import ValidationError
 # new_group.permissions.add(permission)
 
 def profile_picture_file_name(instance, filename):
-    return '/'.join(['profile_pictures', str(instance.id), filename])
+    return '/'.join(['profile_pictures', str(instance.user.id), filename])
 
 def sponsor_logo_file_name(instance, filename):
-    return '/'.join(['sponsor_logos', str(instance.id), filename])
+    return '/'.join(['sponsor_logos', str(instance.user.id), filename])
 
 def resume_file_name(instance, filename):
-    return '/'.join(['resumes', str(instance.id), filename])
+    return '/'.join(['resumes', str(instance.user.id), filename])
 
 def pdf_file(value):
     import os
@@ -36,7 +37,7 @@ def pdf_file(value):
 class Student(models.Model):
     user = models.OneToOneField(User)
     resume = models.FileField(blank=True, upload_to=resume_file_name, validators=[pdf_file])
-    pokerstars_username = models.CharField(max_length=100)
+    pokerstars_username = models.CharField(max_length=100, blank=True)
     picture = models.ImageField(blank=True, upload_to=profile_picture_file_name)
     bio = models.TextField(default='I <3 Poker')
     FRESHMAN = 'FR'
@@ -62,7 +63,7 @@ class Student(models.Model):
         if self.picture and hasattr(self.picture, 'url'):
             return self.picture.url
         else:
-            return '/static/frontend/img/profile_default.png'
+            return settings.STATIC_URL+'frontend/img/profile_default.png'
 
     def full_name(self):
         return self.user.first_name + ' ' + self.user.last_name
@@ -73,6 +74,11 @@ class Student(models.Model):
 
 class Member(Student):
     is_registered = models.BooleanField(default=False)
+    is_interested_in_exec = models.BooleanField(default=False)
+    activation_key = models.CharField(max_length=40, blank=True)
+
+    def results(self):
+        return self.tournamentresult_set.all()
 
 class Admin(Student):
     position = models.CharField(max_length=100)
@@ -110,7 +116,7 @@ class Sponsor(models.Model):
         if self.logo and hasattr(self.logo, 'url'):
             return self.logo.url
         else:
-            return '/static/frontend/img/profile_default.png'
+            return settings.STATIC_URL+'frontend/img/profile_default.png'
 
     def can_view_resumes(self):
         #return self.level in [self.PLATINUM, self.GOLD]

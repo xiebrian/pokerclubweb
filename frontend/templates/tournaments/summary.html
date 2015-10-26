@@ -3,7 +3,7 @@
 
 {% block bodyid %}index{% endblock %}
 {% block bodyclass %}{% endblock %}
-{% block headtitle %}Poker Club Home Page{% endblock %}
+{% block headtitle %}MIT Poker Club{% endblock %}
 
 {% block main %}
 
@@ -15,18 +15,21 @@
                       <img src={{tournament.picture_url}}>
                     </div>
                     <div class="middle aligned content">
-                      <div class="header">
-                        {{tournament.name}}
-                      </div>
                       <div class="extra">
-                        <div class="ui label">
-                          <i class="{{icons|get_item:"start_time"}} icon"></i>
-                          {{tournament.start_time}}
-                        </div>
-                        <div class="ui label">
-                          <i class="{{icons|get_item:"location"}} icon"></i>
-                          {{tournament.location}}
-                        </div>
+                        <div class="ui list">
+                    <div class="item">
+                      <i class="{{icons|get_item:"start_time"}} icon"></i>
+                      {{tournament.start_time|date}}
+                    </div>
+                    <div class="item">
+                      <i class="clock icon"></i>
+                      {{tournament.start_time|time}}
+                    </div>
+                    <div class="item">
+                      <i class="{{icons|get_item:"location"}} icon"></i>
+                      {{tournament.location}}
+                    </div>
+                  </div>
                       </div>
                       <div class="ui divider">
                       </div>
@@ -36,22 +39,46 @@
                       <div class="extra">
                         {{tournament.registered_members_count}} Registered Student{% if tournament.registered_members_count != 1 %}s{% endif %}
                       </div>
-                      {% load user_extras %}
-                      {% if user|has_group:"member_group" %}
-                        <form action={% url "register" tournament.id %} method="post">
-                          {% csrf_token %}
-                            {% if user.member in tournament.registered_members.all %}
-                                You are currently registered for this tournament.
-                                <input type="submit" class="ui submit button" value="Unregister">
-                            {% else %}
-                                You are not currently registered for this tournament.
-                                <input type="submit" class="ui submit button" value="Register">
-                            {% endif %}
-                          </form>
+                      {% if tournament.registration_open %}
+                        {% load user_extras %}
+                        {% if user|has_group:"member_group" %}
+                          <form action={% url "register" tournament.id %} method="post">
+                            {% csrf_token %}
+                              {% if user.member in tournament.registered_members.all %}
+                                  You are currently registered for this tournament.
+                                  <input type="submit" class="ui submit button" value="Unregister">
+                              {% else %}
+                                  You are not currently registered for this tournament.
+                                  <input type="submit" class="ui submit button" value="Register">
+                              {% endif %}
+                            </form>
+                        {% endif %}
                       {% endif %}
                     </div>
                     </div>
                     </div>
+                    {% if tournament.results_available %}
+                      <div class="ui horizontal divider">
+                        Results
+                      </div>
+                      <div class="ui list link items">
+                        {% for result in tournament.results %}
+                          <a href={% url "profile" result.member.user.id %} class="item">
+                              <div class="image">
+                                <img src="{{result.member.picture_url}}">
+                              </div>
+                              <div class="middle aligned content">
+                                <div class="header">
+                                {{result.place_string}} Place:
+                                </div>
+                                <div class="meta">
+                                  {{result.member}}
+                                </div>
+                              </div>
+                          </a>
+                        {% endfor %}
+                      </div>
+                    {% endif %}
                     {% if user|has_group:"admin_group" %}
                       <div class="ui horizontal divider">
                         Actions

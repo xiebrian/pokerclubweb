@@ -2,7 +2,9 @@
 
 # Infrastructure
 Django >= 1.8.1, < 1.9
-Pillow == 2.8.2
+Pillow == 2.8.2 
+#--global-option="build_ext" \
+#--global-option="--disable-jpeg"
 MySQL-python >= 1.2
 psycopg2 == 2.6
 python-memcached == 1.54
@@ -33,3 +35,5 @@ django-allauth >= 0.23.0
 gunicorn >= 19.3
 whitenoise >= 2.0.2
 google-api-python-client
+python-dateutil
+pycrypto

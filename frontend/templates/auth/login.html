@@ -1,7 +1,21 @@
 {% extends "form_base.html" %}
 
 {% block form_extras %}
-  <div class="ui item">
-    <a href={% url "reset_password" %}>Reset Password</a>
+	<div class="ui divider"></div>
+  <div class="ui list">
+  	<div class="item">
+    <a href={% url "reset_password" %}>
+    	<div class="ui blue fluid button">
+    		Reset Password
+    	</div>
+    </a>
+    </div>
+    <div class="item">
+    <a href={% url "reset_password" %}>
+    	<div class="ui green fluid button">
+    		Sign Up
+    	</div>
+    </a>
+    </div>
   </div>
 {% endblock %}

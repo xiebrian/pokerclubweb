@@ -2,7 +2,7 @@ from .. import *
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -15,17 +15,15 @@ DEFAULT_FROM_EMAIL = 'mitpokerexec@gmail.com'
 DATABASES = {
     'default': {
         # Choose between PostgreSQL or MySQL:
-        #'ENGINE':   'django.db.backends.postgresql_psycopg2',
-        'ENGINE':   'django.db.backends.mysql',
-        'HOST':     'sql.mit.edu',
-        'NAME':     'poker+pokerclubweb',
-        'USER':     'poker',
-        'PASSWORD':     'jaf50bew',
-        #'PORT':     5432,
+        'ENGINE':   'django.db.backends.postgresql_psycopg2',
+        #'ENGINE':   'django.db.backends.mysql',
+        'HOST':     'ec2-54-163-228-0.compute-1.amazonaws.com',
+        'NAME':     'd3e3n97no6755j',
+        'USER':     'thpigrkwjopqne',
+        'PASSWORD': 'rYj19UP1spyJeAssvJVUR0I9Qa',
+        'PORT':     5432,
     },
 }
-
-WSGI_APPLICATION = 'pokerclubweb.wsgi.production.application'
 
 RAVEN_CONFIG = {
     'dsn': '',
@@ -43,18 +41,15 @@ TEMPLATE_LOADERS = (
 ALLOWED_HOSTS = (
     '.pokerclubweb.tld',
     '.pokerclubweb.tld.',
-    '.mit.edu'
+    '.herokuapp.com'
 )
 
 CACHES['default']['KEY_PREFIX'] = 'pokerclubweb.production'
 
-COMPRESS_OFFLINE = False
+COMPRESS_OFFLINE = True
 
 # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'web/static'),
 # )
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-STATIC_URL = '/pokerclubweb/web/static/'
-MEDIA_URL = '/pokerclubweb/web/media/'

@@ -15,7 +15,15 @@ class UserProfileForm(forms.ModelForm):
             'username' : None
         }
 
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+
+        self.fields['email'].required = True
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+
 class MemberProfileForm(forms.ModelForm):
+    is_interested_in_exec = forms.BooleanField(label='I am interesed in being contacted about joining the MIT Poker Club Committee', required=False)
     dropdowns = [
         'class_year'
     ]
@@ -28,7 +36,7 @@ class MemberProfileForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = '__all__'
-        exclude = ['user', 'is_registered']
+        exclude = ['user', 'activation_key', 'is_registered']
 
 
 class AdminProfileForm(MemberProfileForm):
@@ -44,7 +52,7 @@ class AdminProfileForm(MemberProfileForm):
     class Meta:
         model = Admin
         fields = '__all__'
-        exclude = ['user', 'is_registered']
+        exclude = ['user', 'activation_key', 'is_registered']
 
 class SponsorProfileForm(forms.ModelForm):
 

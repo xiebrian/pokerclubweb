@@ -9,13 +9,13 @@ from .defaults import *
 
 # Admins receive 500 errors, managers receive 404 errors.
 ADMINS = (
-    # ('pokerclubweb', 'sysadmin@pokerclubweb.example.org'),
+    ('jlmart88', 'jlmart88@mit.edu'),
 )
 MANAGERS = ADMINS
 
 SERVER_EMAIL = 'root@localhost'
-DEFAULT_FROM_EMAIL = 'info@pokerclubweb.example.com'
-EMAIL_SUBJECT_PREFIX = '[Django][pokerclubweb] '
+DEFAULT_FROM_EMAIL = 'mitpokerexec@gmail.com'
+EMAIL_SUBJECT_PREFIX = '[MIT Poker Club]'
 
 # Project language settings
 TIME_ZONE = 'Europe/Amsterdam'

@@ -1,22 +1,23 @@
 from django.conf.urls import *
 from django.conf import settings
 from django.contrib import admin
-from filebrowser.sites import site as fb_site
+#from filebrowser.sites import site as fb_site
 from frontend.views import TextFileView, Http500View
 from pokerclubweb import views
 from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm, password_reset_complete
 from django.views.generic import RedirectView
+from .sitemaps import StaticViewSitemap
 
 admin.autodiscover()
 
 sitemaps = {
-    # Place sitemaps here
+    'static': StaticViewSitemap,
 }
 
 urlpatterns = patterns('',
     # Django admin
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^admin/filebrowser/', include(fb_site.urls)),
+    #url(r'^admin/filebrowser/', include(fb_site.urls)),
     url(r'^admin/util/tools/', include('admin_tools.urls')),
 
     # Test pages
@@ -47,6 +48,9 @@ urlpatterns = patterns('',
         url(r'^login/$', views.login, name="login"),
         url(r'^logout/$', views.logout, name="logout"),
         url(r'^signup/$', views.signup, name="signup"),
+        url(r'^register_success/$', views.register_success, name="register_success"),
+        url(r'^register_confirmation/(?P<activation_key>\w+)/$', views.register_confirmation, name="register_confirmation"),
+        url(r'^register_validated/$', views.register_validated, name="register_validated"),
         url(r'^change_password/$', views.change_password, name="change_password"),
         url(r'^change_password_done/$', views.change_password_done, name="password_change_done"),
         url(r'^reset_password/$', views.reset_password, name="reset_password"),
