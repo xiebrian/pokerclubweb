@@ -201,7 +201,7 @@ def sponsors(request):
 def officers(request):
     template = loader.get_template('home/officers.html')
     context = RequestContext(request)
-    context['officers'] = Admin.objects.all()
+    context['officers'] = sorted(Admin.objects.all(), key=lambda officer: officer.officer_page_order)
     context['title'] = 'Officers'
     return HttpResponse(template.render(context))
 
