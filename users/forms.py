@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from users.models import Member, Sponsor, Admin
 from django.forms import ModelChoiceField
+from django.forms.models import BaseModelFormSet
 
 class MemberModelChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):
@@ -40,6 +41,7 @@ class MemberProfileForm(forms.ModelForm):
 
 
 class AdminProfileForm(MemberProfileForm):
+    is_interested_in_exec = None
     dropdowns = [
         'class_year'
     ]
@@ -52,7 +54,7 @@ class AdminProfileForm(MemberProfileForm):
     class Meta:
         model = Admin
         fields = '__all__'
-        exclude = ['user', 'activation_key', 'is_registered']
+        exclude = ['user', 'activation_key', 'is_registered', 'officers_page_order', 'position']
 
 class SponsorProfileForm(forms.ModelForm):
 
@@ -84,3 +86,8 @@ class MemberSelectForm(forms.Form):
         'member'
     ]
     member = MemberModelChoiceField(Member.objects.all())
+
+class AdminOfficersPageForm(forms.ModelForm):
+    class Meta:
+        model = Admin
+        fields = ['position', 'officers_page_order']

@@ -5,9 +5,10 @@ from django.template import RequestContext, loader
 from .models import Member, Sponsor, Admin, Student
 from django.contrib.auth.models import User, Group
 from pokerclubweb.forms import SponsorSignupForm, UserSignupForm
-from .forms import MemberProfileForm, UserProfileForm, AdminProfileForm, SponsorProfileForm, SponsorProfileAdminForm, AdminCreateForm, MemberSelectForm
+from .forms import *
 from .decorators import group_required, is_self_or_admin, can_view_resumes
 from django.contrib.auth.decorators import login_required
+from django.forms.models import modelformset_factory
 
 import os
 import csv
@@ -16,7 +17,7 @@ import csv
 def index(request):
     template = loader.get_template('users/index.html')
     context = RequestContext(request)
-    context['members'] = Member.objects.all()
+    context['members'] = sorted(Member.objects.all(), key=lambda member: member.user.first_name)
     context['title'] = 'Members'
     return HttpResponse(template.render(context))
 
@@ -223,3 +224,29 @@ def admin_download_csv(request):
         writer.writerow([member.user.first_name, member.user.last_name, member.user.email, member.pokerstars_username])
 
     return response
+
+@group_required('admin_group')
+def admin_edit_officers_page(request):
+    sorted_admin = Admin.objects.all().order_by('officers_page_order')
+    OfficerPageFormSet = modelformset_factory(Admin, form=AdminOfficersPageForm, extra=0)
+    if request.method == 'POST':
+        form = OfficerPageFormSet(request.POST, queryset=sorted_admin)
+        
+        if (form.is_valid()):
+            form.save()
+
+            return redirect('officers',)
+    else:
+        form = OfficerPageFormSet(queryset=sorted_admin)
+        
+    context = RequestContext(request)
+    titles = [admin.full_name() for admin in sorted_admin]
+    for f, name in zip(form, titles):
+        f.title = name
+    context['forms'] = form
+    if (form.errors):
+        context['errors'] = True
+    template = loader.get_template('users/admin/edit_officers_page.html')
+    context['title'] = 'Edit Officers Page'
+
+    return HttpResponse(template.render(context))

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load get_item %}
+{% load user_extras %}
+
 
 {% block bodyid %}index{% endblock %}
 {% block bodyclass %}{% endblock %}
@@ -7,6 +9,15 @@
 
 {% block main %}
   <div class="ui one column grid">
+    {% if user|has_group:"admin_group" %}
+      <div class="center aligned column">
+        <a class="ui center aligned button" href={% url "admin_edit_officers_page" %}>
+            <div class="">
+              Edit Officers Page
+            </div>
+        </a>
+      </div>
+    {% endif %}
     <div class="column">
       <div class="ui divided items">
         {% for officer in officers %}

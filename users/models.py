@@ -82,7 +82,7 @@ class Member(Student):
 
 class Admin(Student):
     position = models.CharField(max_length=100)
-    officer_page_order = models.IntegerField(default=1)
+    officers_page_order = models.IntegerField(default=1)
 
     def update_with_member(self, member):
         for a in member._meta.get_all_field_names():

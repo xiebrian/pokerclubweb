@@ -5,10 +5,10 @@
         <img src="{{sponsor.logo_url}}">
     </a>
     {% if user|has_group:"admin_group" %}
-    <a class="ui button" href={% url "sponsor_profile" sponsor.user.id %}>
-        <div class="">
-          Sponsor Profile
-        </div>
-    </a>
-{% endif %}
+	    <a class="ui button" href={% url "sponsor_profile" sponsor.user.id %}>
+	        <div class="">
+	          Sponsor Profile
+	        </div>
+	    </a>
+	{% endif %}
 </div>

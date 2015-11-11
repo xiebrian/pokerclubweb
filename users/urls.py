@@ -13,6 +13,7 @@ urlpatterns = patterns('',
         url(r'^sponsors/create/$', views.admin_create_sponsor, name='admin_create_sponsor'),
         url(r'^create/$', views.admin_create_admin, name='admin_create_admin'),
         url(r'^download_csv/$', views.admin_download_csv, name="admin_download_csv"),
+        url(r'^edit_officers_page/$', views.admin_edit_officers_page, name="admin_edit_officers_page"),
         ])
     ),
 )
