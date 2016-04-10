@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from users.models import Member, Sponsor, Admin
 from django.forms import ModelChoiceField
 from django.forms.models import BaseModelFormSet
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 class MemberModelChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):

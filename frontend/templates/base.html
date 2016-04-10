@@ -1,4 +1,4 @@
-{% load compress googletools %}
+{% load compress %}
 {% load static %}
 <!doctype html>
 <html xml:lang="{{ LANGUAGE_CODE|default:"en" }}" lang="{{ LANGUAGE_CODE|default:"en" }}">
@@ -30,7 +30,6 @@
     <script src="{{ STATIC_URL }}frontend/vendor/html5shiv.js"></script>
     <![endif]-->
     {% block extrahead %}{% endblock %}
-    {% site_verification_code %}
     <script type="text/javascript" src="{% static "frontend/vendor/jquery-1.11.3.min.js" %}"></script>
     <script type="text/javascript" src="{% static "frontend/vendor/semantic.min.js" %}"></script>
     {% block script %}{% endblock %}
@@ -58,6 +57,5 @@
     </div>
     
     {% compress js %}{% block bodyscripts %}{% endblock %}{% endcompress %}
-    {% analytics_code %}
   </body>
 </html>

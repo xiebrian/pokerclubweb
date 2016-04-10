@@ -48,7 +48,6 @@ INSTALLED_APPS += (
     'axes',
     'crispy_forms',
     'filebrowser',
-    'googletools',
     'sorl.thumbnail',
 
     # and enable the admin
