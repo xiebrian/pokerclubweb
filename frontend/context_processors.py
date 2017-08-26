@@ -31,6 +31,7 @@ def icons(request):
         'pokerstars_username': 'star',
         'picture': 'photo',
         #'bio': 'book',
+        'class_year_num': 'student',
         'class_year': 'student',
         'position': 'suitcase',
         'company_name': 'building',

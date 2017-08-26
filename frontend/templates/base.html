@@ -44,6 +44,9 @@
       <div class="ui main text container">
 
         <h1 class="pagetitle ui center aligned header">{{title}}</h1>
+        {% if caption %} 
+          <h5 class="ui center aligned header">{{caption}}</h5>
+        {% endif %}
         <div id="main">
           {% block main %}{% endblock %}
         </div>

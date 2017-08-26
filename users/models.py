@@ -1,3 +1,6 @@
+import os
+import datetime
+
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.models import Group, Permission
@@ -19,13 +22,20 @@ from django.conf import settings
 # new_group.permissions.add(permission)
 
 def profile_picture_file_name(instance, filename):
-    return '/'.join(['profile_pictures', str(instance.user.id), filename])
+    if not filename:
+        return '/'.join(['profile_pictures', str(instance.user.id), filename])
+    ext = os.path.splitext(filename)[1]
+    name = instance.user.first_name + '_' + instance.user.last_name + '_Profile_Picture' + ext
+    return '/'.join(['profile_pictures', str(instance.user.id), name])
 
 def sponsor_logo_file_name(instance, filename):
     return '/'.join(['sponsor_logos', str(instance.user.id), filename])
 
 def resume_file_name(instance, filename):
-    return '/'.join(['resumes', str(instance.user.id), filename])
+    if not filename:
+        return '/'.join(['resumes', str(instance.user.id), filename])
+    name = instance.user.first_name + '_' + instance.user.last_name + '_Resume.pdf'
+    return '/'.join(['resumes', str(instance.user.id), name])
 
 def pdf_file(value):
     import os
@@ -37,7 +47,7 @@ def pdf_file(value):
 class Student(models.Model):
     user = models.OneToOneField(User)
     resume = models.FileField(blank=True, upload_to=resume_file_name, validators=[pdf_file])
-    pokerstars_username = models.CharField(max_length=100, blank=True)
+    pokerstars_username = models.CharField(max_length=100, blank=True, verbose_name="Username")
     picture = models.ImageField(blank=True, upload_to=profile_picture_file_name)
     bio = models.TextField(default='I <3 Poker')
     FRESHMAN = 'FR'
@@ -52,9 +62,11 @@ class Student(models.Model):
         (SENIOR, 'Senior'),
         (GRADUATE, 'Graduate'),
     )
-    class_year = models.CharField(max_length=2,
-                                      choices=CLASS_YEAR_CHOICES,
-                                      default=FRESHMAN)
+
+    class_year_num = models.IntegerField(default=datetime.datetime.now().year+4, verbose_name="Undergrad Class Year")
+    # class_year = models.CharField(max_length=2,
+    #                                  choices=CLASS_YEAR_CHOICES,
+    #                                  default=FRESHMAN)
 
     def __unicode__(self):
         return self.user.first_name + ' ' + self.user.last_name

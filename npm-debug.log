@@ -1,0 +1,235 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/bin/npm', 'install' ]
+2 info using npm@1.3.6
+3 info using node@v0.10.36
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/afs/athena.mit.edu/activity/p/poker/web_scripts/pokerclubweb',
+5 verbose install   [ 'semantic-ui',
+5 verbose install     'del',
+5 verbose install     'gulp',
+5 verbose install     'gulp-livereload',
+5 verbose install     'gulp-sass',
+5 verbose install     'gulp-sourcemaps',
+5 verbose install     'node-sass' ] ]
+6 info preinstall website-frontend@0.0.0
+7 verbose readDependencies using package.json deps
+8 verbose cache add [ 'semantic-ui@*', null ]
+9 verbose cache add name=undefined spec="semantic-ui@*" args=["semantic-ui@*",null]
+10 verbose parsed url { protocol: null,
+10 verbose parsed url   slashes: null,
+10 verbose parsed url   auth: null,
+10 verbose parsed url   host: null,
+10 verbose parsed url   port: null,
+10 verbose parsed url   hostname: null,
+10 verbose parsed url   hash: null,
+10 verbose parsed url   search: null,
+10 verbose parsed url   query: null,
+10 verbose parsed url   pathname: 'semantic-ui@*',
+10 verbose parsed url   path: 'semantic-ui@*',
+10 verbose parsed url   href: 'semantic-ui@*' }
+11 verbose cache add name="semantic-ui" spec="*" args=["semantic-ui","*"]
+12 verbose parsed url { protocol: null,
+12 verbose parsed url   slashes: null,
+12 verbose parsed url   auth: null,
+12 verbose parsed url   host: null,
+12 verbose parsed url   port: null,
+12 verbose parsed url   hostname: null,
+12 verbose parsed url   hash: null,
+12 verbose parsed url   search: null,
+12 verbose parsed url   query: null,
+12 verbose parsed url   pathname: '*',
+12 verbose parsed url   path: '*',
+12 verbose parsed url   href: '*' }
+13 verbose addNamed [ 'semantic-ui', '*' ]
+14 verbose addNamed [ null, '*' ]
+15 verbose cache add [ 'del@^1.1.1', null ]
+16 verbose cache add name=undefined spec="del@^1.1.1" args=["del@^1.1.1",null]
+17 verbose parsed url { protocol: null,
+17 verbose parsed url   slashes: null,
+17 verbose parsed url   auth: null,
+17 verbose parsed url   host: null,
+17 verbose parsed url   port: null,
+17 verbose parsed url   hostname: null,
+17 verbose parsed url   hash: null,
+17 verbose parsed url   search: null,
+17 verbose parsed url   query: null,
+17 verbose parsed url   pathname: 'del@^1.1.1',
+17 verbose parsed url   path: 'del@^1.1.1',
+17 verbose parsed url   href: 'del@^1.1.1' }
+18 verbose cache add name="del" spec="^1.1.1" args=["del","^1.1.1"]
+19 verbose parsed url { protocol: null,
+19 verbose parsed url   slashes: null,
+19 verbose parsed url   auth: null,
+19 verbose parsed url   host: null,
+19 verbose parsed url   port: null,
+19 verbose parsed url   hostname: null,
+19 verbose parsed url   hash: null,
+19 verbose parsed url   search: null,
+19 verbose parsed url   query: null,
+19 verbose parsed url   pathname: '^1.1.1',
+19 verbose parsed url   path: '^1.1.1',
+19 verbose parsed url   href: '^1.1.1' }
+20 verbose addNamed [ 'del', '^1.1.1' ]
+21 verbose addNamed [ null, '>=1.1.1-0 <2.0.0-0' ]
+22 verbose cache add [ 'gulp@^3.8.11', null ]
+23 verbose cache add name=undefined spec="gulp@^3.8.11" args=["gulp@^3.8.11",null]
+24 verbose parsed url { protocol: null,
+24 verbose parsed url   slashes: null,
+24 verbose parsed url   auth: null,
+24 verbose parsed url   host: null,
+24 verbose parsed url   port: null,
+24 verbose parsed url   hostname: null,
+24 verbose parsed url   hash: null,
+24 verbose parsed url   search: null,
+24 verbose parsed url   query: null,
+24 verbose parsed url   pathname: 'gulp@^3.8.11',
+24 verbose parsed url   path: 'gulp@^3.8.11',
+24 verbose parsed url   href: 'gulp@^3.8.11' }
+25 verbose cache add name="gulp" spec="^3.8.11" args=["gulp","^3.8.11"]
+26 verbose parsed url { protocol: null,
+26 verbose parsed url   slashes: null,
+26 verbose parsed url   auth: null,
+26 verbose parsed url   host: null,
+26 verbose parsed url   port: null,
+26 verbose parsed url   hostname: null,
+26 verbose parsed url   hash: null,
+26 verbose parsed url   search: null,
+26 verbose parsed url   query: null,
+26 verbose parsed url   pathname: '^3.8.11',
+26 verbose parsed url   path: '^3.8.11',
+26 verbose parsed url   href: '^3.8.11' }
+27 verbose addNamed [ 'gulp', '^3.8.11' ]
+28 verbose addNamed [ null, '>=3.8.11-0 <4.0.0-0' ]
+29 verbose cache add [ 'gulp-livereload@^3.8.0', null ]
+30 verbose cache add name=undefined spec="gulp-livereload@^3.8.0" args=["gulp-livereload@^3.8.0",null]
+31 verbose parsed url { protocol: null,
+31 verbose parsed url   slashes: null,
+31 verbose parsed url   auth: null,
+31 verbose parsed url   host: null,
+31 verbose parsed url   port: null,
+31 verbose parsed url   hostname: null,
+31 verbose parsed url   hash: null,
+31 verbose parsed url   search: null,
+31 verbose parsed url   query: null,
+31 verbose parsed url   pathname: 'gulp-livereload@^3.8.0',
+31 verbose parsed url   path: 'gulp-livereload@^3.8.0',
+31 verbose parsed url   href: 'gulp-livereload@^3.8.0' }
+32 verbose cache add name="gulp-livereload" spec="^3.8.0" args=["gulp-livereload","^3.8.0"]
+33 verbose parsed url { protocol: null,
+33 verbose parsed url   slashes: null,
+33 verbose parsed url   auth: null,
+33 verbose parsed url   host: null,
+33 verbose parsed url   port: null,
+33 verbose parsed url   hostname: null,
+33 verbose parsed url   hash: null,
+33 verbose parsed url   search: null,
+33 verbose parsed url   query: null,
+33 verbose parsed url   pathname: '^3.8.0',
+33 verbose parsed url   path: '^3.8.0',
+33 verbose parsed url   href: '^3.8.0' }
+34 verbose addNamed [ 'gulp-livereload', '^3.8.0' ]
+35 verbose addNamed [ null, '>=3.8.0-0 <4.0.0-0' ]
+36 verbose cache add [ 'gulp-sass@^2.0.1', null ]
+37 verbose cache add name=undefined spec="gulp-sass@^2.0.1" args=["gulp-sass@^2.0.1",null]
+38 verbose parsed url { protocol: null,
+38 verbose parsed url   slashes: null,
+38 verbose parsed url   auth: null,
+38 verbose parsed url   host: null,
+38 verbose parsed url   port: null,
+38 verbose parsed url   hostname: null,
+38 verbose parsed url   hash: null,
+38 verbose parsed url   search: null,
+38 verbose parsed url   query: null,
+38 verbose parsed url   pathname: 'gulp-sass@^2.0.1',
+38 verbose parsed url   path: 'gulp-sass@^2.0.1',
+38 verbose parsed url   href: 'gulp-sass@^2.0.1' }
+39 verbose cache add name="gulp-sass" spec="^2.0.1" args=["gulp-sass","^2.0.1"]
+40 verbose parsed url { protocol: null,
+40 verbose parsed url   slashes: null,
+40 verbose parsed url   auth: null,
+40 verbose parsed url   host: null,
+40 verbose parsed url   port: null,
+40 verbose parsed url   hostname: null,
+40 verbose parsed url   hash: null,
+40 verbose parsed url   search: null,
+40 verbose parsed url   query: null,
+40 verbose parsed url   pathname: '^2.0.1',
+40 verbose parsed url   path: '^2.0.1',
+40 verbose parsed url   href: '^2.0.1' }
+41 verbose addNamed [ 'gulp-sass', '^2.0.1' ]
+42 verbose addNamed [ null, '>=2.0.1-0 <3.0.0-0' ]
+43 verbose cache add [ 'gulp-sourcemaps@^1.5.2', null ]
+44 verbose cache add name=undefined spec="gulp-sourcemaps@^1.5.2" args=["gulp-sourcemaps@^1.5.2",null]
+45 verbose parsed url { protocol: null,
+45 verbose parsed url   slashes: null,
+45 verbose parsed url   auth: null,
+45 verbose parsed url   host: null,
+45 verbose parsed url   port: null,
+45 verbose parsed url   hostname: null,
+45 verbose parsed url   hash: null,
+45 verbose parsed url   search: null,
+45 verbose parsed url   query: null,
+45 verbose parsed url   pathname: 'gulp-sourcemaps@^1.5.2',
+45 verbose parsed url   path: 'gulp-sourcemaps@^1.5.2',
+45 verbose parsed url   href: 'gulp-sourcemaps@^1.5.2' }
+46 verbose cache add name="gulp-sourcemaps" spec="^1.5.2" args=["gulp-sourcemaps","^1.5.2"]
+47 verbose parsed url { protocol: null,
+47 verbose parsed url   slashes: null,
+47 verbose parsed url   auth: null,
+47 verbose parsed url   host: null,
+47 verbose parsed url   port: null,
+47 verbose parsed url   hostname: null,
+47 verbose parsed url   hash: null,
+47 verbose parsed url   search: null,
+47 verbose parsed url   query: null,
+47 verbose parsed url   pathname: '^1.5.2',
+47 verbose parsed url   path: '^1.5.2',
+47 verbose parsed url   href: '^1.5.2' }
+48 verbose addNamed [ 'gulp-sourcemaps', '^1.5.2' ]
+49 verbose addNamed [ null, '>=1.5.2-0 <2.0.0-0' ]
+50 verbose cache add [ 'node-sass@^3.1.2', null ]
+51 verbose cache add name=undefined spec="node-sass@^3.1.2" args=["node-sass@^3.1.2",null]
+52 verbose parsed url { protocol: null,
+52 verbose parsed url   slashes: null,
+52 verbose parsed url   auth: null,
+52 verbose parsed url   host: null,
+52 verbose parsed url   port: null,
+52 verbose parsed url   hostname: null,
+52 verbose parsed url   hash: null,
+52 verbose parsed url   search: null,
+52 verbose parsed url   query: null,
+52 verbose parsed url   pathname: 'node-sass@^3.1.2',
+52 verbose parsed url   path: 'node-sass@^3.1.2',
+52 verbose parsed url   href: 'node-sass@^3.1.2' }
+53 verbose cache add name="node-sass" spec="^3.1.2" args=["node-sass","^3.1.2"]
+54 verbose parsed url { protocol: null,
+54 verbose parsed url   slashes: null,
+54 verbose parsed url   auth: null,
+54 verbose parsed url   host: null,
+54 verbose parsed url   port: null,
+54 verbose parsed url   hostname: null,
+54 verbose parsed url   hash: null,
+54 verbose parsed url   search: null,
+54 verbose parsed url   query: null,
+54 verbose parsed url   pathname: '^3.1.2',
+54 verbose parsed url   path: '^3.1.2',
+54 verbose parsed url   href: '^3.1.2' }
+55 verbose addNamed [ 'node-sass', '^3.1.2' ]
+56 verbose addNamed [ null, '>=3.1.2-0 <4.0.0-0' ]
+57 silly lockFile a45b97a7-semantic-ui semantic-ui@*
+58 error Error: EACCES, mkdir '/afs/athena.mit.edu/activity/p/poker/.npm'
+58 error  { [Error: EACCES, mkdir '/afs/athena.mit.edu/activity/p/poker/.npm']
+58 error   errno: 3,
+58 error   code: 'EACCES',
+58 error   path: '/afs/athena.mit.edu/activity/p/poker/.npm' }
+59 error Please try running this command again as root/Administrator.
+60 error System Linux 3.19.8-100.fc20.x86_64
+61 error command "node" "/usr/bin/npm" "install"
+62 error cwd /afs/athena.mit.edu/activity/p/poker/web_scripts/pokerclubweb
+63 error node -v v0.10.36
+64 error npm -v 1.3.6
+65 error path /afs/athena.mit.edu/activity/p/poker/.npm
+66 error code EACCES
+67 error errno 3
+68 error stack Error: EACCES, mkdir '/afs/athena.mit.edu/activity/p/poker/.npm'
+69 verbose exit [ 3, true ]

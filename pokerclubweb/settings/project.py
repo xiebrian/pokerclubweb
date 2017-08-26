@@ -10,6 +10,8 @@ from .defaults import *
 # Admins receive 500 errors, managers receive 404 errors.
 ADMINS = (
     ('jlmart88', 'jlmart88@mit.edu'),
+    ('dzd123', 'dzd123@mit.edu'),
+    ('kyliu', 'kyliu@mit.edu')
 )
 MANAGERS = ADMINS
 
@@ -30,13 +32,12 @@ DATABASES = {
         'NAME':     'pokerclubweb',
         #'USER':     'django_user',
         #'PASSWORD': 'django',
-        'USER':     'jlmart88@localhost',
+        'USER':     'dzd@mint-square.mit.edu',
         'PASSWORD': '',   # Stop that "current transaction is aborted" error in PostgreSQL
-        'HOST': '127.0.0.1',
+        'HOST': '18.111.124.227',
         #'PORT': 8889
     },
 }
-
 SECRET_KEY = 'k)t92e20-&9t4r=kd#!ss@0ua&)0#4fx#oh1s$(njzc352p%jc'
 
 # Apps to use
@@ -217,3 +218,7 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/users/profile'
 LOGIN_URL = '/auth/login'
+
+if DEBUG:
+    COMPRESS_DEBUG_TOGGLE = 'whatever'
+    COMPRESS_PRECOMPILERS = []

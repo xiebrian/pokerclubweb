@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from django.template import RequestContext, loader
 from django.template.response import TemplateResponse
@@ -73,10 +73,8 @@ def signup(request):
                     'protocol': 'http',
                 }
             )
-
-            msg = EmailMessage(email_subject, email_body,to=[email])
+            msg = EmailMessage(email_subject, email_body, to=[email])
             msg.send()
-
             return redirect('register_success')
     else:
         userform = UserSignupMITEmailForm(prefix='user')
@@ -123,12 +121,15 @@ def logout(request):
 
 @login_required
 def change_password(request):
-    template_response = password_change(request, template_name='auth/change_password.html')
+    template_response = password_change(request, template_name='auth/change_password.html',
+        post_change_redirect='/auth/change_password_done/')
     if isinstance(template_response, TemplateResponse):
         template_response.context_data['forms'] = [template_response.context_data['form']]
         if (template_response.context_data['form'].errors):
             template_response.context_data['errors'] = True
-    template_response.context_data['title'] = 'Change Password'
+        template_response.context_data['title'] = 'Change Password'
+    else:
+        return HttpResponseRedirect('/auth/change_password_done/')
     return template_response
 
 @login_required

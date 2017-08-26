@@ -25,3 +25,4 @@ semantic/*
 semantic/src/*
 !semantic/src/site/
 pokerclubweb/cache/*
+venv/

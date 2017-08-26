@@ -48,17 +48,19 @@ def view_resume(request, userID):
     else:
         return redirect('index')
 
-    if resume:
-        abspath = open(str(resume.file),'r')
-        response = HttpResponse(content=abspath.read())
+    try:
+        if resume:
+            abspath = open(str(resume.file),'r')
+            response = HttpResponse(content=abspath.read())
 
-        response['Content-Type'] = 'application/pdf'
+            response['Content-Type'] = 'application/pdf'
 
-        response['Content-Disposition'] = 'inline; filename=%s.pdf' \
-             % (user.first_name+'_'+user.last_name)
-        return response
-
-    else:
+            response['Content-Disposition'] = 'inline; filename=%s.pdf' \
+                % (user.first_name+'_'+user.last_name)
+            return response
+        else:
+            return redirect('profile', userID=userID)
+    except IOError:
         return redirect('profile', userID=userID)
 
 @is_self_or_admin
@@ -127,6 +129,7 @@ def edit_profile(request):
         context['errors'] = True
     template = loader.get_template('users/edit_profile.html')
     context['title'] = 'Edit Profile'
+    context['caption'] = '(If you see nothing, email: poker@mit.edu)'
     return HttpResponse(template.render(context))
 
 @group_required('admin_group')
@@ -217,11 +220,11 @@ def admin_download_csv(request):
 
     members = Member.objects.all()
     admins = Admin.objects.all()
-    writer.writerow(['First Name', 'Last Name', 'Email', 'Pokerstars Account'])
+    writer.writerow(['First Name', 'Last Name', 'Email', 'Pokerstars Account', 'Class Year'])
     for admin in admins:
-        writer.writerow([admin.user.first_name, admin.user.last_name, admin.user.email, admin.pokerstars_username])
+        writer.writerow([admin.user.first_name, admin.user.last_name, admin.user.email, admin.pokerstars_username, admin.class_year_num])
     for member in members:
-        writer.writerow([member.user.first_name, member.user.last_name, member.user.email, member.pokerstars_username])
+        writer.writerow([member.user.first_name, member.user.last_name, member.user.email, member.pokerstars_username, member.class_year_num])
 
     return response
 
