@@ -9,75 +9,60 @@
 
 {% block main %}
 	<div class="ui one column grid">
-		{% if user|has_group:"admin_group" %}
-			<div class="center aligned column">
-				<a class="ui center aligned button" href={% url "admin_edit_officers_page" %}>
-						<div class="">
-							Edit Officers Page
-						</div>
-				</a>
-			</div>
-		{% endif %}
 		<div class="column">
 			<div class="ui divided items">
-				{% for officer in officers %}
+				{% for alumnus in alumni %}
 					<div class="item">
 					{% if forloop.counter0|divisibleby:2 %}
 						<div class="image">
-							<img src="{{officer.picture_url}}">
+							<img src="{{alumnus.picture_url}}">
 						</div>
 						<div class="content">
 							<div class="header">
-								{{officer.user.first_name}} {{officer.user.last_name}}
-							</div>
-							<div class="meta">
-									{{officer.position}}
+								{{alumnus.user.first_name}} {{alumnus.user.last_name}}
 							</div>
 							<div class="extra">
 								<div class="ui list">
 									<div class="item">
 										<i class="{{icons|get_item:"pokerstars_username"}} icon"></i>
-										{{officer.pokerstars_username}}
+										{{alumnus.pokerstars_username}}
 									</div>
 									<div class="item">
 										<i class="{{icons|get_item:"class_year_num"}} icon"></i>
-										Class of {{officer.class_year_num}}
+										Class of {{alumnus.class_year_num}}
 									</div>
 								</div>
 							</div>
 							<div class="description">
-								{{officer.bio}}
+								{{alumnus.bio}}
 							</div>
 						</div>
 					{% else %}
 						<div class="image mobile-show">
-							<img src="{{officer.picture_url}}">
+							<img src="{{alumnus.picture_url}}">
 						</div>
 						<div class="content">
 							<div class="header">
-								{{officer.user.first_name}} {{officer.user.last_name}}
-							</div>
-							<div class="meta">
-									{{officer.position}}
+								{{alumnus.user.first_name}} {{alumnus.user.last_name}}
 							</div>
 							<div class="extra">
 								<div class="ui list">
 									<div class="item">
 										<i class="{{icons|get_item:"pokerstars_username"}} icon"></i>
-										{{officer.pokerstars_username}}
+										{{alumnus.pokerstars_username}}
 									</div>
 									<div class="item">
 										<i class="{{icons|get_item:"class_year_num"}} icon"></i>
-										Class of {{officer.class_year_num}}
+										Class of {{alumnus.class_year_num}}
 									</div>
 								</div>
 							</div>
 							<div class="description">
-								{{officer.bio}}
+								{{alumnus.bio}}
 							</div>
 						</div>
 						<div class="image mobile-hide">
-							<img src="{{officer.picture_url}}">
+							<img src="{{alumnus.picture_url}}">
 						</div>
 					{% endif %}
 					</div>

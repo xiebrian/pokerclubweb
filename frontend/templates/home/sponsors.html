@@ -6,45 +6,71 @@
 {% block headtitle %}MIT Poker Club{% endblock %}
 
 {% block container %}
-  <div class="ui main container">
-  <h1 class="pagetitle ui center aligned header">{{title}}</h1>
-  <div class="ui center aligned grid">
-    <div class="column">
+	<div class="ui main container">
+	<!-- <h1 class="pagetitle ui center aligned header">{{title}}</h1> -->
+	<div class="ui center aligned grid">
+		<div class="column">
+			<div id='sponsor-text'>
+				<p> We would like to thank all of our sponsors for supporting the MIT Poker Club! </p>
+				<p> Interested in sponsoring us? <a href='../contact'>Contact Us!</a></p>
+			</div>
+			<div id='sponsor-display'>
 
-      <h2 class="ui header">
-        Platinum
-      </h2>
-      <div class="ui large images">
-        {% for sponsor in sponsors|are_level:"PL" %}
-          {% include "users/sponsors/logo_display.html" %}
-        {% endfor %}
-      </div>
-      <h3 class="ui header">
-        Gold
-      </h3>
-      <div class="ui medium images">
-        {% for sponsor in sponsors|are_level:"GD" %}
-          {% include "users/sponsors/logo_display.html" %}
-        {% endfor %}
-      </div>
-      <h4 class="ui header">
-        Silver
-      </h4>
-      <div class="ui small images">
-        {% for sponsor in sponsors|are_level:"SL" %}
-          {% include "users/sponsors/logo_display.html" %}
-        {% endfor %}
-      </div>
-      <h5 class="ui header">
-        Bronze
-      </h5>
-      <div class="ui tiny images">
-        {% for sponsor in sponsors|are_level:"BR" %}
-          {% include "users/sponsors/logo_display.html" %}
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-  </div>
+				<h2 class="ui header">
+					Platinum Sponsors
+				</h2>
+				<div class='separation-bar'><hr></div>
+				<p class='margin-bar'></p>
+				<div class='entries'>
+					<div class="ui large images">
+						{% for sponsor in sponsors|are_level:"PL" %}
+							{% include "users/sponsors/logo_display.html" %}
+						{% endfor %}
+					</div>
+					<p class='text-box'>SIG is a global quantitative trading firm founded with an entrepreneurial mindset and rigorous analytical approach to decision making. SIG also values gaming, poker especially, as a way to teach analytical skills used in trading - check out the <a href='https://www.raiseyourgame.com/' target='blank'>Gamer Blog</a>!</p>
+				</div>
+
+				<h2 class="ui header">
+					Gold Sponsors
+				</h2>
+				<div class='separation-bar'><hr></div>
+				<p class='margin-bar'></p>
+				<div class='entries'>
+					<div class="ui medium images">
+						{% for sponsor in sponsors|are_level:"GD" %}
+							{% include "users/sponsors/logo_display.html" %}
+						{% endfor %}
+					</div>
+					<p class='text-box'> Citadel is a leading investor in the world's financial markets. For over a quarter of a century, Citadel has sought to deliver market-leading investment returns to capital partners. Citadel Securities aims to create the fairest, most transparent, and open markets in the world. </p>
+				</div>
+
+				<!-- <h2 class="ui header">
+					Silver Sponsors
+				</h2>
+				<div class='separation-bar'><hr></div>
+				<p class='margin-bar'></p>
+				<div class='entries'>
+					<div class="ui medium images">
+						{% for sponsor in sponsors|are_level:"SL" %}
+							{% include "users/sponsors/logo_display.html" %}
+						{% endfor %}
+					</div>
+					<p class='text-box'>Jane Street is a global quantitative trading firm with a unique focus on technology and collaborative problem solving, specializing in Exchange Traded Funds (ETFs).</p>
+				</div> -->
+
+				<h2 class="ui header">
+					Bronze Sponsors
+				</h2>
+				<div class='separation-bar'><hr></div>
+				<p class='margin-bar bronze'></p>
+				<div class="ui small images">
+					{% for sponsor in sponsors|are_level:"BR" %}
+						{% include "users/sponsors/logo_display.html" %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
 </div>
 {% endblock %}

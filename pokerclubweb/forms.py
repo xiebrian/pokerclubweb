@@ -46,7 +46,7 @@ class UserSignupMITEmailForm(UserSignupForm):
         fields = ['username', 'password1', 'password2', 'email', 'first_name', 'last_name']
         help_texts = {
             'username': None,
-            'email': 'Enter an @mit.edu email address'
+            'email': 'Enter an @mit.edu email address',
         }
    
     def __init__(self, *args, **kwargs):
@@ -58,14 +58,17 @@ class UserSignupMITEmailForm(UserSignupForm):
 
 
 class MemberSignupForm(forms.ModelForm):
-    is_interested_in_exec = forms.BooleanField(label='I am interested in being contacted about joining the MIT Poker Club Committee', required=False)
+    is_interested_in_exec = forms.BooleanField(label='I am interested in being contacted about joining the MIT Poker Club Committee. (See Join/Contact/FAQ for more info)', required=False)
     dropdowns = [
         'class_year'
+    ]
+    file_uploads = [
+        'resume'
     ]
     class Meta:
         model = Member
         fields = '__all__'
-        exclude = ['user', 'bio', 'activation_key', 'resume', 'picture', 'is_registered']
+        exclude = ['user', 'bio', 'activation_key', 'picture', 'is_registered']
 
 class SponsorSignupForm(forms.ModelForm):
     dropdowns = [

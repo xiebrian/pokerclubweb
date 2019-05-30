@@ -23,7 +23,7 @@ def get_google_calendar_events():
     """Shows basic usage of the Google Calendar API.
 
     Creates a Google Calendar API service object and outputs a list of the next
-    10 events on the user's calendar.
+    5 events on the user's calendar.
     """
 
     events, expired = try_cache()
@@ -34,12 +34,12 @@ def get_google_calendar_events():
             service = discovery.build('calendar', 'v3', http=http)
 
             now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-            print 'Getting the upcoming 10 events on home page'
+            print 'Getting the upcoming 5 events on home page'
             # calendarList = service.calendarList().list().execute()
             # for item in calendarList['items']:
             #     print item
             eventsResult = service.events().list(
-                calendarId='mitpokerexec@gmail.com', timeMin=now, maxResults=10, singleEvents=True,
+                calendarId='mitpokerexec@gmail.com', timeMin=now, maxResults=5, singleEvents=True,
                 orderBy='startTime').execute()
             events = eventsResult.get('items', [])
 

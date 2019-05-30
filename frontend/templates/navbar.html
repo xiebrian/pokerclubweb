@@ -10,9 +10,6 @@
 			Menu
 		</a>
 		<div class="desktop-hide left menu">
-			<a class="item" href={% url "about" %}>
-				About
-			</a>
 			<a class="item" href={% url "events" %}>
 				Events
 			</a>
@@ -22,8 +19,11 @@
 			<a class="item" href={% url "officers" %}>
 				Officers
 			</a>
-			 <a class="item" href={% url "contact" %}>
-				Contact
+			<a class="item" href={% url "alumni" %}>
+				Alumni
+			</a>
+			<a class="item" href={% url "contact" %}>
+				Join / Contact / FAQ
 			</a>
 		</div>
 		<div class="right menu">
@@ -39,9 +39,6 @@
 				</a>
 			{% endif %}
 			{% if request.user.is_authenticated %}
-				<a class="mobile-hide item" href={% url "tournaments" %}>
-					Tournaments
-				</a>
 				{% if request.user|has_group:"sponsor_group" %}
 					<a class="mobile-hide item" href={% url "sponsor_profile" request.user.id %}>
 						Profile

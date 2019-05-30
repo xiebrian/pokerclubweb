@@ -2,6 +2,7 @@
 Project specific settings
 """
 from .defaults import *
+import os
 
 # -------------------------------------
 # TODO: update the email settings here!
@@ -189,7 +190,7 @@ PING_CHECKS = (
 # TEMPLATES = [
 #     {
 #         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-#         'DIRS': [],
+#         'DIRS': [os.path.join(os.getcwd(), '../../frontend/templates')],
 #         'APP_DIRS': True,
 #         'OPTIONS': {
 #             'context_processors': [
@@ -198,7 +199,7 @@ PING_CHECKS = (
 #                 'django.template.context_processors.request',
 #                 'django.contrib.auth.context_processors.auth',
 #                 'django.contrib.messages.context_processors.messages',
-
+# 
 #                 # `allauth` needs this from django
 #                 'django.template.context_processors.request',
 #             ],

@@ -32,8 +32,8 @@ def sponsor_logo_file_name(instance, filename):
     return '/'.join(['sponsor_logos', str(instance.user.id), filename])
 
 def resume_file_name(instance, filename):
-    if not filename:
-        return '/'.join(['resumes', str(instance.user.id), filename])
+    # if not filename:
+    #     return '/'.join(['resumes', str(instance.user.id), filename])
     name = instance.user.first_name + '_' + instance.user.last_name + '_Resume.pdf'
     return '/'.join(['resumes', str(instance.user.id), name])
 
@@ -46,8 +46,8 @@ def pdf_file(value):
 
 class Student(models.Model):
     user = models.OneToOneField(User)
-    resume = models.FileField(blank=True, upload_to=resume_file_name, validators=[pdf_file])
-    pokerstars_username = models.CharField(max_length=100, blank=True, verbose_name="Username")
+    resume = models.FileField(blank=False, upload_to=resume_file_name, validators=[pdf_file], help_text="Please attach your resume in PDF format.")
+    pokerstars_username = models.CharField(max_length=100, blank=True, verbose_name="PokerStars Username", help_text="Required to participate in the SIG Main Event Series. See Join/Contact/FAQ for more info.")
     picture = models.ImageField(blank=True, upload_to=profile_picture_file_name)
     bio = models.TextField(default='I <3 Poker')
     FRESHMAN = 'FR'

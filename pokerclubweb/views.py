@@ -41,7 +41,7 @@ def login(request):
 def signup(request):
     if request.method == 'POST':
         userform = UserSignupMITEmailForm(request.POST, prefix='user')
-        memberform = MemberSignupForm(request.POST, prefix='member')
+        memberform = MemberSignupForm(request.POST, request.FILES, prefix='member')
 
         if (userform.is_valid() and memberform.is_valid()):
             user = userform.save()
@@ -202,8 +202,21 @@ def sponsors(request):
 def officers(request):
     template = loader.get_template('home/officers.html')
     context = RequestContext(request)
-    context['officers'] = Admin.objects.all().order_by('officers_page_order')
+    context['officers'] = [
+        officer for officer in Admin.objects.all().order_by('officers_page_order')
+        if officer.position != 'Alumni'
+    ]
     context['title'] = 'Officers'
+    return HttpResponse(template.render(context))
+
+def alumni(request):
+    template = loader.get_template('home/alumni.html')
+    context = RequestContext(request)
+    context['alumni'] = [
+        alumnus for alumnus in Admin.objects.all().order_by('officers_page_order')
+        if alumnus.position == 'Alumni'
+    ]
+    context['title'] = 'Alumni'
     return HttpResponse(template.render(context))
 
 def photos(request):

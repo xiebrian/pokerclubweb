@@ -15,6 +15,9 @@
     -->
     <title>{% block headtitle %}{% endblock %}</title>
 
+    <!-- Thumbnail -->
+    <link rel="icon" href="/pokerclubweb/web/static/frontend/img/PokerClubLogo_Thumbnail.png">
+
     <meta property="og:type" content="{% block og-type %}website{% endblock %}" />
     <meta property="og:image" content="http://{{ site.domain|default:"www.example.org" }}{% block og-image %}{{ STATIC_URL }}frontend/img/logo.png{% endblock %}" />
     <meta property="og:url" content="http://{{ site.domain|default:"www.example.org" }}{{ request.path }}" />

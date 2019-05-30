@@ -1,0 +1,192 @@
+.pagetitle.ui.header {
+	margin-bottom: 30px;
+}
+
+#navbar .item, #sidebar .item {
+	text-transform: uppercase !important;
+	font-weight: 200;
+}
+
+#navbar .desktop-hide, #sidebar .desktop-hide {
+	display: inherit;
+}
+
+#navbar .mobile-hide, #sidebar .mobile-hide {
+	display: inherit;
+}
+
+#navbar .collapsed-left-menu, #navbar .mobile-show, #sidebar .collapsed-left-menu, #sidebar .mobile-show {
+	display: none;
+}
+
+@media (max-width: 1200px) {
+	#navbar .desktop-hide, #sidebar .desktop-hide {
+		display: none;
+	}
+	#navbar .collapsed-left-menu, #sidebar .collapsed-left-menu {
+		display: inherit;
+	}
+}
+
+@media (max-width: 768px) {
+	#navbar .mobile-hide, #sidebar .mobile-hide {
+		display: none;
+	}
+	#navbar .mobile-show, #sidebar .mobile-show {
+		display: inherit;
+	}
+}
+
+.ui.header {
+	text-transform: uppercase;
+	font-weight: 200;
+}
+
+.pusher {
+	padding-top: 7em;
+}
+
+.ui.main.container {
+	min-height: calc(100vh - 225px);
+}
+
+.ui.footer.segment {
+	padding: 2em 0em;
+	margin-top: 5em;
+}
+
+.ui.footer.segment a {
+	color: black;
+}
+
+.ui.multiple.selection.dropdown .field-icon {
+	padding-top: .55em;
+}
+
+.ui.segment.upcomingevents {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.ui.segment.upcomingevents .ui.list.eventslist {
+	padding: 0;
+}
+
+.ui.segment.upcomingevents .ui.list.eventslist .ui.segment.datepreview {
+	width: 3.5em;
+	height: 3.5em;
+	padding: 0.5em;
+}
+
+
+@media (max-width: 767px) {
+	.mobile-hide {
+		display: none !important;
+	}
+
+	.ui.column {
+		margin: 0em 0.15em;
+	}
+
+	* {
+		padding-left: 0rem;
+		padding-right: 0rem;
+	}
+}
+
+@media (min-width: 768px) {
+	.mobile-show {
+		display: none !important;
+	}
+
+	.ui.column {
+		margin-top: 0.5em;
+	}
+}
+
+/* HOME */
+
+#disclaimer {
+	text-align: center;
+	margin: auto;
+	margin-top: 1.5em;
+	max-width: 52em;
+}
+
+#About-Us {
+	font-size: 1.14285714rem;
+	line-height: 1.5;
+}
+
+#banner {
+	max-width: 100%;
+	width: auto;
+	height: auto;
+	margin-bottom: 0.75em;
+}
+
+/* SPONSORS */
+
+#sponsor-text {
+	font-size: 1.14285714rem;
+	padding: 0 0 0.75em 0;
+}
+
+#sponsor-text p {
+	margin: 0 0 0.5em 0;
+}
+
+#sponsor-display h2 {
+	margin: auto;
+	padding: 0;
+	max-width: 42em;
+}
+
+.separation-bar {
+	max-width: 42em;
+	margin: auto;
+}
+
+.separation-bar hr {
+	margin: 0em;
+	padding: 0;
+	color: rgba(0, 0, 0, 0.4);
+}
+
+.sponsor-image {
+	margin: 0.5em 0;
+}
+
+.margin-bar {
+	font-size: 1.5em;
+}
+
+.margin-bar.bronze {
+	font-size: 0.75em;
+}
+
+.text-box {
+	max-width: 42em;
+	padding-bottom: 1.25em;
+	margin: auto;
+}
+
+/* FAQ/CONTACT */
+
+.dropdown {
+	text-align: left;
+	font-weight: bold;
+}
+
+.dropdown:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.dropdown-info {
+	/*display: none;*/
+	text-align: left;
+	overflow: hidden;
+	margin-left: 15px;
+}
+

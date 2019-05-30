@@ -6,58 +6,95 @@
 {% block headtitle %}MIT Poker Club{% endblock %}
 
 {% block container %}
-  <div class="ui main container">
-  <h1 class="pagetitle ui center aligned header">{{title}}</h1>
-    <div class="ui two column stackable grid">
-        <div class="left aligned column">
-            <h2 class="ui centered header">Upcoming Events</h2>
-            {% if events %}
-                <div class="ui top attached segment upcomingevents">
-                    <div class="ui divided relaxed list eventslist">
-                        {% for event in events %}
-                            <div class="item">
-                                <div class="middle aligned image">
-                                    <div class="ui center aligned red segment datepreview">
-                                    <div class="header">
-                                        {{event.time|date:"M"}}
-                                    </div>
-                                    <div class="extra">
-                                        {{event.time|date:"d"}}
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="content ui list">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<link href="/pokerclubweb/web/static/frontend/css/boot-style.css" rel="stylesheet">
+	<div class='ui main container'>
+	<h1 class="pagetitle ui center aligned header">{{title}}</h1>
+<!-- BANNER -->
+		<div class='ui one column'> <!-- got rid of grid -->
+		<div class='bootstrap'>
+			<div id='banner' class='carousel slide' data-ride='carousel'>
+				<ol class='carousel-indicators'>
+					<li data-target='#banner' data-slide-to='0' class='active'></li>
+					<li data-target='#banner' data-slide-to='1'></li>
+				</ol>
+				<div class='carousel-inner'>
+					<div class='item active'>
+						<img src="{% static "frontend/img/committee.jpg" %}"/>
+					</div>
+					<div class='item'>
+						<img src="{% static "frontend/img/fall-main-event.jpg" %}"/>
+					</div>
+				</div>
+				<a class='left carousel-control' href='#banner' data-slide='prev'>
+					<span class='sr-only'>Previous</span>
+				</a>
+				<a class='right carousel-control' href='#banner' data-slide='next'>
+					<span class='sr-only'>Next</span>
+				</a>
+			</div>
+		</div>
+		</div>
+<!-- ABOUT AND EVENTS -->
+		<div class='ui two column stackable grid'>
+			<div class='left aligned column'>
+				<!-- ABOUT US -->
+				<h2 class='ui centered header'>About Us</h2>
+				<div id='About-Us'>
+					<p> Welcome to the MIT Poker Club website! We provide a fun, spirited learning environment for poker enthusiasts and novices alike - all levels are welcome! Throughout the year, we organize workshops, casino nights, tournaments, and more to enhance members' analytical and mathematical skills used in poker strategies, with an emphasis on understanding decision making processes. We also have strong connections with trading companies and provide great networking opportunities for club members, as both poker and trading require many similar strategical skills. </p>
+					<p> If you have any questions about the MIT Poker Club, or are interested in becoming a member or joining the executive committee, please see <a href='./contact'>Join/FAQ/Contact</a>.</p>
+				</div>
+				<h3 class='ui centered header'>Disclaimer</h3>
+				<p> The MIT Poker Club does not support any form of gambling on campus and thus will not be a gambling venue. Any form of gambling or cash game will be prohibited. </p>
+			</div>
+			<div class='left aligned column'>
+				<!-- UPCOMING EVENTS -->
+				<h2 class="ui centered header">Upcoming Events</h2>
+				{% if events %}
+					<div class="ui top attached segment upcomingevents">
+						<div class="ui divided relaxed list eventslist">
+							{% for event in events %}
+								<div class="item">
+									<div class="middle aligned image">
+										<div class="ui center aligned red segment datepreview">
+										<div class="header">
+											{{event.time|date:"M"}}
+										</div>
+										<div class="extra">
+											{{event.time|date:"d"}}
+										</div>
+										</div>
+									</div>
+									<div class="content ui list">
 
-                                    <div class="header item">
-                                        {{event.summary}}
-                                    </div>
-                                    <div class="extra item">
-                                        <i class="calendar icon"></i>
-                                        {{event.time|date}}
-                                    </div>
-                                    <div class="extra item">
-                                        <i class="time icon"></i>
-                                        {{event.time|time}}
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% else %}
-                <div class="ui center aligned top attached segment">
-                    No upcoming events
-                </div>
-            {% endif %}
-            <a href={% url "events" %}>
-                <div class="ui bottom attached primary button">
-                    View Full Calendar
-                </div>
-            </a>
-        </div>
-        <div class="column">
-            <img class="ui large centered image" src="{% static "frontend/img/PokerClubLogo_ClearBackground.png" %}"/>
-        </div>
-    </div>
-</div>
+										<div class="header item">
+											{{event.summary}}
+										</div>
+										<div class="extra item">
+											<i class="calendar icon"></i>
+											{{event.time|date}}
+										</div>
+										<div class="extra item">
+											<i class="time icon"></i>
+											{{event.time|time}}
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% else %}
+					<div class="ui center aligned top attached segment">
+						No upcoming events
+					</div>
+				{% endif %}
+				<a href={% url "events" %}>
+					<div class="ui bottom attached primary button">
+						View Full Calendar
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 {% endblock %}

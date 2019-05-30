@@ -17,7 +17,7 @@ sitemaps = {
 urlpatterns = patterns('',
     # Django admin
     url(r'^admin/', include(admin.site.urls)),
-    #url(r'^admin/filebrowser/', include(fb_site.urls)),
+    # url(r'^admin/filebrowser/', include(fb_site.urls)),
     url(r'^admin/util/tools/', include('admin_tools.urls')),
 
     # Test pages
@@ -38,12 +38,12 @@ urlpatterns = patterns('',
 
     # CMS modules
     url(r'^$', views.index, name="index"),
-    url(r'^about/', views.about, name="about"),
+    # url(r'^about/', views.about, name="about"),
     url(r'^events/', views.events, name="events"),
     url(r'^sponsors/', views.sponsors, name="sponsors"),
     url(r'^officers/', views.officers, name="officers"),
+    url(r'^alumni/', views.alumni, name="alumni"),
     url(r'^contact/', views.contact, name="contact"),
-    url(r'^photos/', views.photos, name="photos"),
     url(r'^auth/', include([
         url(r'^login/$', views.login, name="login"),
         url(r'^logout/$', views.logout, name="logout"),

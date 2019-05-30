@@ -1,7 +1,12 @@
 .. TODO: Complete the README descriptions and "about" section.
 
+
+**NOTE: to log in, go to auth/login**
+
+
 Pokerclubweb Project
 ========================================
+
 
 About
 -----
@@ -74,6 +79,54 @@ To setup a local development environment::
 
     ./manage.py syncdb --migrate
     ./manage.py runserver
+
+Getting dev access on Athena
+-----
+
+Find a current admin and have them run the following::
+
+    attach poker
+    fs sa /mit/poker [username] all
+
+
+Now, in your own Athena, run the following to give yourself access rights to the poker locker::
+
+    fs setacl /mit/poker kwlee all
+
+
+Accessing files on Athena
+-----
+From Athena, run the following to access the scripts server::
+
+    ssh -k poker@scripts
+
+In a regular terminal, you can run the following instead of ssh-ing from Athena::
+
+    ssh poker@scripts.mit.edu
+
+
+Notes from Brain
+-----
+
+- Website: poker.mit.edu
+- Admin: poker.mit.edu/admin (for basic changes like updating BIOs)
+- Calendar: Add events to Google Calendar (MIT Poker Club)
+
+
+To make serious code changes:
+
+1. Login to athena
+2. Login to scripts
+3. Make changes in local repository, push, and pull in MIT scripts repository.
+4. Kill the process associated with the website
+    - Go to scripts.mit.edu, scroll to the bottom, and check which server you're connected to.
+    - Login to athena, login to that server ($ ssh poker@<>.mit.edu), and kill the associated process (find process in htop and "pkill -9 python" it)
+
+- HTML files corresponding to frontend pages are typically located in /frontend/templates.
+- For more complicated issues, you may wish to check views.py, forms.py, and urls.py in different folders.
+- For CSS updates, check files corresponding to semantic.min.css.
+- To get resumes: run ./compress_resumes.sh, and it should be in ~/web/media/resumes
+
 
 Compiling SASS files
 ~~~~~~~~~~~~~~~~~~~~
