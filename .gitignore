@@ -20,6 +20,7 @@ Gemfile.lock
 /web/media
 /stats/
 pokerclubweb/settings/local.py
+pokerclubweb/settings/project.py
 semantic/*
 !semantic/src/
 semantic/src/*
