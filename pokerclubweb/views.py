@@ -60,6 +60,11 @@ def signup(request):
             member.activation_key = activation_key
             member.save()
 
+            user = member.user
+            user.is_active = True
+            user.save()
+
+            """
             current_site = get_current_site(request)
             site_name = current_site.name
             domain = current_site.domain
@@ -75,6 +80,7 @@ def signup(request):
             )
             msg = EmailMessage(email_subject, email_body, to=[email])
             msg.send()
+            """
             return redirect('register_success')
     else:
         userform = UserSignupMITEmailForm(prefix='user')

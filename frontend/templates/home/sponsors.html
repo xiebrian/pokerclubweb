@@ -38,13 +38,23 @@
 				<div class='entries'>
 					<div class="ui medium images">
 						{% for sponsor in sponsors|are_level:"GD" %}
-							{% include "users/sponsors/logo_display.html" %}
+              {% if "Citadel" in sponsor.company_name %}
+  							{% include "users/sponsors/logo_display.html" %}
+              {% endif %}
 						{% endfor %}
 					</div>
 					<p class='text-box'> Citadel is a leading investor in the world's financial markets. For over a quarter of a century, Citadel has sought to deliver market-leading investment returns to capital partners. Citadel Securities aims to create the fairest, most transparent, and open markets in the world. </p>
+          <div class='ui medium images'>
+            {% for sponsor in sponsors|are_level:"GD" %}
+              {% if "Two Sigma" in sponsor.company_name %}
+                {% include "users/sponsors/logo_display.html" %}
+              {% endif %}
+            {% endfor %}
+          </div>
+          <!-- TODO: fill in for Two Sigma <p class='text-box'> Two Sigma. </p>-->
 				</div>
 
-				<!-- <h2 class="ui header">
+				<h2 class="ui header">
 					Silver Sponsors
 				</h2>
 				<div class='separation-bar'><hr></div>
@@ -55,8 +65,7 @@
 							{% include "users/sponsors/logo_display.html" %}
 						{% endfor %}
 					</div>
-					<p class='text-box'>Jane Street is a global quantitative trading firm with a unique focus on technology and collaborative problem solving, specializing in Exchange Traded Funds (ETFs).</p>
-				</div> -->
+				</div>
 
 				<h2 class="ui header">
 					Bronze Sponsors
